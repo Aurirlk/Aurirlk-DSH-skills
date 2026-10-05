@@ -11,8 +11,8 @@
 
 ### 计划中
 
-- `README.en.md` 与各技能 `SKILL.md` 的英文版（面向国际用户）
-- 英文 `description`：它是技能目录里唯一被模型看到的一行，目前只有中文
+- 各技能 `SKILL.md` **正文**的英文版（当前正文为中文；frontmatter 与 README 已双语）
+
 - 空间趋势的图形化导出（当前是 Unicode 迷你趋势图）
 - 管理员级清理的脚本化（卷影副本、`hiberfil.sys`——实测单机有约 11 GB 属这类）
 
@@ -29,6 +29,13 @@
 - `scripts/Fix-Bom.ps1`：仓库级 BOM 校正（`.ps1` 必须有、`SKILL.md` 必须没有）。
 - `.github/workflows/verify.yml`：**遍历所有技能**跑自检，并验证合集注册逻辑。
 - `CONTRIBUTING.md` 里的「新增一个技能」四步流程。
+
+### 新增 —— 文档（中英双语）
+
+- 根目录 `README.md` / `README.en.md`：仓库介绍 + 技能目录，顶部互相跳转
+- 技能级 `README.md` / `README.en.md`：介绍、用法、安装方式、安全模型
+- `SKILL.md` 的 `description` 与 `whenToUse` 改为**双语**——它是技能目录里唯一被模型
+  看到的一行，双语让中英文提问都能命中。正文仍为中文，英文正文欢迎贡献。
 
 ### 新增 —— 技能：disk-butler
 
