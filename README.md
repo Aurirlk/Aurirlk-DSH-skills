@@ -7,6 +7,8 @@
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
 
+**中文** | [English](README.en.md)
+
 ---
 
 ## 技能目录

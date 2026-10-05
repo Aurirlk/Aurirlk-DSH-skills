@@ -2,6 +2,8 @@
 
 > 本技能是 [Aurirlk DSH Skills](../../README.md) 合集的一员 · [← 返回仓库目录](../../README.md)
 
+**中文** | [English](README.en.md)
+
 > 给 AI agent 用的 Windows 电脑管家，两条主线：
 > **①查询**（只读）：回答「装了什么 / 空间去哪了 / 这个能删吗 / 某个目录里到底是什么 / 什么时候开始变大的」
 > **②操作**（有副作用）：按安全等级清理垃圾 → 用 NTFS Junction 透明迁移缓存 → 留档

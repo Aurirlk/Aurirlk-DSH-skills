@@ -1,8 +1,12 @@
 ---
 name: disk-butler
-description: Windows 电脑管家，两条主线。①查询（只读）：回答「这台电脑上装了什么 / 空间去哪了 / 这个目录能不能删 / 某工具怎么配的 / 以前做过什么操作」，读本机长期档案，不重复全盘扫描。②操作（有副作用）：扫描垃圾、过期文件与 Agent 运行脚本残余（npx 缓存、会话临时产物、工具 .tmp），按安全等级产出清理计划并执行；用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘。触发场景：「我电脑…」「C盘满了」「清理磁盘」「空间去哪了」「这个能删吗」「把缓存挪到D盘」「为什么C盘越来越大」「装了什么」。
-whenToUse: 用户提到「我的电脑」「本机」「这台机器」，或询问磁盘空间、目录用途与能否删除、已装软件、开发环境配置、服务与启动项、定时任务、环境变量、清理垃圾与缓存、迁移缓存时。
+description: "Windows computer butler / 电脑管家，两条主线。Query（read-only 只读查询）：装了什么、空间去哪了、这个能不能删、某工具怎么配的 —— what is installed, where did my disk space go, is this safe to delete, what is inside this folder. 读本机长期档案，不重复全盘扫描。Operate（有副作用）：扫描垃圾、过期文件与 Agent 运行脚本残余（npx 缓存、工具 .tmp），按安全等级产出清理计划并执行；用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘。Triggers：「C盘满了」「清理磁盘」「空间去哪了」「这个能删吗」「把缓存挪到D盘」；my C drive is full, clean up disk, free up space, can I delete this, move cache to another drive."
+whenToUse: "用户提到「我的电脑」「本机」「这台机器」，或询问磁盘空间、目录用途与能否删除、已装软件、开发环境配置、启动项、定时任务、环境变量、清理垃圾与缓存、迁移缓存。Also when the user mentions their PC, this machine or local environment, or asks about disk space, directory purpose and deletability, installed software, dev environment configuration, startup items, scheduled tasks, environment variables, or cleaning and migrating caches。"
 ---
+
+> Language note: this instruction body is written in Chinese. The frontmatter `description` above is
+> bilingual so the skill is discoverable in both languages. An English body is welcome as a
+> contribution — see [CONTRIBUTING.md](../../CONTRIBUTING.md).
 
 # 电脑管家
 
