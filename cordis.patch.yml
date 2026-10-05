@@ -1,0 +1,10 @@
+# disk-butler bundle layer
+#
+# 本文件是 package.json#dsh.bundle.patch 指向的补丁层。
+# 层语义：一个 YAML 数组，元素是行动词（row verbs）；`insert` 把插件行加入组合配置。
+# 后续层可以用 `id` 覆盖本行（整配置替换）。
+- insert:
+    # id：稳定行标识，供后续层覆盖用
+    - id: disk-butler
+      # name：loader 要 import 的模块，解析到本包的入口（package.json#main → index.js）
+      name: dsh-disk-butler

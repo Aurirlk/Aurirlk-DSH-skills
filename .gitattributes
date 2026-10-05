@@ -1,0 +1,39 @@
+# 行尾与编码策略
+# ==========================================================================
+# 全仓库统一 LF。
+#
+# 为什么 .ps1 也用 LF：本项目的脚本一直是 LF，并在 Windows PowerShell 5.1 下
+# 实测正常运行。统一 LF 可以避免 Windows 贡献者因 core.autocrlf 造成的行尾抖动。
+# PowerShell 对 LF / CRLF 都支持，行尾不是本项目的风险点。
+#
+# ⚠️ 本项目的真正命门是 **UTF-8 BOM**：
+#     .ps1      必须【有】BOM —— PS 5.1 读无 BOM 的 UTF-8 会按 GBK 解释，中文全乱、
+#               脚本直接解析失败
+#     SKILL.md  必须【没有】BOM —— 带 BOM 会让 frontmatter 的 '---' 判定失效，
+#               技能描述被静默丢弃
+#
+# 行尾归一化不会碰 BOM，所以下面的规则不会破坏它；但编辑器和 git 钩子可能会。
+# 提交前请跑 scripts/Fix-Bom.ps1，CI 也会用 -Check 拦一道。
+# ==========================================================================
+* text=auto eol=lf
+
+# 二进制文件：不做任何行尾或编码处理
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.webp   binary
+*.zip    binary
+*.gz     binary
+*.tgz    binary
+*.exe    binary
+*.dll    binary
+*.node   binary
+
+# npm 的锁文件由工具生成，diff 噪音大且无阅读价值
+package-lock.json  -diff linguist-generated
+pnpm-lock.yaml     -diff linguist-generated
+
+# 这些文件是「自动生成、不要手工编辑」的，标记出来避免 PR 里误改
+skills/disk-butler/references/*.md  linguist-documentation

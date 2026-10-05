@@ -1,0 +1,45 @@
+# 编辑器统一配置
+#
+# 这个文件存在的首要目的是：让编辑器不要破坏本项目的 BOM 约定。
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# --------------------------------------------------------------------------
+# PowerShell：必须保存为 UTF-8【带】BOM
+#
+# 运行环境是 Windows PowerShell 5.1，它读无 BOM 的 UTF-8 文件会按 ANSI(GBK)
+# 解释，中文全部变乱码、脚本直接解析失败。
+#
+# `utf-8-bom` 是 EditorConfig 的标准取值，支持它的编辑器（VS Code、JetBrains 系）
+# 会自动写入 BOM。如果你的编辑器不支持，请手动把编码设为「UTF-8 with BOM」，
+# 或保存后运行 scripts/Fix-Bom.ps1 校正。
+# --------------------------------------------------------------------------
+[*.{ps1,psm1,psd1}]
+charset = utf-8-bom
+indent_size = 4
+
+# --------------------------------------------------------------------------
+# 技能正文：必须保存为 UTF-8【无】BOM
+#
+# 带 BOM 会让 frontmatter 的 `---` 首行判定失效，技能描述被静默丢弃
+# （表现是技能在目录里只剩一条没有描述的条目，且不报错）。
+# 所以这里显式声明 charset = utf-8，与上面的 PowerShell 规则相反。
+# --------------------------------------------------------------------------
+[SKILL.md]
+charset = utf-8
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.{json,yml,yaml}]
+indent_size = 2
+
+[*.js]
+indent_size = 2

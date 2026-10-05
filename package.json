@@ -1,0 +1,47 @@
+{
+  "name": "dsh-disk-butler",
+  "version": "0.1.0",
+  "description": "Windows 磁盘管家 for DeepSeek Harness：查清 C/D/E 盘空间去向，识别垃圾、过期文件、Agent 运行脚本残余与各类缓存，按安全等级产出清理计划并执行；用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘；并留档成本机档案。",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "agent-skill",
+    "disk",
+    "cleanup",
+    "cache",
+    "windows",
+    "junction",
+    "磁盘清理"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh": ">=0.2.0-rc.1"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

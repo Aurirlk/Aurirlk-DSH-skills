@@ -1,0 +1,36 @@
+{
+  "name": "disk-butler",
+  "version": "0.1.0",
+  "description": "Windows 磁盘管家：查清 C/D/E 盘空间去向，识别垃圾、过期文件、Agent 运行脚本残余与各类缓存，按安全等级产出清理计划并执行；用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘；并留档成本机档案。",
+  "author": {
+    "name": "disk-butler contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "disk",
+    "cleanup",
+    "cache",
+    "windows",
+    "junction",
+    "disk-space",
+    "磁盘清理"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Disk Butler",
+    "shortDescription": "Windows 磁盘清理与缓存迁移",
+    "longDescription": "扫描 C/D/E 盘空间去向，按安全等级识别可清理对象（缓存、过期文件、Agent 运行脚本残余、崩溃转储），产出计划后执行；用 NTFS Junction 把写死在 C 盘的缓存目录透明迁移到其他盘，并记录回退点。全程双层安全校验，扫描器不删除、执行器默认预演。",
+    "developerName": "disk-butler contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "brandColor": "#3B82F6",
+    "defaultPrompt": [
+      "帮我看看 C 盘空间都被什么占用了",
+      "清理一下磁盘垃圾，先给我看计划",
+      "把 C 盘的浏览器缓存挪到 E 盘"
+    ]
+  }
+}

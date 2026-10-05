@@ -1,0 +1,57 @@
+name: verify
+
+# 这个项目的脚本有一类「只在运行时才暴露」的坑（BOM、编码、数组包装语义），
+# 所以 CI 跑的是真正的自检脚本，而不是形式化的 lint。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    # Windows 是目标平台，且脚本依赖 PowerShell 与 robocopy 等
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 编码与 BOM 检查
+        shell: pwsh
+        run: |
+          # .ps1 必须有 UTF-8 BOM（PS 5.1 读无 BOM 的 UTF-8 会按 GBK 解释）
+          # SKILL.md 必须没有 BOM（带 BOM 会让 frontmatter 解析失效）
+          ./scripts/Fix-Bom.ps1 -Check
+
+      - name: 技能自检（BOM / 编码 / frontmatter / 数组陷阱 / 打包内容 / 插件清单）
+        shell: pwsh
+        run: ./skills/disk-butler/scripts/Test-SkillHealth.ps1 -Deep
+
+      - name: 设置 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: 插件入口自测（mock Cordis 上下文 + 解析器单元测试）
+        run: node scripts/self-test.mjs
+
+      - name: 扫描器冒烟测试
+        shell: pwsh
+        run: |
+          $plan = Join-Path $env:TEMP 'smoke-plan.json'
+          ./skills/disk-butler/scripts/Find-Junk.ps1 -Days 30 -JsonOut $plan
+          # 预演模式：不带 -Execute，不会删除任何东西
+          ./skills/disk-butler/scripts/Invoke-Cleanup.ps1 -Plan $plan
+
+      - name: 下钻冒烟测试
+        shell: pwsh
+        run: |
+          ./skills/disk-butler/scripts/Get-Drilldown.ps1 -Path $env:TEMP -Top 3 -Depth 1 -MinSizeMB 1
+
+      - name: 隔离区空状态冒烟测试
+        shell: pwsh
+        run: ./skills/disk-butler/scripts/Invoke-Cleanup.ps1 -ListQuarantine

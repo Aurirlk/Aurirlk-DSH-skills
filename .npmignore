@@ -1,0 +1,13 @@
+# 绝不发布的内容（双保险：package.json#files 已限定范围，这里再挡一层）
+logs/
+**/logs/
+*.log
+*.tgz
+scripts/
+_ref/
+node_modules/
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store

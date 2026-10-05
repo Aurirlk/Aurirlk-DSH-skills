@@ -1,0 +1,15 @@
+# 运行产物
+logs/
+junk-plan.json
+_bad-plan.json
+
+# 打包与调研
+*.tgz
+_ref/
+node_modules/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+.DS_Store
