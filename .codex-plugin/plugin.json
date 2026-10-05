@@ -1,26 +1,31 @@
 {
-  "name": "disk-butler",
+  "name": "aurirlk-dsh-skills",
   "version": "0.1.0",
-  "description": "Windows 磁盘管家：查清 C/D/E 盘空间去向，识别垃圾、过期文件、Agent 运行脚本残余与各类缓存，按安全等级产出清理计划并执行；用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘；并留档成本机档案。",
+  "description": "Aurirlk 验证可用的 DSH 技能合集：每个技能一个目录，装上即注册全部技能。当前收录 disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存、留档成本机档案）。",
   "author": {
-    "name": "disk-butler contributors"
+    "name": "Aurirlk",
+    "url": "https://github.com/Aurirlk"
   },
   "license": "MIT",
   "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "agent-skill",
+    "skills",
+    "collection",
+    "windows",
     "disk",
     "cleanup",
     "cache",
-    "windows",
-    "junction",
-    "disk-space",
     "磁盘清理"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Disk Butler",
-    "shortDescription": "Windows 磁盘清理与缓存迁移",
-    "longDescription": "扫描 C/D/E 盘空间去向，按安全等级识别可清理对象（缓存、过期文件、Agent 运行脚本残余、崩溃转储），产出计划后执行；用 NTFS Junction 把写死在 C 盘的缓存目录透明迁移到其他盘，并记录回退点。全程双层安全校验，扫描器不删除、执行器默认预演。",
-    "developerName": "disk-butler contributors",
+    "displayName": "Aurirlk DSH Skills",
+    "shortDescription": "Aurirlk 验证过的 DSH 技能合集",
+    "longDescription": "收录 Aurirlk 实际使用并验证可用的 DSH（DeepSeek Harness）技能，每个技能一个目录、各自带 README 说明用法与安装方式。当前收录 disk-butler：查清 C/D/E 盘空间去向，按安全等级识别可清理对象并执行，用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘，并把结论留档成本机档案。",
+    "developerName": "Aurirlk",
+    "websiteURL": "https://github.com/Aurirlk/Aurirlk-DSH-skills",
     "category": "Productivity",
     "capabilities": [
       "Interactive",

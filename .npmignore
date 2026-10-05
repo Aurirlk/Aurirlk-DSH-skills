@@ -1,11 +1,17 @@
-# 绝不发布的内容（双保险：package.json#files 已限定范围，这里再挡一层）
-logs/
+# 绝不发布的内容
+# （双保险：package.json#files 已限定范围，这里再挡一层）
+#
+# ⚠️ 注意区分「仓库根」与「技能内部」的同名目录：
+#     /scripts/            仓库级开发工具，不发布
+#     skills/*/scripts/    技能本体的一部分，**必须发布**
+# 所以这里必须写成 /scripts/ 而不是 scripts/ —— 后者会连技能脚本一起排除掉。
+/logs/
+/scripts/
+/_ref/
+/node_modules/
+*.tgz
 **/logs/
 *.log
-*.tgz
-scripts/
-_ref/
-node_modules/
 
 # 编辑器
 .vscode/

@@ -1,10 +1,11 @@
-# disk-butler bundle layer
+# Aurirlk DSH Skills —— 合集补丁层
 #
 # 本文件是 package.json#dsh.bundle.patch 指向的补丁层。
 # 层语义：一个 YAML 数组，元素是行动词（row verbs）；`insert` 把插件行加入组合配置。
 # 后续层可以用 `id` 覆盖本行（整配置替换）。
 - insert:
     # id：稳定行标识，供后续层覆盖用
-    - id: disk-butler
+    - id: aurirlk-dsh-skills
       # name：loader 要 import 的模块，解析到本包的入口（package.json#main → index.js）
-      name: dsh-disk-butler
+      # 入口会遍历 skills/ 下的全部技能并逐个注册；新增技能无需改本文件。
+      name: dsh-aurirlk-skills

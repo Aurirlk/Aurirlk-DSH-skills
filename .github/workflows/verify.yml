@@ -1,7 +1,10 @@
 name: verify
 
-# 这个项目的脚本有一类「只在运行时才暴露」的坑（BOM、编码、数组包装语义），
+# 这个仓库的技能有一类「只在运行时才暴露」的坑（BOM、编码、数组包装语义），
 # 所以 CI 跑的是真正的自检脚本，而不是形式化的 lint。
+#
+# 设计要点：**遍历 skills/ 下的所有技能**，新增技能不需要改本文件
+# （改 workflow 才对——新增技能时这里会自动覆盖到）。
 
 on:
   push:
@@ -14,44 +17,66 @@ permissions:
 
 jobs:
   verify:
-    # Windows 是目标平台，且脚本依赖 PowerShell 与 robocopy 等
+    # Windows 是目标平台，脚本依赖 PowerShell 与 robocopy 等
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: 编码与 BOM 检查
+      - name: 编码与 BOM 检查（全仓库）
         shell: pwsh
         run: |
           # .ps1 必须有 UTF-8 BOM（PS 5.1 读无 BOM 的 UTF-8 会按 GBK 解释）
           # SKILL.md 必须没有 BOM（带 BOM 会让 frontmatter 解析失效）
           ./scripts/Fix-Bom.ps1 -Check
 
-      - name: 技能自检（BOM / 编码 / frontmatter / 数组陷阱 / 打包内容 / 插件清单）
-        shell: pwsh
-        run: ./skills/disk-butler/scripts/Test-SkillHealth.ps1 -Deep
-
       - name: 设置 Node
         uses: actions/setup-node@v4
         with:
           node-version: '22'
 
-      - name: 插件入口自测（mock Cordis 上下文 + 解析器单元测试）
+      - name: 合集注册逻辑 + 解析器单测
         run: node scripts/self-test.mjs
+
+      - name: 逐个技能自检
+        shell: pwsh
+        run: |
+          $skills = @(Get-ChildItem ./skills -Directory -ErrorAction Stop |
+                      Where-Object { Test-Path (Join-Path $_.FullName 'SKILL.md') })
+
+          if ($skills.Count -eq 0) { throw 'skills/ 下没有找到任何技能' }
+          Write-Host "发现 $($skills.Count) 个技能: $($skills.Name -join ', ')"
+
+          $failed = @()
+          foreach ($s in $skills) {
+            Write-Host ""
+            Write-Host "===== $($s.Name) =====" -ForegroundColor Cyan
+
+            $check = Join-Path $s.FullName 'scripts/Test-SkillHealth.ps1'
+            if (Test-Path $check) {
+              & $check -Deep
+              if ($LASTEXITCODE -ne 0) { $failed += $s.Name }
+            } else {
+              Write-Host "（该技能没有自检脚本，跳过）" -ForegroundColor DarkGray
+            }
+          }
+
+          if ($failed.Count -gt 0) { throw "以下技能自检未通过: $($failed -join ', ')" }
 
       - name: 扫描器冒烟测试
         shell: pwsh
         run: |
+          $skill = './skills/disk-butler/scripts'
+          if (-not (Test-Path $skill)) { Write-Host '没有 disk-butler，跳过'; exit 0 }
           $plan = Join-Path $env:TEMP 'smoke-plan.json'
-          ./skills/disk-butler/scripts/Find-Junk.ps1 -Days 30 -JsonOut $plan
+          & "$skill/Find-Junk.ps1" -Days 30 -JsonOut $plan
           # 预演模式：不带 -Execute，不会删除任何东西
-          ./skills/disk-butler/scripts/Invoke-Cleanup.ps1 -Plan $plan
+          & "$skill/Invoke-Cleanup.ps1" -Plan $plan
 
-      - name: 下钻冒烟测试
+      - name: 下钻与隔离区冒烟测试
         shell: pwsh
         run: |
-          ./skills/disk-butler/scripts/Get-Drilldown.ps1 -Path $env:TEMP -Top 3 -Depth 1 -MinSizeMB 1
-
-      - name: 隔离区空状态冒烟测试
-        shell: pwsh
-        run: ./skills/disk-butler/scripts/Invoke-Cleanup.ps1 -ListQuarantine
+          $skill = './skills/disk-butler/scripts'
+          if (-not (Test-Path $skill)) { Write-Host '没有 disk-butler，跳过'; exit 0 }
+          & "$skill/Get-Drilldown.ps1" -Path $env:TEMP -Top 3 -Depth 1 -MinSizeMB 1
+          & "$skill/Invoke-Cleanup.ps1" -ListQuarantine

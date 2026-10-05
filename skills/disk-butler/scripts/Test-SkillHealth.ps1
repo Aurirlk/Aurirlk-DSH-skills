@@ -187,12 +187,38 @@ if (Test-Path $idx) {
 
     $js = Get-Content $idx -Raw -Encoding UTF8
     $dirName = Split-Path $SkillRoot -Leaf
+
     if ($js -match "export const name = '([^']+)'") {
-        if ($Matches[1] -eq $dirName) { Ok "index.js 导出 name 与技能目录名一致（$($Matches[1])）" }
-        else { Bad "index.js 导出 name='$($Matches[1])' 与目录名 '$dirName' 不一致" }
+        $idxName = $Matches[1]
+        # 在合集仓库里 index.js 的身份是「合集」，名字与单个技能目录名无关；
+        # 真正的不变量是它与 package.json#name 一致。所以分两种情况判断。
+        if ($js -match 'discoverSkills') {
+            Ok "index.js 是合集入口（导出 discoverSkills，名字 $idxName）"
+        } elseif ($idxName -eq $dirName) {
+            Ok "index.js 导出 name 与技能目录名一致（$idxName）"
+        } else {
+            Bad "index.js 导出 name='$idxName' 与目录名 '$dirName' 不一致" `
+                "单技能仓库里两者必须一致；若是合集仓库，入口应导出 discoverSkills"
+        }
     } else { Bad "index.js 里找不到 export const name" }
+
     if ($js -match 'resourceBase') { Ok "index.js 设置了 resourceBase（相对引用才能解析）" }
     else { Bad "index.js 没有 resourceBase" "SKILL.md 里的 scripts/、references/ 相对引用会失效" }
+
+    # 合集模式下，本技能必须能被入口发现
+    if ($js -match 'discoverSkills') {
+        $nodeCmd = Get-Command node -ErrorAction SilentlyContinue
+        if ($nodeCmd) {
+            $probe = & $nodeCmd.Source -e "import('file:///$($idx -replace '\\','/')').then(m=>{const s=m.discoverSkills().map(x=>x.name);console.log(JSON.stringify(s))}).catch(e=>{console.log('ERR:'+e.message)})" 2>&1
+            if ("$probe" -match 'ERR:') {
+                Warn "无法调用 discoverSkills：$probe"
+            } elseif ("$probe" -match "`"$([regex]::Escape($dirName))`"") {
+                Ok "合集入口的 discoverSkills 能发现本技能（$probe）"
+            } else {
+                Bad "合集入口未能发现本技能 '$dirName'" "discoverSkills 返回 $probe"
+            }
+        }
+    }
 } else { Warn "仓库根没有 index.js，跳过 DSH 插件包装检查" }
 
 $pkg = Join-Path $RepoRoot 'package.json'

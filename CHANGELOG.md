@@ -1,22 +1,36 @@
 # 更新日志
 
-本文件记录本项目的显著变更。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
+本文件记录本仓库的显著变更。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，
 版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+
+> **仓库形态**：本仓库是 **Aurirlk 的 DSH 技能合集**，不是单个技能。
+> 每个技能一个顶层目录（`skills/<名字>/`），共用仓库级校验与一套 npm 打包。
+> 下面的版本号针对**整个合集包**。
 
 ## [未发布]
 
 ### 计划中
 
-- `README.en.md` 与 `SKILL.md` 英文版（面向国际用户）
+- `README.en.md` 与各技能 `SKILL.md` 的英文版（面向国际用户）
 - 英文 `description`：它是技能目录里唯一被模型看到的一行，目前只有中文
 - 空间趋势的图形化导出（当前是 Unicode 迷你趋势图）
 - 管理员级清理的脚本化（卷影副本、`hiberfil.sys`——实测单机有约 11 GB 属这类）
 
 ## [0.1.0] - 2026-10-05
 
-首个版本。
+首个版本。仓库定位为**技能合集**：`index.js` 遍历 `skills/` 注册全部技能，
+新增技能无需改代码；CI 同样遍历所有技能做校验。
 
-### 新增 —— 查询（只读）
+### 新增 —— 合集骨架
+
+- `index.js`：遍历 `skills/<名字>/SKILL.md` 并逐个注册技能。导出 `discoverSkills()`
+  供测试与工具使用；每个技能各用一个 `ctx.effect`，卸载插件可干净撤掉全部技能。
+- `scripts/self-test.mjs`：合集注册逻辑 + frontmatter 解析器的单元测试。
+- `scripts/Fix-Bom.ps1`：仓库级 BOM 校正（`.ps1` 必须有、`SKILL.md` 必须没有）。
+- `.github/workflows/verify.yml`：**遍历所有技能**跑自检，并验证合集注册逻辑。
+- `CONTRIBUTING.md` 里的「新增一个技能」四步流程。
+
+### 新增 —— 技能：disk-butler
 
 - `Find-Junk.ps1`：扫描 10 类可清理目标，按 `Safe` / `Confirm` / `Report` 三档产出 JSON 计划。
   覆盖系统临时文件、崩溃转储、包管理器缓存、浏览器缓存、`~/.cache/<工具>`、

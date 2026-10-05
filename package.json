@@ -1,7 +1,7 @@
 {
-  "name": "dsh-disk-butler",
+  "name": "dsh-aurirlk-skills",
   "version": "0.1.0",
-  "description": "Windows 磁盘管家 for DeepSeek Harness：查清 C/D/E 盘空间去向，识别垃圾、过期文件、Agent 运行脚本残余与各类缓存，按安全等级产出清理计划并执行；用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘；并留档成本机档案。",
+  "description": "Aurirlk 验证可用的 DSH（DeepSeek Harness）技能合集：每个技能一个目录，装上本包即注册全部技能。当前收录 disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存、留档成本机档案）。",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -13,6 +13,9 @@
     "cordis.patch.yml",
     "skills",
     "README.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "CHANGELOG.md",
     "LICENSE"
   ],
   "keywords": [
@@ -20,11 +23,14 @@
     "dsh-plugin",
     "deepseek-harness",
     "agent-skill",
+    "skills",
+    "collection",
+    "windows",
     "disk",
     "cleanup",
     "cache",
-    "windows",
     "junction",
+    "电脑管家",
     "磁盘清理"
   ],
   "license": "MIT",
