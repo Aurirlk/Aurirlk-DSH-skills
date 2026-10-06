@@ -4,7 +4,10 @@
 >
 > 每个技能一个目录，各自带 README 说明用法与安装方式。
 > 不合未经测试的东西——这里只放我自己跑通过、愿意长期维护的技能。
-> Deepseek-Harness：https://github.com/deepseek-ai/deepseek-harness
+> Deepseek-Harness官网链接：https://github.com/deepseek-ai/deepseek-harness
+> DeepSeek-Harness（dsh）是由 DeepSeek AI（深度求索） 开发的开源 Agent harness（智能体框架）。
+> 它构建于一切皆插件的架构之上，由 Cordis 驱动，其设计参见论文 https://arxiv.org/abs/2608.25512。
+> 文档：https://deepseek-harness.github.io/deepseek-harness/
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
 
