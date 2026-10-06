@@ -4,6 +4,7 @@
 >
 > 每个技能一个目录，各自带 README 说明用法与安装方式。
 > 不合未经测试的东西——这里只放我自己跑通过、愿意长期维护的技能。
+> Deepseek-Harness：https://github.com/deepseek-ai/deepseek-harness
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
 
