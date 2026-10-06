@@ -28,6 +28,12 @@
 |---|---|---|---|
 | **disk-butler** | Windows 电脑管家：查清 C/D/E 盘空间去向 → 按安全等级清理垃圾 → 用 NTFS Junction 透明迁移缓存 → 留档成本机档案 | Windows | [中文](skills/disk-butler/README.md) · [EN](skills/disk-butler/README.en.md) |
 
+### 文档与图表
+
+| 技能 | 一句话说明 | 来源 | 文档 |
+|---|---|---|---|
+| **drawio** | 生成 / 导出 / 体检 draw.io 图表：JSON 规格分层自动布局、逐页导出 PNG/SVG/PDF、导出前查出方框重叠与**连线穿框** | 原创 | [中文](skills/drawio/README.md) · [EN](skills/drawio/README.en.md) |
+
 ### 前端开发（Nuxt 4 / Vue 3 / Vuetify 3）
 
 | 技能 | 一句话说明 | 来源 | 文档 |

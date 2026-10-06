@@ -1,0 +1,82 @@
+{
+  "_说明": "示例规格：4 层架构图。只看结构，不写坐标——横向位置由层内等分算出来。",
+  "_用法": ".\\scripts\\New-Drawio.ps1 -Spec .\\examples\\sample-architecture.json -Out .\\out\\sample.drawio -ThenTest",
+
+  "pages": [
+    {
+      "id": "arch",
+      "name": "系统架构图",
+      "title": "订单中台 · 系统架构图",
+      "pageWidth": 1400,
+      "labelWidth": 120,
+      "itemHeight": 70,
+
+      "layers": [
+        {
+          "label": "接入层",
+          "height": 120,
+          "fill": "#dae8fc",
+          "stroke": "#6c8ebf",
+          "items": [
+            { "id": "web",   "text": "Web 前端\nReact + TS" },
+            { "id": "app",   "text": "移动 App\niOS / Android" },
+            { "id": "mini",  "text": "小程序 / H5\nuni-app" },
+            { "id": "openapi", "text": "开放 API\n第三方接入" }
+          ]
+        },
+        {
+          "label": "网关层",
+          "height": 110,
+          "fill": "#d5e8d4",
+          "stroke": "#82b366",
+          "items": [
+            { "id": "gw",    "text": "API 网关\nKong / Nginx" },
+            { "id": "auth",  "text": "统一鉴权\nOAuth2 + JWT" },
+            { "id": "limit", "text": "限流熔断\nSentinel" }
+          ]
+        },
+        {
+          "label": "业务服务层",
+          "height": 130,
+          "fill": "#ffe6cc",
+          "stroke": "#d79b00",
+          "items": [
+            { "id": "order",   "text": "订单服务" },
+            { "id": "pay",     "text": "支付服务" },
+            { "id": "stock",   "text": "库存服务" },
+            { "id": "user",    "text": "用户服务" },
+            { "id": "risk",    "text": "风控服务" }
+          ]
+        },
+        {
+          "label": "数据层",
+          "height": 120,
+          "fill": "#f8cecc",
+          "stroke": "#b85450",
+          "items": [
+            { "id": "mysql", "text": "MySQL 主从集群\n订单 / 支付 / 用户" },
+            { "id": "es",    "text": "Elasticsearch\n订单检索 / 日志分析" },
+            { "id": "oss",   "text": "对象存储 OSS\n附件 / 对账文件" }
+          ]
+        }
+      ],
+
+      "edges": [
+        { "from": "web",     "to": "gw" },
+        { "from": "app",     "to": "gw" },
+        { "from": "mini",    "to": "auth" },
+        { "from": "openapi", "to": "limit" },
+
+        { "from": "gw",   "to": "order" },
+        { "from": "gw",   "to": "pay" },
+        { "from": "auth", "to": "user" },
+        { "from": "limit","to": "risk" },
+
+        { "from": "order", "to": "mysql" },
+        { "from": "pay",   "to": "mysql" },
+        { "from": "stock", "to": "es" },
+        { "from": "user",  "to": "oss" }
+      ]
+    }
+  ]
+}

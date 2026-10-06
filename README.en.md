@@ -24,6 +24,12 @@
 |---|---|---|---|
 | **disk-butler** | Windows computer butler: find out where C/D/E space went → clean junk by safety tier → migrate hard-coded caches transparently with NTFS junctions → keep a durable machine archive | Windows | [English](skills/disk-butler/README.en.md) · [中文](skills/disk-butler/README.md) |
 
+### Documents & diagrams
+
+| Skill | What it does | Origin | Docs |
+|---|---|---|---|
+| **drawio** | Generate / export / lint draw.io diagrams: automatic layered layout from a JSON spec, page-by-page export to PNG/SVG/PDF, and pre-export checks for overlapping boxes and **edges routed through boxes** | original | [English](skills/drawio/README.en.md) · [中文](skills/drawio/README.md) |
+
 ### Front-end (Nuxt 4 / Vue 3 / Vuetify 3)
 
 | Skill | What it does | Origin | Docs |
