@@ -8,6 +8,7 @@
 
 > DeepSeek-Harness（dsh）是由 DeepSeek AI（深度求索） 开发的开源 Agent harness（智能体框架）。
 > 它构建于一切皆插件的架构之上，由 Cordis 驱动，其设计参见论文 https://arxiv.org/abs/2608.25512。
+
 > 文档：https://deepseek-harness.github.io/deepseek-harness/
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
