@@ -29,21 +29,38 @@
 
 ## 怎么装
 
+> **本仓库是公开的 git 仓库，可以直接当作包源用。**
+> 不需要 npm registry，也不需要 npm 账号。
+
 ### 方式一：装整个合集（推荐）
 
-本仓库同时是一个 npm 包，装上它**一次性注册全部技能**：
+在 DSH 的 profile 目录里把本仓库装上，**一次性注册全部技能**：
 
 ```powershell
-# 在 DSH 的 profile 目录里
-pnpm add dsh-aurirlk-skills
+# Windows —— profile 目录不一定叫 desktop，按你实际的来
+cd "$env:USERPROFILE\.dsh\profiles\desktop"
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
 
-或者用 DSH 的插件面板按包名 `dsh-aurirlk-skills` 安装。
+```bash
+# macOS / Linux
+cd ~/.dsh/profiles/desktop
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
+```
+
+装完后 DSH 会读包里的 `dsh.bundle.patch`，把 `skills/` 下的技能全部注册进去。
+实测约 **7 秒**完成。
+
+**更新到最新版：**
+
+```powershell
+pnpm update dsh-aurirlk-skills
+```
 
 ### 方式二：只装某一个技能（技能目录直挂）
 
 DSH 的文件系统技能发现会扫描技能根目录下的**一层**子目录（`<根>/<名字>/SKILL.md`），
-所以把某个技能目录直接挂进去即可，不需要整个仓库：
+所以把某个技能目录直接挂进去即可，不需要整个仓库、也不需要装包：
 
 ```powershell
 # Windows：用 Junction（不需要管理员权限）
@@ -54,13 +71,17 @@ New-Item -ItemType Junction `
 ```
 
 ```bash
-# macOS / Linux：用符号链接（技能目录被监视，新增/改名/删除无需重启 DSH）
+# macOS / Linux：用符号链接
 git clone https://github.com/Aurirlk/Aurirlk-DSH-skills.git ~/dev/Aurirlk-DSH-skills
 ln -s ~/dev/Aurirlk-DSH-skills/skills/disk-butler ~/.dsh/skills/disk-butler
 ```
 
-> 用软链/Junction 的好处：`git pull` 之后技能就是最新的，不用重新拷贝。
-> DSH 的技能根目录被监视，改动会热生效。
+> **两种方式的取舍**：
+> - 方式一装整个合集，新增技能自动生效；适合想跟着更新的人
+> - 方式二只挂一个技能，仓库里的其它技能不会进你的环境；适合只用其中一个
+>
+> 两者都用 Junction/软链，所以 `git pull` 之后技能就是最新的，不用重新拷贝。
+> DSH 的技能根目录被监视，**新增/改名/删除都无需重启**。
 
 ### 方式三：其它 agent
 
@@ -69,6 +90,18 @@ Claude Code、Codex 等支持 `SKILL.md` 的 agent 都可以直接使用该目�
 
 - **Codex / OpenAI 插件**：本仓库带 `.codex-plugin/plugin.json`，可按其插件市场方式引入
 - **手动**：把 `skills/<名字>/` 放到对应 agent 的技能目录
+
+### 验证装好了没
+
+```powershell
+# 直接问 agent：「我电脑 C 盘满了」或「查一下我电脑」——它应当自动加载 disk-butler
+# 也可以手动跑技能自检：
+& "$env:USERPROFILE\.dsh\skills\disk-butler\scripts\Test-SkillHealth.ps1" -Deep
+```
+
+> **关于 npm**：本仓库的 `package.json` 是一个合法的 npm 包（`dsh-aurirlk-skills`），
+> 但**尚未发布到 npm registry**，所以 `pnpm add dsh-aurirlk-skills` 现在会失败。
+> 请用方式一。git 安装和 npm 安装的包内容完全一致。
 
 ---
 

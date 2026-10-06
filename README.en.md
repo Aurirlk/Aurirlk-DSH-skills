@@ -23,21 +23,38 @@
 
 ## Installation
 
+> **This repository is a public git repository and can be used directly as a package source.**
+> No npm registry and no npm account required.
+
 ### Option 1 — install the whole collection (recommended)
 
-This repository is also an npm package. Installing it **registers every skill at once**:
+Add this repository as a dependency of your DSH profile to **register every skill at once**:
 
-```bash
-# from your DSH profile directory
-pnpm add dsh-aurirlk-skills
+```powershell
+# Windows — your profile directory may not be called `desktop`; use whatever you have
+cd "$env:USERPROFILE\.dsh\profiles\desktop"
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
 
-Or install it by package name `dsh-aurirlk-skills` from the DSH plugin panel.
+```bash
+# macOS / Linux
+cd ~/.dsh/profiles/desktop
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
+```
+
+DSH then reads the package's `dsh.bundle.patch` and registers every skill under `skills/`.
+Measured at roughly **7 seconds**.
+
+**Updating to the latest version:**
+
+```powershell
+pnpm update dsh-aurirlk-skills
+```
 
 ### Option 2 — link a single skill
 
 DSH discovers skills by scanning **one level** under a skill root (`<root>/<name>/SKILL.md`),
-so you can link just one skill instead of the whole repository:
+so you can link just one skill instead of the whole repository — no package install needed:
 
 ```powershell
 # Windows — a junction needs no administrator rights (a symlink would)
@@ -53,14 +70,33 @@ git clone https://github.com/Aurirlk/Aurirlk-DSH-skills.git ~/dev/Aurirlk-DSH-sk
 ln -s ~/dev/Aurirlk-DSH-skills/skills/disk-butler ~/.dsh/skills/disk-butler
 ```
 
-Linking is better than copying: after `git pull` the skill is already up to date.
-DSH watches skill roots, so added / renamed / removed skills take effect **without a restart**.
+> **Which option to pick:**
+> - Option 1 installs the whole collection; skills you add later show up automatically.
+>   Good if you want to follow upstream.
+> - Option 2 links a single skill; the repository's other skills stay out of your environment.
+>   Good if you only want one of them.
+>
+> Both use a junction/symlink, so after `git pull` the skill is already up to date — no copying.
+> DSH watches skill roots, so added / renamed / removed skills take effect **without a restart**.
 
 ### Option 3 — other agents
 
 The skill body is just `skills/<name>/SKILL.md` and **does not depend on DSH**.
 Any agent that understands `SKILL.md` (Claude Code, Codex, …) can use the directory directly.
 The repository also ships `.codex-plugin/plugin.json` for the Codex/OpenAI plugin flow.
+
+### Verifying the install
+
+```powershell
+# Just ask the agent: "my C drive is full" — it should load disk-butler automatically.
+# Or run the skill's self-check by hand:
+& "$env:USERPROFILE\.dsh\skills\disk-butler\scripts\Test-SkillHealth.ps1" -Deep
+```
+
+> **A note on npm**: this repository's `package.json` is a valid npm package
+> (`dsh-aurirlk-skills`), but it has **not been published to the npm registry**, so
+> `pnpm add dsh-aurirlk-skills` will fail today. Use Option 1 instead.
+> The git install and an npm install would ship identical contents.
 
 ---
 

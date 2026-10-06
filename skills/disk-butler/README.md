@@ -149,14 +149,22 @@ Aurirlk-DSH-skills/            ← 合集仓库（顶层还有 index.js / packag
 
 ### 方式一：装整个合集（推荐）
 
-本技能所在仓库同时是一个 npm 包，**装上即注册合集中的全部技能**：
+把技能合集所在仓库装成 DSH profile 的依赖，**装上即注册合集中的全部技能**：
 
 ```powershell
-# 在 DSH 的 profile 目录里
-pnpm add dsh-aurirlk-skills
+# profile 目录不一定叫 desktop，按你实际的来
+cd "$env:USERPROFILE\.dsh\profiles\desktop"
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
 
-或用 DSH 的插件面板按包名 `dsh-aurirlk-skills` 安装。
+```bash
+# macOS / Linux
+cd ~/.dsh/profiles/desktop
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
+```
+
+> 本仓库**尚未发布到 npm registry**，所以 `pnpm add dsh-aurirlk-skills` 现在会失败。
+> 用上面的 git 方式，内容完全一致。更新用 `pnpm update dsh-aurirlk-skills`。
 
 ### 方式二：只挂这一个技能
 

@@ -137,9 +137,23 @@ anchor**, because execution re-checks. This was tested — a forged plan aimed a
 
 ### Option 1 — install the whole collection (recommended)
 
-```bash
-pnpm add dsh-aurirlk-skills
+Add the collection repository as a dependency of your DSH profile to register **every skill at once**:
+
+```powershell
+# your profile directory may not be called `desktop`; use whatever you have
+cd "$env:USERPROFILE\.dsh\profiles\desktop"
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
+
+```bash
+# macOS / Linux
+cd ~/.dsh/profiles/desktop
+pnpm add github:Aurirlk/Aurirlk-DSH-skills
+```
+
+> This repository is **not published to the npm registry**, so `pnpm add dsh-aurirlk-skills`
+> will fail today. Use the git form above — the contents are identical.
+> Update with `pnpm update dsh-aurirlk-skills`.
 
 ### Option 2 — link just this skill
 
