@@ -1,6 +1,6 @@
 {
   "name": "aurirlk-dsh-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Aurirlk 验证可用的 DSH 技能合集：每个技能一个目录，装上即注册全部技能。当前收录 disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存、留档成本机档案）。",
   "author": {
     "name": "Aurirlk",

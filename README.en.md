@@ -1,9 +1,14 @@
 # Aurirlk DSH Skills
 
-> **DSH (DeepSeek Harness) skills that I actually use and have verified working.**
+> **My DSH skill-sharing repository.** One directory per skill, each with **bilingual READMEs**
+> covering usage and installation.
 >
-> One directory per skill, each with its own README covering usage and installation.
-> Nothing untested lives here — only skills I have run myself and intend to maintain.
+> Two kinds of content live here:
+> - **Original** — written and used by me (e.g. disk-butler)
+> - **Adapted** — built from someone else's or an official published skill, reworked to the DSH spec
+>
+> Every adapted skill records its **source, licence and exactly what we changed** in
+> [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
 
@@ -13,9 +18,42 @@
 
 ## Skills
 
+### System tools
+
 | Skill | What it does | Platform | Docs |
 |---|---|---|---|
-| **disk-butler** | Windows computer butler: find out where C/D/E space went → clean junk by safety tier → migrate hard-coded caches transparently with NTFS junctions → keep a durable machine archive | Windows | [README](skills/disk-butler/README.en.md) · [中文](skills/disk-butler/README.md) |
+| **disk-butler** | Windows computer butler: find out where C/D/E space went → clean junk by safety tier → migrate hard-coded caches transparently with NTFS junctions → keep a durable machine archive | Windows | [English](skills/disk-butler/README.en.md) · [中文](skills/disk-butler/README.md) |
+
+### Front-end (Nuxt 4 / Vue 3 / Vuetify 3)
+
+| Skill | What it does | Origin | Docs |
+|---|---|---|---|
+| **code-review-refactor** | Actionable code review and refactoring: duplicated logic, CSS de-duplication, config-driven pages | adapted | [English](skills/code-review-refactor/README.en.md) · [中文](skills/code-review-refactor/README.md) |
+| **git-commit-message-generator** | Conventional Commits messages with subjects that actually say something | adapted | [English](skills/git-commit-message-generator/README.en.md) · [中文](skills/git-commit-message-generator/README.md) |
+| **ui-tip** | One convention for global toasts: success uses defaults, **errors must set the icon** | adapted (body changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
+| **ui-use-confirm** | One convention for confirmation dialogs, plus which actions must confirm first | adapted (body changed) | [English](skills/ui-use-confirm/README.en.md) · [中文](skills/ui-use-confirm/README.md) |
+| **vuetify0** | Using and authoring with `@vuetify/v0` headless components and composables | official skill | [English](skills/vuetify0/README.en.md) · [中文](skills/vuetify0/README.md) |
+
+### Job hunting / interviews
+
+| Skill | What it does | Origin | Docs |
+|---|---|---|---|
+| **create-interviewer** | Distils an interviewer into a continuously-evolving AI persona (tech map + behaviour archive + persona) | adapted (MIT) | [English](skills/create-interviewer/README.en.md) · [中文](skills/create-interviewer/README.md) |
+| **interview-skills** | Big-tech AI mock interviewer: questions from company + role + JD + resume, with good-vs-bad answers and multi-round simulation | adapted (MIT) | [English](skills/interview-skills/README.en.md) · [中文](skills/interview-skills/README.md) |
+
+> Sources and licences are documented in [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
+
+---
+
+## Related projects
+
+These live **outside this repository** (they have homes of their own — re-uploading would be
+pointless), so they are listed as recommendations only:
+
+| Project | Notes |
+|---|---|
+| **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** | A job-hunting skill collection (5.4k ⭐): resume "distillation", interview prediction and follow-up drilling, autumn recruiting tracker, open-source contribution helper. Aurirlk contributed OpenCode plugin support ([PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)) |
+| **[@vuetify/v0](https://0.vuetifyjs.com/)** | Where this repository's `vuetify0` skill comes from — the headless logic layer for Vue 3 |
 
 <!-- When adding a skill, add a row above and make sure skills/<name>/README.md exists -->
 

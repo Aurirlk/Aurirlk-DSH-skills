@@ -1,9 +1,12 @@
 # Aurirlk DSH Skills
 
-> **我在 DeepSeek Harness 里实际用过、并验证可用的技能合集。**
+> **我的 DSH 技能分享仓库。** 每个技能一个目录，各自带**中英双语 README** 说明用法与安装方式。
 >
-> 每个技能一个目录，各自带 README 说明用法与安装方式。
-> 不合未经测试的东西——这里只放我自己跑通过、愿意长期维护的技能。
+> 内容分两类：
+> - **原创** —— 我自己写并在用的（如 disk-butler）
+> - **二开** —— 以别人或官方发布的 skill 为素材，按 DSH 规范改造适配
+>
+> 二开的一律在 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md) 里写明**来源、许可证、我们改了什么**。
 > Deepseek-Harness官网链接：https://github.com/deepseek-ai/deepseek-harness
 
 > DeepSeek-Harness（dsh）是由 DeepSeek AI（深度求索） 开发的开源 Agent harness（智能体框架）。
@@ -19,9 +22,41 @@
 
 ## 技能目录
 
+### 系统工具
+
 | 技能 | 一句话说明 | 平台 | 文档 |
 |---|---|---|---|
-| **disk-butler** | Windows 电脑管家：查清 C/D/E 盘空间去向 → 按安全等级清理垃圾 → 用 NTFS Junction 透明迁移缓存 → 留档成本机档案 | Windows | [README](skills/disk-butler/README.md) |
+| **disk-butler** | Windows 电脑管家：查清 C/D/E 盘空间去向 → 按安全等级清理垃圾 → 用 NTFS Junction 透明迁移缓存 → 留档成本机档案 | Windows | [中文](skills/disk-butler/README.md) · [EN](skills/disk-butler/README.en.md) |
+
+### 前端开发（Nuxt 4 / Vue 3 / Vuetify 3）
+
+| 技能 | 一句话说明 | 来源 | 文档 |
+|---|---|---|---|
+| **code-review-refactor** | 可落地的代码审查与重构：重复逻辑、CSS 去重、相似页面改 JSON 驱动 | 二开 | [中文](skills/code-review-refactor/README.md) · [EN](skills/code-review-refactor/README.en.md) |
+| **git-commit-message-generator** | 生成约定式提交信息，主题拒绝「修改了/更新了」这类空话 | 二开 | [中文](skills/git-commit-message-generator/README.md) · [EN](skills/git-commit-message-generator/README.en.md) |
+| **ui-tip** | 统一全局 Toast 规范：成功走默认、**错误必须显式指定 icon** | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
+| **ui-use-confirm** | 统一确认弹窗规范，并明确哪些操作必须先二次确认 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
+| **vuetify0** | `@vuetify/v0` 无样式组件与 composable 的用法与编写指南 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
+
+### 求职 / 面试
+
+| 技能 | 一句话说明 | 来源 | 文档 |
+|---|---|---|---|
+| **create-interviewer** | 把一位面试官蒸馏成会持续进化的 AI 角色（技术图谱 + 行为档案 + 人格画像） | 二开（MIT） | [中文](skills/create-interviewer/README.md) · [EN](skills/create-interviewer/README.en.md) |
+| **interview-skills** | 大厂 AI 模拟面试官：按公司 + 岗位 + JD + 简历出题，带好答案/差答案对比与多轮模拟 | 二开（MIT） | [中文](skills/interview-skills/README.md) · [EN](skills/interview-skills/README.en.md) |
+
+> 二开来源与许可详见 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md)。
+
+---
+
+## 相关项目
+
+以下项目**不在本仓库**（人家有自己的仓库，重复上传没有意义），只作推荐：
+
+| 项目 | 说明 |
+|---|---|
+| **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** | 求职技能合集（5.4k ⭐）：简历「酥化」、面试预测与追问强化、秋招进度管理、开源贡献辅助等。Aurirlk 曾为其贡献 OpenCode 插件支持（[PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)） |
+| **[@vuetify/v0](https://0.vuetifyjs.com/)** | 本仓库 `vuetify0` 技能的原始出处，Vue 3 的无样式逻辑层 |
 
 <!-- 新增技能时，在上面表格里加一行，并确保 skills/<名字>/README.md 存在 -->
 

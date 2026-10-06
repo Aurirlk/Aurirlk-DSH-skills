@@ -7,6 +7,42 @@
 > 每个技能一个顶层目录（`skills/<名字>/`），共用仓库级校验与一套 npm 打包。
 > 下面的版本号针对**整个合集包**。
 
+## [0.2.0] - 2026-10-06
+
+仓库定位调整为**通用 DSH 技能分享仓库**，新增 7 个技能（合计 8 个）。
+
+### 新增 —— 前端开发
+
+- **code-review-refactor**：Nuxt 4 + Vue 3 + Vuetify 3 的可落地代码审查与重构
+- **git-commit-message-generator**：约定式提交信息生成
+- **ui-tip**：全局 Toast 调用规范（错误必须显式指定 icon）
+- **ui-use-confirm**：确认弹窗规范与二次确认判据
+- **vuetify0**：`@vuetify/v0` 无样式组件与 composable 指南（含 6 个 references）
+
+### 新增 —— 求职 / 面试
+
+- **create-interviewer**：把面试官蒸馏成持续进化的 AI 角色
+- **interview-skills**：大厂 AI 模拟面试官（含 7 个 references）
+
+### 新增 —— 合规
+
+- **`ATTRIBUTIONS.md`**：逐个记录二开来源、许可证、改动内容。用于履行
+  Apache-2.0（保留声明 + 标明改动）与 MIT（保留版权声明）的署名义务。
+
+### 变更
+
+- 根 README 重新定位为通用分享仓库，技能目录按「系统工具 / 前端开发 / 求职面试」分区
+- 新增「相关项目」区块，推荐 **ASu-skills** 与 **@vuetify/v0**（不复制其内容）
+- 所有 8 个技能补齐**中英双语 README**
+- `index.js` 无需改动——它本来就遍历 `skills/` 注册，新增技能自动生效
+
+### 说明
+
+- 二开技能的改动一律限于**适配层**（frontmatter 规范化、目录重命名、补写 README），
+  例外是 `ui-tip` / `ui-use-confirm`——原文假定项目内已存在 `$tip` / `useConfirm`，
+  为使其独立可用补上了最小实现，已在 ATTRIBUTIONS 中显式标明
+- `vuetify0` 改用**官方完整版**（18.4 KB + 6 references），而非 DataAgent 里那份
+  3.9 KB 且丢失全部 references 的删减版
 ## [未发布]
 
 ### 计划中
