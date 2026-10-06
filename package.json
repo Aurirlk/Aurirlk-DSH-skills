@@ -1,6 +1,6 @@
 {
   "name": "dsh-aurirlk-skills",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Aurirlk 验证可用的 DSH（DeepSeek Harness）技能合集：每个技能一个目录，装上本包即注册全部技能。当前收录 9 个技能，包含 disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存、留档成本机档案）与 drawio（draw.io 图表生成 / 导出 / 布局体检）。",
   "type": "module",
   "main": "index.js",

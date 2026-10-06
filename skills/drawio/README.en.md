@@ -120,10 +120,12 @@ Auto-layout, meanwhile, measured **0 issues**: 4 layers, 15 modules, 12 edges.
 1. **Text overflow is an estimate.** Real width depends on font, weight and letter spacing, and
    draw.io wraps text automatically. The formula assumes CJK = 1.0×fontSize and
    ASCII = 0.55×fontSize, so it reports *possible* overflow. Anything within ~5% is fine.
-2. **Edge-through-box detection is approximate.** The linter approximates draw.io's orthogonal
-   routing as "exit bottom → move across at mid-gap → enter top" rather than invoking the real
-   router. What it reports is a *real* pass through a module, but it may miss some more complex
-   detours.
+2. **Edge-through-box detection honours explicit waypoints; it only approximates when there are
+   none.** When an edge carries `<Array as="points">`, the linter uses the real polyline
+   (exit anchor → waypoints → entry anchor). Only edges *without* waypoints fall back to the
+   "exit bottom → move across at mid-gap → enter top" approximation. So editing the routing does
+   change the lint result — the fix-then-reverify loop holds. What it reports is a *real* pass
+   through a module. Edge-on-edge crossings are not checked and should not be treated as defects.
 3. **Auto-layout divides each layer evenly — it is not a global grid.** Each layer splits the
    available width independently, so box widths and column positions **differ between layers**.
    It looks tidy, but it is not the strict column alignment of a table. For strict alignment you

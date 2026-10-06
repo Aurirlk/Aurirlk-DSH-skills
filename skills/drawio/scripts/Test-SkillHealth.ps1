@@ -210,6 +210,50 @@ if ($Deep) {
         $true
     }
 
+    Check '★ 拐点被真正采纳（绕过障碍方框后不再报穿框）' {
+        # 几何：src 在障碍方框正上方，dst 在正下方。不加拐点时竖线必穿障碍方框；
+        # 加了绕行拐点（从方框右侧绕过去）就不该再报。这条锁住「改 → 复验」闭环——
+        # 没有它，体检会忽略拐点，于是修完了还报原来的问题。
+        $mkDiag = {
+            param([string]$File, [bool]$WithWaypoints)
+            $pts = ''
+            if ($WithWaypoints) {
+                $pts = '<Array as="points"><mxPoint x="100" y="170" /><mxPoint x="480" y="170" /><mxPoint x="480" y="370" /><mxPoint x="100" y="370" /></Array>'
+            }
+            $xml = @"
+<mxfile host="app.diagrams.net">
+  <diagram id="w" name="wp">
+    <mxGraphModel pageWidth="800" pageHeight="600">
+      <root>
+        <mxCell id="0" /><mxCell id="1" parent="0" />
+        <mxCell id="src" value="S" style="rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1"><mxGeometry x="60" y="80" width="80" height="50" as="geometry" /></mxCell>
+        <mxCell id="blk" value="X" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1"><mxGeometry x="60" y="220" width="400" height="80" as="geometry" /></mxCell>
+        <mxCell id="dst" value="T" style="rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="60" y="420" width="80" height="50" as="geometry" /></mxCell>
+        <mxCell id="e" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="src" target="dst"><mxGeometry relative="1" as="geometry">$pts</mxGeometry></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
+"@
+            [System.IO.File]::WriteAllText($File, $xml, [System.Text.UTF8Encoding]::new($false))
+        }
+
+        $plain  = Join-Path $tmp 'wp-plain.drawio'
+        $detour = Join-Path $tmp 'wp-detour.drawio'
+        & $mkDiag $plain  $false
+        & $mkDiag $detour $true
+
+        & (Join-Path $PSScriptRoot 'Test-DrawioLayout.ps1') -Path $plain -Quiet | Out-Null
+        if ($LASTEXITCODE -ne 1) {
+            throw ("无拐点版退出码 {0}，期望 1（竖线本该穿过障碍方框）" -f $LASTEXITCODE)
+        }
+        & (Join-Path $PSScriptRoot 'Test-DrawioLayout.ps1') -Path $detour -Quiet | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            throw ("有拐点版退出码 {0}，期望 0（拐点没被采纳？）" -f $LASTEXITCODE)
+        }
+        $true
+    }
+
     Check '★ 单页文件的页数报 1（锁住裸对象 .Count 为空的坑）' {
         # 这个 bug 只在单页暴露：函数返回 List 被拆成裸 PSCustomObject，
         # 它的 .Count 是空，1..$null 变成 1,0，报「页号超出范围：1,0」。

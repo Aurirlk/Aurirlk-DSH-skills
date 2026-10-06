@@ -149,10 +149,21 @@ function Read-Diagram {
                 })
             }
             elseif ($c.GetAttribute('edge') -eq '1') {
+                # 显式拐点：<mxGeometry><Array as="points"><mxPoint x=".." y=".." />…</Array></mxGeometry>
+                # 有拐点的边必须按真实路径判定，否则修好了还会被误报。
+                $wps = New-Object System.Collections.Generic.List[object]
+                foreach ($pt in @($c.SelectNodes('mxGeometry/Array[@as="points"]/mxPoint'))) {
+                    $wps.Add([pscustomobject]@{
+                        X = (ToD $pt.GetAttribute('x'))
+                        Y = (ToD $pt.GetAttribute('y'))
+                    })
+                }
                 $edges.Add([pscustomobject]@{
                     Id = $id
                     Source = $c.GetAttribute('source')
                     Target = $c.GetAttribute('target')
+                    Style = $style
+                    Waypoints = $wps
                 })
             }
         }
@@ -186,22 +197,39 @@ function Get-RectArea {
     return $R.W * $R.H
 }
 
-function Test-HSegCrossRect {
-    param([double]$Y, [double]$X1, [double]$X2, $R, [double]$Tol)
-    $lo = [Math]::Min($X1, $X2); $hi = [Math]::Max($X1, $X2)
-    if ($Y -le ($R.Y + $Tol)) { return $false }
-    if ($Y -ge ($R.Y + $R.H - $Tol)) { return $false }
-    $ox = [Math]::Min($hi, $R.X + $R.W) - [Math]::Max($lo, $R.X)
-    return ($ox -gt $Tol)
-}
+function Test-SegCrossRect {
+    <#
+      任意方向的线段与矩形是否相交（Liang-Barsky 裁剪）。
+      矩形先按 Tol 向内收缩，这样「擦着边过」不算穿过。
+      能处理斜线——有了显式拐点之后，锚点到第一个拐点那一段未必是正交的。
+    #>
+    param([double]$X1, [double]$Y1, [double]$X2, [double]$Y2, $R, [double]$Tol)
+    $minX = $R.X + $Tol; $maxX = $R.X + $R.W - $Tol
+    $minY = $R.Y + $Tol; $maxY = $R.Y + $R.H - $Tol
+    if ($maxX -le $minX -or $maxY -le $minY) { return $false }
 
-function Test-VSegCrossRect {
-    param([double]$X, [double]$Y1, [double]$Y2, $R, [double]$Tol)
-    $lo = [Math]::Min($Y1, $Y2); $hi = [Math]::Max($Y1, $Y2)
-    if ($X -le ($R.X + $Tol)) { return $false }
-    if ($X -ge ($R.X + $R.W - $Tol)) { return $false }
-    $oy = [Math]::Min($hi, $R.Y + $R.H) - [Math]::Max($lo, $R.Y)
-    return ($oy -gt $Tol)
+    $dx = $X2 - $X1
+    $dy = $Y2 - $Y1
+    $t0 = 0.0
+    $t1 = 1.0
+    $p = @((-$dx), $dx, (-$dy), $dy)
+    $q = @(($X1 - $minX), ($maxX - $X1), ($Y1 - $minY), ($maxY - $Y1))
+
+    for ($k = 0; $k -lt 4; $k++) {
+        if ($p[$k] -eq 0) {
+            if ($q[$k] -lt 0) { return $false }
+        } else {
+            $r = $q[$k] / $p[$k]
+            if ($p[$k] -lt 0) {
+                if ($r -gt $t1) { return $false }
+                if ($r -gt $t0) { $t0 = $r }
+            } else {
+                if ($r -lt $t0) { return $false }
+                if ($r -lt $t1) { $t1 = $r }
+            }
+        }
+    }
+    return ($t0 -lt $t1)
 }
 
 # ---------- 主流程 ----------
@@ -277,28 +305,48 @@ foreach ($pg in $pages) {
         if ($S.IsLabel -or $T.IsLabel) { continue }
         if ($S.IsContainer -or $T.IsContainer) { continue }
 
-        $sx = $S.X + $S.W / 2; $sy = $S.Y + $S.H
-        $tx = $T.X + $T.W / 2; $ty = $T.Y
-        # 目标在上方时翻转
-        if ($ty -lt $sy) { $ty = $T.Y + $T.H; $sy = $S.Y }
-        $midY = ($sy + $ty) / 2
+        # 出入锚点：优先用 style 里的 exitX/exitY/entryX/entryY，否则按上下关系取默认
+        $upper = (($T.Y + $T.H / 2) -lt ($S.Y + $S.H / 2))
+        $exF = Get-StyleVal $e.Style 'exitX';  $eyF = Get-StyleVal $e.Style 'exitY'
+        $nxF = Get-StyleVal $e.Style 'entryX'; $nyF = Get-StyleVal $e.Style 'entryY'
+        if ($exF -ne '' -and $eyF -ne '') {
+            $ax = $S.X + $S.W * (ToD $exF); $ay = $S.Y + $S.H * (ToD $eyF)
+        } elseif ($upper) { $ax = $S.X + $S.W / 2; $ay = $S.Y }
+        else { $ax = $S.X + $S.W / 2; $ay = $S.Y + $S.H }
+        if ($nxF -ne '' -and $nyF -ne '') {
+            $bx = $T.X + $T.W * (ToD $nxF); $by = $T.Y + $T.H * (ToD $nyF)
+        } elseif ($upper) { $bx = $T.X + $T.W / 2; $by = $T.Y + $T.H }
+        else { $bx = $T.X + $T.W / 2; $by = $T.Y }
+
+        # 组装折线：出口锚点 → 显式拐点 → 入口锚点。
+        # 有拐点就走真实路径；没有拐点才退回「下出 → 中间横移 → 上进」的近似。
+        $pts = New-Object System.Collections.Generic.List[object]
+        $pts.Add([pscustomobject]@{ X = $ax; Y = $ay })
+        $wps = $e.Waypoints.ToArray()
+        if ($wps.Count -gt 0) {
+            foreach ($wp in $wps) { $pts.Add($wp) }
+        } else {
+            $midY = ($ay + $by) / 2
+            $pts.Add([pscustomobject]@{ X = $ax; Y = $midY })
+            $pts.Add([pscustomobject]@{ X = $bx; Y = $midY })
+        }
+        $pts.Add([pscustomobject]@{ X = $bx; Y = $by })
 
         $crossers = New-Object System.Collections.Generic.List[string]
-        foreach ($o in $shapes) {
-            if ($o.Id -eq $S.Id -or $o.Id -eq $T.Id) { continue }
-            $hit = $false
-            # 段1：source 竖直出去
-            if (Test-VSegCrossRect -X $sx -Y1 $sy -Y2 $midY -R $o -Tol $Tolerance) { $hit = $true }
-            # 段2：横移
-            if (-not $hit -and (Test-HSegCrossRect -Y $midY -X1 $sx -X2 $tx -R $o -Tol $Tolerance)) { $hit = $true }
-            # 段3：竖直进入 target
-            if (-not $hit -and (Test-VSegCrossRect -X $tx -Y1 $midY -Y2 $ty -R $o -Tol $Tolerance)) { $hit = $true }
-            if ($hit) { $crossers.Add($o.Id) }
+        $arr = $pts.ToArray()
+        for ($k = 0; $k -lt $arr.Count - 1; $k++) {
+            $p1 = $arr[$k]; $p2 = $arr[$k + 1]
+            foreach ($o in $shapes) {
+                if ($o.Id -eq $S.Id -or $o.Id -eq $T.Id) { continue }
+                if (Test-SegCrossRect -X1 $p1.X -Y1 $p1.Y -X2 $p2.X -Y2 $p2.Y -R $o -Tol $Tolerance) {
+                    if (-not $crossers.Contains($o.Id)) { $crossers.Add($o.Id) }
+                }
+            }
         }
         if ($crossers.Count -gt 0) {
             $issues.Add([pscustomobject]@{
                 Page = $pg.Name; Kind = '连线穿框'
-                Detail = ("边 '{0}'（{1} → {2}）穿过 {3}" -f $e.Id, $e.Source, $e.Target, (($crossers | Select-Object -Unique) -join ', '))
+                Detail = ("边 '{0}'（{1} → {2}）穿过 {3}" -f $e.Id, $e.Source, $e.Target, ($crossers.ToArray() -join ', '))
             })
             $found++
         }
