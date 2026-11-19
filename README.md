@@ -33,6 +33,7 @@
 | 技能 | 一句话说明 | 来源 | 文档 |
 |---|---|---|---|
 | **drawio** | 生成 / 导出 / 体检 draw.io 图表：JSON 规格分层自动布局、逐页导出 PNG/SVG/PDF、导出前查出方框重叠与**连线穿框** | 原创 | [中文](skills/drawio/README.md) · [EN](skills/drawio/README.en.md) |
+| **speak-human** | 把技术实现翻译成业务人话：三步降噪改写 + 研发黑话/营销废话双红线表，产出产品介绍与更新日志 | 原创 | [中文](skills/speak-human/README.md) · [EN](skills/speak-human/README.en.md) |
 
 ### 前端开发（Nuxt 4 / Vue 3 / Vuetify 3）
 

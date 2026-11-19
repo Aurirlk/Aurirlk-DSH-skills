@@ -29,6 +29,7 @@
 | Skill | What it does | Origin | Docs |
 |---|---|---|---|
 | **drawio** | Generate / export / lint draw.io diagrams: automatic layered layout from a JSON spec, page-by-page export to PNG/SVG/PDF, and pre-export checks for overlapping boxes and **edges routed through boxes** | original | [English](skills/drawio/README.en.md) · [中文](skills/drawio/README.md) |
+| **speak-human** | Translate engineer-speak into plain business language: three-step denoise-and-rewrite plus dual blocklists for jargon and marketing filler; outputs product intros and release notes | original | [English](skills/speak-human/README.en.md) · [中文](skills/speak-human/README.md) |
 
 ### Front-end (Nuxt 4 / Vue 3 / Vuetify 3)
 

@@ -1,7 +1,7 @@
 {
   "name": "dsh-aurirlk-skills",
-  "version": "0.4.0",
-  "description": "Aurirlk 验证可用的 DSH（DeepSeek Harness）技能合集：每个技能一个目录，装上本包即注册全部技能。当前收录 10 个技能，包含 agent-trace-eval（Agent 工具调用轨迹评测：约束台账、五层错误分类、严重度判定树）、disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存）与 drawio（draw.io 图表生成 / 导出 / 布局体检）。",
+  "version": "0.5.0",
+  "description": "Aurirlk 验证可用的 DSH（DeepSeek Harness）技能合集：每个技能一个目录，装上本包即注册全部技能。当前收录 11 个技能，包含 agent-trace-eval（Agent 工具调用轨迹评测：错误判断 / 工具调用 / 白盒测试三场景）、speak-human（把技术实现翻译成业务人话，带黑话与营销词红线表）、disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存）与 drawio（draw.io 图表生成 / 导出 / 布局体检）。",
   "type": "module",
   "main": "index.js",
   "exports": {
@@ -43,6 +43,12 @@
     "agent-评测",
     "工具调用评测",
     "指令遵循",
+    "说人话",
+    "更新日志",
+    "产品文案",
+    "speak-human",
+    "changelog",
+    "plain-language",
     "电脑管家",
     "磁盘清理",
     "图表"
