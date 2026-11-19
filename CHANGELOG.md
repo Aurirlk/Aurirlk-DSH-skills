@@ -14,13 +14,21 @@
 ### 新增 —— AI 评测
 
 - **agent-trace-eval**：把用户的每句自然语言拆成**可勾选的约束台账**，逐步骤对一遍，
-  只把有约束编号支撑的行为记成错误。
-  - **五层错误分类**：`Intent-` / `Scope-` / `Exec-` / `Side-` / `Out-`，
-    比十几个扁平类目好记，判错时先定位层再选类型
-  - **严重度判定树**：一问「要不要回滚」，把 Critical / Major / Minor 的判级统一到一条尺子上
-  - **八条铁律**：其中「读取 ≠ 采纳」「不必要 ≠ 违规」「根因 ≠ 后果」是评测里最高频的三个坑
-  - **三句话理由模板**：违反哪条 / 为什么这个级别 / 有无并列问题——少一句就变成「我觉得」
-  - `references/速查卡.md`：一页纸，做题与质检时只看这个
+  只把有约束编号支撑的行为记为错误。按**三种评估场景**组织，各自独立成文：
+  - **A · 错误判断**（`references/01-错误判断.md`）：九类错误
+    `Instruction Understanding` / `Scope` / `Filtering` / `Tool-use` / `Parameter` /
+    `Workflow` / `Side Effect` / `Output Format` / `Other`，六字段输出
+  - **B · 工具调用**（`references/02-工具调用.md`）：四值判定
+    `Correct` / `Incorrect` / `Unnecessary` / `Cannot Determine`，
+    十一类细分错误（含 `Premature Side Effect`、`Content Matching Error` 等）
+  - **C · 白盒测试**（`references/03-白盒测试.md`）：Rubric 六字段
+    （含 `Judge Target` / `Type` / `Priority` / `Expected Behavior`）、PASS/FAIL 判定、
+    Ground Truth 手算八步
+  - **术语沿用 Agent 指令遵循标注的通用叫法**，并给出粗/细两套的对照表
+    （`Scope` ↔ `Invalid Scope`；`Filtering` ↔ `Temporal Filter` / `File Type` / `Content Matching`）
+  - **严重度判定树**：一问「要不要回滚」，把 Critical / Major / Minor 统一到一条尺子上
+  - **八条铁律**：其中「读取 ≠ 采纳」「不必要 ≠ 违规」「根因 ≠ 后果」是最高频的三个坑
+  - `references/速查卡.md`：一页纸，三场景速查
   - `references/评测集设计.md`：四源采样法 + 可直接复制的生成提示词，
     把「手写 200 条」从 5 小时发明压成 1 小时审稿
 

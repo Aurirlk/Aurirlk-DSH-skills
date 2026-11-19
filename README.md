@@ -55,7 +55,7 @@
 
 | 技能 | 一句话说明 | 来源 | 文档 |
 |---|---|---|---|
-| **agent-trace-eval** | 评测 Agent 工具调用轨迹是否遵循指令：约束台账 → 五层分类 → 判定树定级 → 三句话理由；附评测集生成提示词 | 原创 | [中文](skills/agent-trace-eval/README.md) · [EN](skills/agent-trace-eval/README.en.md) |
+| **agent-trace-eval** | 评测 Agent 工具调用轨迹是否遵循指令，分三种场景：错误判断 / 工具调用标注 / 白盒 Rubric + GT；术语沿用指令遵循标注通用叫法 | 原创 | [中文](skills/agent-trace-eval/README.md) · [EN](skills/agent-trace-eval/README.en.md) |
 
 > 二开来源与许可详见 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md)。
 

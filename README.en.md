@@ -51,7 +51,7 @@
 
 | Skill | What it does | Origin | Docs |
 |---|---|---|---|
-| **agent-trace-eval** | Evaluate whether an agent's tool-call trace follows the instruction: constraint ledger → five-layer taxonomy → severity decision tree → three-sentence rationale; ships with an eval-set generation prompt | original | [English](skills/agent-trace-eval/README.en.md) · [中文](skills/agent-trace-eval/README.md) |
+| **agent-trace-eval** | Evaluate whether an agent's tool-call trace follows the instruction, in three modes: error location / tool-call labeling / white-box rubrics + ground truth; uses the standard instruction-following annotation vocabulary | original | [English](skills/agent-trace-eval/README.en.md) · [中文](skills/agent-trace-eval/README.md) |
 
 > Sources and licences are documented in [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
 
