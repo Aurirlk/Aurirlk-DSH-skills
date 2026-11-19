@@ -4,72 +4,127 @@
 
 [中文](README.md) | **English**
 
-A general framework for judging scenes from surveillance imagery.
+Judging what happened from surveillance footage.
 
-**Core claim: when image judgment fails, it is usually not because the model saw wrong, but because nobody first stated what could be seen.**
+**The biggest trap is not seeing it wrong — it is drawing a conclusion without first saying what could actually be seen.**
 
-## When to use
+## A real mess to start with
 
-- Surveillance footage → behaviour / state / risk verdicts
-- Frame sequences → progression-stage judgment
-- No labelled baseline, degraded imagery, costly false positives
+Late at night. Something dark is moving on the infrared feed.
 
-## Five layers
+Is someone struggling in the water, or is it just wind on the surface?
 
-```
-1 Input parsing  → count, timestamps, business context, noise filtering
-2 Boundary claim → distance / lighting / occlusion / frame rate / resolution
-3 Invariants     → directionality / coherence / temporal gradient / residual dynamics
-4 Progression    → onset → peak → decay → termination
-5 Differential   → pair every high-risk misread with an observable discriminator
-```
+- Call it "someone is drowning" — if it was a wave, you mobilise rescue at 2am and the whole team hears about it.
+- Call it "nothing" — if it really was a person, that is not a joke anyone laughs at.
 
-## Three key judgments
+**Same frame. Two readings. Costs that differ by orders of magnitude.**
 
-### ① State what you cannot see, first
+The hard part is not "what do you see". It is **"this image cannot resolve what you would need to see"**.
 
-> "This assessment relies on a distant overhead camera; individual detail is not resolvable. Conclusions below are based only on group movement and surface disturbance."
+The first thing this skill does is make you say that out loud.
 
-After that sentence, every downstream conclusion is bounded automatically. **That is protection, not a disclaimer.**
+## Step 1 — State what you cannot see
 
-### ② When dimensions conflict, report the conflict
+Before any conclusion, say this:
 
-**Do not vote. Do not force a consensus.**
+> "This assessment relies on a distant overhead camera. Individual detail is not resolvable. What follows is based only on group movement and surface disturbance."
 
-> "Directionality suggests active approach, but coherence shows isolated individuals. The two conflict; leaning toward a local anomaly rather than a state change."
+After that sentence, everything downstream is automatically bounded.
 
-**Reporting conflict is worth more than forcing agreement.**
+**That is protection, not a disclaimer.** It tells the reader how much weight to give your conclusion.
 
-### ③ For progression, shape beats absolute value
+Five things to declare:
 
-- Smooth decay → natural completion
-- Cliff-edge stop → external interference
-- Overlong plateau → abnormal stagnation
-- Repeated rise and fall → cyclic fault
+| Declare | Why it matters |
+|---|---|
+| Distance | Far away means group behaviour only, no individuals |
+| Lighting | Infrared has no colour; anything relying on colour is void |
+| Occlusion | Glare, rain, and fog make entire regions unjudgeable |
+| Frame rate | Wide sampling cannot judge instant motion, only trends |
+| Resolution | Too blurry means small detail is out of scope — don't force it |
 
-This transfers to any time-series scenario.
+## Step 2 — Cross-check four independent angles
 
-## Without a baseline, use relative gradients
+Judging on one feature goes wrong constantly.
 
-No historical baseline means **no absolute thresholds**:
+**Require four independent angles to point the same way before concluding.**
 
-- ✗ "disturbance height > 20cm means high intensity"
-- ✓ "disturbance area expanded more than 3× relative to the first frame"
+| Angle | Ask |
+|---|---|
+| **Where is it going** | Gathering toward a centre, or scattering outward? |
+| **How orderly** | Moving as one line, or independently, with stragglers? |
+| **How fast it changed** | Gradual rise and fall, or an instant jump? |
+| **What is left behind** | Is the input consumed quickly, or piling up? |
 
-Two rules: state the baseline; never convert the ratio into physical units.
+**When the four disagree — say so.**
 
-## Five anti-hallucination rules
+Do not vote. Do not force a consensus.
 
-1. Unclear → write "cannot be resolved"
-2. Never infer long-term trends from a single frame
-3. **Never turn "not observed" into "does not exist"** — a different observation condition
-4. Never invent identifiers, timestamps, or counts
-5. Every conclusion must point to a region of the image
+> "Directionality suggests active approach, but coherence shows isolated individuals. They conflict; leaning toward a local anomaly rather than a state change."
+
+**Reporting the conflict is worth far more than forcing agreement.**
+
+## Step 3 — Read the speed and the shape
+
+One frame tells you "what it looks like now". **A sequence tells you "where it is heading".**
+
+The useful signal is not magnitude. It is **shape**:
+
+| Shape | Usually means |
+|---|---|
+| Smooth rise, smooth fall | Normal start, normal finish |
+| Sudden stop (cliff edge) | Something external intervened |
+| Stuck at a high plateau | Jammed; not normal |
+| Repeated rise and fall | Cyclic fault |
+
+**This transfers to almost any time-series scenario**, not just video.
+
+## Step 4 — Pair every likely misread with a discriminator
+
+This is the most practical part of the skill.
+
+List the situations most often misjudged in this domain, and write one line each:
+
+**"It looks like X — but if it is really Y, you will also see Z."**
+
+| What you see | Commonly misread as | How to tell |
+|---|---|---|
+| Vigorous movement | Abnormal agitation | Gathering inward = normal high-intensity work; scattering = startled |
+| Perfectly still surface | Empty / nothing there | Look for small sporadic disturbance. **Quiet ≠ absent** |
+| Motion stops abruptly | System failure | Check whether any external input changed. Smooth decline usually means it finished naturally |
+| One small anomaly | Whole thing is abnormal | Check the share of stragglers. Under 5% is usually an individual |
+
+**One hard requirement: the discriminator must be observable.**
+
+"Note the difference" is not a discriminator. **"Check whether it gathers or scatters" is.**
+
+## When you have no baseline
+
+Often there is no history, and no idea what counts as "a lot".
+
+**Never invent an absolute threshold:**
+
+| ❌ Invented | ✅ Checkable |
+|---|---|
+| "Disturbance above 20cm is high intensity" | "Disturbance area grew more than 3× versus the first frame of this sequence" |
+
+Two rules for relative measures:
+
+1. **Name the baseline** (first frame / this site's history / the adjacent period)
+2. **Never convert the ratio into physical units** (3× is 3×, not "about 20 centimetres")
+
+## Five never-dos
+
+1. Unclear → write "cannot be resolved". Do not fill it in.
+2. Never infer a long-term trend from a single frame.
+3. **Never turn "I did not see it" into "it was not there"** — those differ by an entire observation condition.
+4. Never invent identifiers, timestamps, or counts.
+5. Every conclusion must point back to a region of the image. If it cannot, lower the confidence.
 
 ## Install
 
 See the [installation section of the repo README](../../README.md#怎么装).
 
-## Origin and license
+## Origin
 
 Original. Extracted from four vertical aquaculture-monitoring skills (species-specific judgment, cross-species judgment, disease triage, night security) — **all domain nouns removed, only the judgment skeleton kept**.

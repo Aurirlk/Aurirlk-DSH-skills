@@ -4,62 +4,143 @@
 
 [中文](README.md) | **English**
 
-Natural-language querying with metric attribution.
+Querying a database in plain language.
 
-**The hard part was never "generate SQL" — it is querying the right table, holding the boundary, stating the definition, and never inventing when the result is empty.**
+**The hard part is not translating a sentence into SQL. It is reading the right table, not leaking other tenants, stating the definition, and never inventing a number when the result is empty.**
 
-## When to use
+## Three ways this goes wrong in production
 
-Users ask business questions in natural language and expect a query plus an explanation: BI querying, dashboard extraction, operational metrics.
+**① You query someone else's data**
 
-Especially for multi-tenant systems, easily-confused definitions, and cases where an empty result must not be filled in.
+You are building analytics for company A. The user asks for last month's order count.
+
+The SQL is beautiful and it runs. But the `WHERE` clause is missing the tenant predicate —
+
+**so B's and C's orders are included.** That is not a bug. That is a security incident.
+
+**② The number is right, the definition is wrong**
+
+The user asks for the conversion rate. You compute `feed / delta` and get 2.8.
+
+Finance computes 1.4.
+
+**Neither of you is wrong — the word "conversion rate" maps to two different tables in the system.** You picked the wrong one.
+
+**③ The result is empty, so it invents one**
+
+There are no records for this month. The assistant sees an empty result and adds:
+
+> "The conversion rate this month is approximately 1.5, which is normal."
+
+**It made that up.** And the user will probably believe it.
+
+Those three are the holes this skill plugs.
 
 ## Six steps
 
 ```
-① intent & context → ② semantic mapping → ③ safe SQL → ④ execute → ⑤ validate & attribute → ⑥ chart
+① Establish who, which period, which object, which metric
+② Translate the plain-language term into a table and a formula
+③ Generate SQL (safely)
+④ Execute
+⑤ Check the result; explain anomalies
+⑥ Pick a chart
 ```
 
-## Four safety rules
+## Step 1 — Pin down four things
 
-| # | Rule | Why |
-|---|---|---|
-| 1 | Inject scope predicates into the main table **and every joined table** | One missed join is a cross-tenant leak |
-| 2 | `SELECT` only | Enforce in the tool layer, not just the prompt |
-| 3 | Wrap ratio denominators in `NULLIF(b, 0)` | Division by zero is a guaranteed failure |
-| 4 | Parameterise; never concatenate | Injection |
+| Pin down | If you skip it |
+|---|---|
+| **Which tenant / which site** | That is incident ① above |
+| **Which period** | "Recently" and "this week" must become concrete dates |
+| **Which object** | A specific point, or the whole aggregate |
+| **Which metric** | If ambiguous, offer two and let the user choose |
 
-**A cross-tenant query is a security incident, not a bug. There is no room to negotiate this one.**
+**Always echo the time range back** ("2026-11-13 to 2026-11-19"). Correcting it here is far cheaper than arguing after the report is out.
 
-## Semantic mapping needs a "do not read from" column
+## Step 2 — Translate the term into a table and a formula
 
-Saying where to read from is not enough — **the model will grab whichever table happens to have a related field.**
+Three things must be written, not two: **which table to read, how to compute it, and which table NOT to read.**
 
-| Term | Source | Definition | **Not from** |
+**The third is the one people skip, and the one that causes incident ②.**
+
+Saying "daily feed comes from `feeding_log`" is not enough — the model may still reach for the camera-event table, because that one also has a field called `feed`.
+
+So every easily-confused metric needs an explicit "do not read from":
+
+| Term | Read from | Definition | **Not from** |
 |---|---|---|---|
-| Daily feed | `feeding_log` | `SUM(feed_weight)` | **not the camera-event table** |
-| Conversion ratio | `feed_log` + `biomass` | `SUM(feed)/(end_b−start_b)` | guard the denominator |
+| Daily feed | `feeding_log` | `SUM(feed_weight)` aggregated by day | **not the camera-event table** |
+| Conversion rate | `feed_log` + `biomass` | `SUM(feed) / (end − start)` | guard a zero denominator |
+| Achievement rate | `target` + `actual` | `actual / target` | say "no target set" when null |
 
-## Honesty rules
+## Step 3 — Four safety lines for the SQL
 
-**Empty result**:
+### 1. Every table carries the tenant predicate
 
-- ✓ "No records under the current conditions; check the identifier or whether data was entered"
-- ✗ inventing a number with "typically" or "generally"
+**Not just the main table. Every joined table needs it in `WHERE`.**
 
-**This is the most frequently broken and least tolerated rule.**
+```sql
+WHERE t.tenant_id = :tenant_id
+  AND t.base_id = :base_id   -- only when the context specifies one
+```
 
-**Anomalous values**: don't report the number alone — attribute it against contemporaneous environment data, and ground that attribution in retrieved data, not common sense.
+One missed join and you have incident ①.
 
-## Pick charts by dimension, not by looks
+### 2. Read-only
+
+`SELECT` only. No `INSERT` / `UPDATE` / `DELETE` / `DROP`.
+
+**Enforce this in the tool layer, not just in the prompt.** Prompts can be talked around.
+
+### 3. Guard every division
+
+```sql
+SUM(a) / NULLIF(SUM(b), 0)
+```
+
+Unguarded, it will blow up — and not every time. **Intermittent failures are worse than consistent ones.**
+
+### 4. Bind parameters, never concatenate
+
+Concatenation is an open door for injection.
+
+## Step 4 — When it is empty, say so
+
+**This is the most frequently broken rule and the least tolerated.**
+
+| ✅ Right | ❌ Wrong |
+|---|---|
+| "No records under the current conditions; check the identifier or whether data has been entered" | Inventing a number with "typically", "generally", "around" |
+
+**An empty result is data, not a failure.** It tells you either the filter is wrong or the data entry is missing.
+
+You can usually add something more useful: "This site has had no records for three days; worth checking the entry process."
+
+## Step 5 — Explain anomalies, but only from data you retrieved
+
+If a value is clearly off (a sudden drop, a spike, an absurd ratio), **don't just hand over the number**.
+
+Attach the contemporaneous environment data:
+
+```
+Metric: conversion rate 2.8 (historical range 1.2–1.6)
+Same period: average temperature 12°C (22°C seasonally), input unchanged
+Explanation: lower temperature reduced efficiency, but input was not reduced,
+             so the ratio rose
+```
+
+**But the explanation must rest on retrieved data.** "Probably seasonal" is not an explanation — it is a guess.
+
+## Step 6 — Choose charts by data shape, not by looks
 
 | Data shape | Chart |
 |---|---|
-| Single metric over time | line |
-| Multi-object comparison | grouped bar |
+| One metric over time | line |
+| Several objects compared | grouped bar |
 | Two metrics, different units | dual-axis combo |
-| Composition (>6 categories) | stacked bar |
-| Single-value target | gauge |
+| Composition (more than 6 categories) | stacked bar |
+| Single target progress | gauge |
 
 **A chart is only a vehicle. State the conclusion in one sentence — and never more confidently than the data.**
 
@@ -67,6 +148,6 @@ Saying where to read from is not enough — **the model will grab whichever tabl
 
 See the [installation section of the repo README](../../README.md#怎么装).
 
-## Origin and license
+## Origin
 
-Original. Extracted from a smart-fishery dashboard's NL2SQL skill — **all aquaculture fields and metric definitions removed; only the pipeline, safety boundary, and honesty rules kept**.
+Original. Extracted from a smart-fishery dashboard's NL2SQL skill — **all business fields and metric definitions removed; only the pipeline, the safety boundary, and the honesty rules kept**.
