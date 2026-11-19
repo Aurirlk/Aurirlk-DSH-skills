@@ -58,6 +58,20 @@
 |---|---|---|---|
 | **agent-trace-eval** | 评测 Agent 工具调用轨迹是否遵循指令，分三种场景：错误判断 / 工具调用标注 / 白盒 Rubric + GT；术语沿用指令遵循标注通用叫法 | 原创 | [中文](skills/agent-trace-eval/README.md) · [EN](skills/agent-trace-eval/README.en.md) |
 
+### 推理与诊断
+
+| 技能 | 一句话说明 | 来源 | 文档 |
+|---|---|---|---|
+| **see-analyze-act** | 见·析·行三段式诊断：声明边界 → 三层归因 → 两级行动，配事实溯源四铁律防编造 | 原创（抽自垂类技能） | [中文](skills/see-analyze-act/README.md) · [EN](skills/see-analyze-act/README.en.md) |
+| **visual-scene-judge** | 监控画面判别框架：边界声明 → 多维不变量 → 时间梯度 → 鉴别诊断；四维冲突时报告冲突而非投票 | 原创（抽自垂类技能） | [中文](skills/visual-scene-judge/README.md) · [EN](skills/visual-scene-judge/README.en.md) |
+
+### AI 应用编排
+
+| 技能 | 一句话说明 | 来源 | 文档 |
+|---|---|---|---|
+| **agent-orchestration** | 多技能路由 + 三层记忆 + 双模式表达：同一事实在大屏与对话框说不同的话，但不改信息 | 原创（抽自垂类技能） | [中文](skills/agent-orchestration/README.md) · [EN](skills/agent-orchestration/README.en.md) |
+| **nl2sql-analyst** | 自然语言问数六步：意图 → 语义映射（含禁忌表）→ 租户隔离只读 SQL → 归因 → 图表 | 原创（抽自垂类技能） | [中文](skills/nl2sql-analyst/README.md) · [EN](skills/nl2sql-analyst/README.en.md) |
+
 > 二开来源与许可详见 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md)。
 
 ---

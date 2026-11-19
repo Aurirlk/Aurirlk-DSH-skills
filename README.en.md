@@ -54,6 +54,20 @@
 |---|---|---|---|
 | **agent-trace-eval** | Evaluate whether an agent's tool-call trace follows the instruction, in three modes: error location / tool-call labeling / white-box rubrics + ground truth; uses the standard instruction-following annotation vocabulary | original | [English](skills/agent-trace-eval/README.en.md) · [中文](skills/agent-trace-eval/README.md) |
 
+### Reasoning & diagnosis
+
+| Skill | What it does | Origin | Docs |
+|---|---|---|---|
+| **see-analyze-act** | Three-stage diagnosis: state the boundary → three-layer attribution → two-level action, with four grounding rules against invention | original (abstracted) | [English](skills/see-analyze-act/README.en.md) · [中文](skills/see-analyze-act/README.md) |
+| **visual-scene-judge** | Scene judgment from surveillance: boundary claim → invariants → temporal gradient → differential diagnosis; conflicts are reported, not voted on | original (abstracted) | [English](skills/visual-scene-judge/README.en.md) · [中文](skills/visual-scene-judge/README.md) |
+
+### Agent orchestration
+
+| Skill | What it does | Origin | Docs |
+|---|---|---|---|
+| **agent-orchestration** | Multi-skill routing + three-tier memory + dual register: same facts, different words for dashboard vs chat, never different information | original (abstracted) | [English](skills/agent-orchestration/README.en.md) · [中文](skills/agent-orchestration/README.md) |
+| **nl2sql-analyst** | Six-step NL querying: intent → semantic mapping (with a do-not-read-from column) → tenant-isolated read-only SQL → attribution → charts | original (abstracted) | [English](skills/nl2sql-analyst/README.en.md) · [中文](skills/nl2sql-analyst/README.md) |
+
 > Sources and licences are documented in [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
 
 ---
