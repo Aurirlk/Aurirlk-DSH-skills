@@ -47,6 +47,12 @@
 | **create-interviewer** | Distils an interviewer into a continuously-evolving AI persona (tech map + behaviour archive + persona) | adapted (MIT) | [English](skills/create-interviewer/README.en.md) · [中文](skills/create-interviewer/README.md) |
 | **interview-skills** | Big-tech AI mock interviewer: questions from company + role + JD + resume, with good-vs-bad answers and multi-round simulation | adapted (MIT) | [English](skills/interview-skills/README.en.md) · [中文](skills/interview-skills/README.md) |
 
+### AI evaluation
+
+| Skill | What it does | Origin | Docs |
+|---|---|---|---|
+| **agent-trace-eval** | Evaluate whether an agent's tool-call trace follows the instruction: constraint ledger → five-layer taxonomy → severity decision tree → three-sentence rationale; ships with an eval-set generation prompt | original | [English](skills/agent-trace-eval/README.en.md) · [中文](skills/agent-trace-eval/README.md) |
+
 > Sources and licences are documented in [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
 
 ---

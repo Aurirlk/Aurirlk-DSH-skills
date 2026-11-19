@@ -51,6 +51,12 @@
 | **create-interviewer** | 把一位面试官蒸馏成会持续进化的 AI 角色（技术图谱 + 行为档案 + 人格画像） | 二开（MIT） | [中文](skills/create-interviewer/README.md) · [EN](skills/create-interviewer/README.en.md) |
 | **interview-skills** | 大厂 AI 模拟面试官：按公司 + 岗位 + JD + 简历出题，带好答案/差答案对比与多轮模拟 | 二开（MIT） | [中文](skills/interview-skills/README.md) · [EN](skills/interview-skills/README.en.md) |
 
+### AI 评测
+
+| 技能 | 一句话说明 | 来源 | 文档 |
+|---|---|---|---|
+| **agent-trace-eval** | 评测 Agent 工具调用轨迹是否遵循指令：约束台账 → 五层分类 → 判定树定级 → 三句话理由；附评测集生成提示词 | 原创 | [中文](skills/agent-trace-eval/README.md) · [EN](skills/agent-trace-eval/README.en.md) |
+
 > 二开来源与许可详见 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md)。
 
 ---
