@@ -1,18 +1,6 @@
 # Aurirlk DSH Skills
 
-> **我的 DSH 技能分享仓库。** 每个技能一个目录，各自带**中英双语 README** 说明用法与安装方式。
->
-> 内容分两类：
-> - **原创** —— 我自己写并在用的（如 disk-butler）
-> - **二开** —— 以别人或官方发布的 skill 为素材，按 DSH 规范改造适配
->
-> 二开的一律在 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md) 里写明**来源、许可证、我们改了什么**。
-> Deepseek-Harness官网链接：https://github.com/deepseek-ai/deepseek-harness
-
-> DeepSeek-Harness（dsh）是由 DeepSeek AI（深度求索） 开发的开源 Agent harness（智能体框架）。
-> 它构建于一切皆插件的架构之上，由 Cordis 驱动，其设计参见论文 https://arxiv.org/abs/2608.25512。
-
-> 文档：https://deepseek-harness.github.io/deepseek-harness/
+**一个 DSH 技能包集合。装一次，你的 agent 就多会十几件事。**
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
 
@@ -20,69 +8,99 @@
 
 ---
 
-## 技能目录
+## 这玩意儿是干什么的
 
-### 系统工具
+DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一个能读文件、能跑命令、能调工具的 AI 助手。[官网](https://github.com/deepseek-ai/deepseek-harness) · [文档](https://deepseek-harness.github.io/deepseek-harness/)
 
-| 技能 | 一句话说明 | 平台 | 文档 |
-|---|---|---|---|
-| **disk-butler** | Windows 电脑管家：查清 C/D/E 盘空间去向 → 按安全等级清理垃圾 → 用 NTFS Junction 透明迁移缓存 → 留档成本机档案 | Windows | [中文](skills/disk-butler/README.md) · [EN](skills/disk-butler/README.en.md) |
+但它默认是"什么都会一点，什么都不精"。
 
-### 文档与图表
+**技能（skill）就是给它补一门手艺。**
 
-| 技能 | 一句话说明 | 来源 | 文档 |
-|---|---|---|---|
-| **drawio** | 生成 / 导出 / 体检 draw.io 图表：JSON 规格分层自动布局、逐页导出 PNG/SVG/PDF、导出前查出方框重叠与**连线穿框** | 原创 | [中文](skills/drawio/README.md) · [EN](skills/drawio/README.en.md) |
-| **speak-human** | 把技术实现翻译成业务人话：三步降噪改写 + 研发黑话/营销废话双红线表，产出产品介绍与更新日志 | 原创 | [中文](skills/speak-human/README.md) · [EN](skills/speak-human/README.en.md) |
+一个技能就是一份写好的说明书：告诉它做某类事的时候，按什么顺序来、什么不能做、什么情况该停下来问。
 
-### 前端开发（Nuxt 4 / Vue 3 / Vuetify 3）
+这个仓库里放的是我攒下来的技能，**装一次全部生效**，随时 `git pull` 就跟上更新。
 
-| 技能 | 一句话说明 | 来源 | 文档 |
-|---|---|---|---|
-| **code-review-refactor** | 可落地的代码审查与重构：重复逻辑、CSS 去重、相似页面改 JSON 驱动 | 二开 | [中文](skills/code-review-refactor/README.md) · [EN](skills/code-review-refactor/README.en.md) |
-| **git-commit-message-generator** | 生成约定式提交信息，主题拒绝「修改了/更新了」这类空话 | 二开 | [中文](skills/git-commit-message-generator/README.md) · [EN](skills/git-commit-message-generator/README.en.md) |
-| **ui-tip** | 统一全局 Toast 规范：成功走默认、**错误必须显式指定 icon** | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
-| **ui-use-confirm** | 统一确认弹窗规范，并明确哪些操作必须先二次确认 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
-| **vuetify0** | `@vuetify/v0` 无样式组件与 composable 的用法与编写指南 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
-
-### 求职 / 面试
-
-| 技能 | 一句话说明 | 来源 | 文档 |
-|---|---|---|---|
-| **create-interviewer** | 把一位面试官蒸馏成会持续进化的 AI 角色（技术图谱 + 行为档案 + 人格画像） | 二开（MIT） | [中文](skills/create-interviewer/README.md) · [EN](skills/create-interviewer/README.en.md) |
-| **interview-skills** | 大厂 AI 模拟面试官：按公司 + 岗位 + JD + 简历出题，带好答案/差答案对比与多轮模拟 | 二开（MIT） | [中文](skills/interview-skills/README.md) · [EN](skills/interview-skills/README.en.md) |
-
-### AI 评测
-
-| 技能 | 一句话说明 | 来源 | 文档 |
-|---|---|---|---|
-| **agent-trace-eval** | 评测 Agent 工具调用轨迹是否遵循指令，分三种场景：错误判断 / 工具调用标注 / 白盒 Rubric + GT；术语沿用指令遵循标注通用叫法 | 原创 | [中文](skills/agent-trace-eval/README.md) · [EN](skills/agent-trace-eval/README.en.md) |
-
-### 推理与诊断
-
-| 技能 | 一句话说明 | 来源 | 文档 |
-|---|---|---|---|
-| **systematic-rca** | 系统化根因诊断四阶段：事实提取 → 假设与排他（给低成本鉴别动作）→ 根因溯源 → 分级处置；覆盖代码、文档、事件、Bug 回复四场景 | 原创 | [中文](skills/systematic-rca/README.md) · [EN](skills/systematic-rca/README.en.md) |
-| **visual-scene-judge** | 监控画面判别框架：边界声明 → 多维不变量 → 时间梯度 → 鉴别诊断；四维冲突时报告冲突而非投票 | 原创（抽自垂类技能） | [中文](skills/visual-scene-judge/README.md) · [EN](skills/visual-scene-judge/README.en.md) |
-
-### AI 应用编排
-
-| 技能 | 一句话说明 | 来源 | 文档 |
-|---|---|---|---|
-| **agent-orchestration** | 多技能路由 + 三层记忆 + 双模式表达：同一事实在大屏与对话框说不同的话，但不改信息 | 原创（抽自垂类技能） | [中文](skills/agent-orchestration/README.md) · [EN](skills/agent-orchestration/README.en.md) |
-| **nl2sql-analyst** | 自然语言问数六步：意图 → 语义映射（含禁忌表）→ 租户隔离只读 SQL → 归因 → 图表 | 原创（抽自垂类技能） | [中文](skills/nl2sql-analyst/README.md) · [EN](skills/nl2sql-analyst/README.en.md) |
-
-> 二开来源与许可详见 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md)。
+> 里面有两类：**原创**（我自己写的）和**二开**（拿别人的改的）。
+> 二开的都在 [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md) 里写清了来源、许可证、改了什么。
 
 ---
 
-## 相关项目
+## 你可能正需要它
 
-以下项目**不在本仓库**（人家有自己的仓库，重复上传没有意义），只作推荐：
+| 你遇到的麻烦 | 该用哪个 |
+|---|---|
+| C 盘红了，不知道哪些能删、哪些删了就废 | **disk-butler** |
+| 要画架构图，不想一个个手动拖框对齐 | **drawio** |
+| 要给业务方写更新日志，写着写着全是黑话 | **speak-human** |
+| 线上出问题，查了两小时发现方向一开始就错了 | **systematic-rca** |
+| 用大白话问数据库，怕查出别人家的数据 | **nl2sql-analyst** |
+| 一个助手要管一堆能力，不知道什么话该谁答 | **agent-orchestration** |
+| 看监控画面判状态，容易看花眼 | **visual-scene-judge** |
+| 要判断 agent 到底有没有按要求干活 | **agent-trace-eval** |
+| 面试前想按真实 JD 练几轮 | **interview-skills** |
+| 代码重复太多，想清理但不敢动 | **code-review-refactor** |
+
+---
+
+## 技能目录
+
+共 **15 个**。
+
+### 系统工具
+
+| 技能 | 什么时候用 | 平台 | 文档 |
+|---|---|---|---|
+| **disk-butler** | C 盘满了：先告诉你空间去哪了，再按危险程度清理，最后把写死在 C 盘的缓存搬到别的盘，并留一份本机档案 | Windows | [中文](skills/disk-butler/README.md) · [EN](skills/disk-butler/README.en.md) |
+
+### 文档与图表
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **drawio** | 要画架构图：写几行 JSON 就出图，能批量导 PNG/SVG/PDF，导出前先告诉你哪几个框叠一起了 | 原创 | [中文](skills/drawio/README.md) · [EN](skills/drawio/README.en.md) |
+| **speak-human** | 要把技术改动讲给业务方听：三步改写成大白话，顺手清掉「赋能」「打通」这类词 | 原创 | [中文](skills/speak-human/README.md) · [EN](skills/speak-human/README.en.md) |
+
+### 前端开发（Nuxt 4 / Vue 3 / Vuetify 3）
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **code-review-refactor** | 代码重复太多：找出重复的、合并掉，相似页面改成配置驱动 | 二开 | [中文](skills/code-review-refactor/README.md) · [EN](skills/code-review-refactor/README.en.md) |
+| **git-commit-message-generator** | 写 commit：按 feat/fix/docs 分类，主题不许写「修改了」「更新了」 | 二开 | [中文](skills/git-commit-message-generator/README.md) · [EN](skills/git-commit-message-generator/README.en.md) |
+| **ui-tip** | 全局提示不统一：定死成功走默认样式，报错必须显式指定图标 | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
+| **ui-use-confirm** | 哪些操作该弹二次确认：定好规矩，别每次临时拍脑袋 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
+| **vuetify0** | 用 `@vuetify/v0` 写组件：无样式组件和 composable 怎么用 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
+
+### 求职 / 面试
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **create-interviewer** | 想反复练同一位面试官：把ta的思路、偏好、提问习惯固化成 AI 角色 | 二开（MIT） | [中文](skills/create-interviewer/README.md) · [EN](skills/create-interviewer/README.en.md) |
+| **interview-skills** | 模拟大厂面试：给公司、岗位、JD 和简历，它出题并对比「好答案 / 差答案」 | 二开（MIT） | [中文](skills/interview-skills/README.md) · [EN](skills/interview-skills/README.en.md) |
+
+### AI 评测
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **agent-trace-eval** | 判断 agent 有没有按要求干活：拿它的调用记录一步步核对，标出哪步错了、多严重、怎么改 | 原创 | [中文](skills/agent-trace-eval/README.md) · [EN](skills/agent-trace-eval/README.en.md) |
+
+### 推理与诊断
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **systematic-rca** | 出问题查原因：先看清现象，再列可能，想办法排除，最后才动手。防的是「第一眼就下结论」 | 原创 | [中文](skills/systematic-rca/README.md) · [EN](skills/systematic-rca/README.en.md) |
+| **visual-scene-judge** | 看监控画面判状态：先说清能看清什么，再用四个维度交叉判断，冲突时如实报冲突 | 原创 | [中文](skills/visual-scene-judge/README.md) · [EN](skills/visual-scene-judge/README.en.md) |
+
+### AI 应用编排
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **agent-orchestration** | 一个助手管一堆能力：什么话该谁答、上下文怎么记、大屏和对话框怎么说不同的话 | 原创 | [中文](skills/agent-orchestration/README.md) · [EN](skills/agent-orchestration/README.en.md) |
+| **nl2sql-analyst** | 用大白话查数据库：说人话出 SQL，多租户不会串，查不到就直说没数据 | 原创 | [中文](skills/nl2sql-analyst/README.md) · [EN](skills/nl2sql-analyst/README.en.md) |
+
+### 别人的项目（不在本仓库）
 
 | 项目 | 说明 |
 |---|---|
-| **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** | 求职技能合集（5.4k ⭐）：简历「酥化」、面试预测与追问强化、秋招进度管理、开源贡献辅助等。Aurirlk 曾为其贡献 OpenCode 插件支持（[PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)） |
+| **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** | 求职技能合集（5.4k ⭐）：简历「酥化」、面试预测与追问强化、秋招进度管理。Aurirlk 给它贡献过 OpenCode 插件支持（[PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)） |
 | **[@vuetify/v0](https://0.vuetifyjs.com/)** | 本仓库 `vuetify0` 技能的原始出处，Vue 3 的无样式逻辑层 |
 
 <!-- 新增技能时，在上面表格里加一行，并确保 skills/<名字>/README.md 存在 -->
@@ -91,15 +109,12 @@
 
 ## 怎么装
 
-> **本仓库是公开的 git 仓库，可以直接当作包源用。**
-> 不需要 npm registry，也不需要 npm 账号。
+前提：你已经装好了 DSH，并且有一个 profile 目录（一般长这样 `~/.dsh/profiles/desktop`，具体名字按你的来）。
 
-### 方式一：装整个合集（推荐）
-
-在 DSH 的 profile 目录里把本仓库装上，**一次性注册全部技能**：
+### 一次装全部（推荐）
 
 ```powershell
-# Windows —— profile 目录不一定叫 desktop，按你实际的来
+# Windows
 cd "$env:USERPROFILE\.dsh\profiles\desktop"
 pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
@@ -110,22 +125,23 @@ cd ~/.dsh/profiles/desktop
 pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
 
-装完后 DSH 会读包里的 `dsh.bundle.patch`，把 `skills/` 下的技能全部注册进去。
-实测约 **7 秒**完成。
+**装完不用重启。** DSH 会自己扫到 `skills/` 下的所有技能，实测约 7 秒。
 
-**更新到最新版：**
+以后想更新：
 
 ```powershell
 pnpm update dsh-aurirlk-skills
 ```
 
-### 方式二：只装某一个技能（技能目录直挂）
+> ⚠️ **别用 `pnpm add dsh-aurirlk-skills`**（不带 `github:` 那种）。这个包还没发到 npm 官方仓库，那条命令会失败。
+> 用上面那条 git 地址就行，两者内容完全一样。
 
-DSH 的文件系统技能发现会扫描技能根目录下的**一层**子目录（`<根>/<名字>/SKILL.md`），
-所以把某个技能目录直接挂进去即可，不需要整个仓库、也不需要装包：
+### 只想装其中一个
+
+技能目录是直接挂进去用的，不需要装整包：
 
 ```powershell
-# Windows：用 Junction（不需要管理员权限）
+# Windows：用 Junction 挂进去（不需要管理员权限）
 git clone https://github.com/Aurirlk/Aurirlk-DSH-skills.git D:\Dev\Aurirlk-DSH-skills
 New-Item -ItemType Junction `
   -Path   "$env:USERPROFILE\.dsh\skills\disk-butler" `
@@ -133,97 +149,122 @@ New-Item -ItemType Junction `
 ```
 
 ```bash
-# macOS / Linux：用符号链接
+# macOS / Linux：用软链接
 git clone https://github.com/Aurirlk/Aurirlk-DSH-skills.git ~/dev/Aurirlk-DSH-skills
 ln -s ~/dev/Aurirlk-DSH-skills/skills/disk-butler ~/.dsh/skills/disk-butler
 ```
 
-> **两种方式的取舍**：
-> - 方式一装整个合集，新增技能自动生效；适合想跟着更新的人
-> - 方式二只挂一个技能，仓库里的其它技能不会进你的环境；适合只用其中一个
->
-> 两者都用 Junction/软链，所以 `git pull` 之后技能就是最新的，不用重新拷贝。
-> DSH 的技能根目录被监视，**新增/改名/删除都无需重启**。
+两种方式怎么选：
 
-### 方式三：其它 agent
+| | 装全部 | 只装一个 |
+|---|---|---|
+| 适合谁 | 想跟着更新的人 | 只用其中一两个的人 |
+| 以后新增的技能 | 自动生效 | 不会进来 |
+| 更新 | `pnpm update` | `git pull` 即可，因为挂的是链接 |
+
+**两种都是链接，不是拷贝。** 所以 `git pull` 之后技能就是最新的，不用重新搬。
+技能目录被监视着，**新增、改名、删除都不用重启**。
+
+### 给别的 agent 用
 
 技能本体就是 `skills/<名字>/SKILL.md`，**不依赖 DSH**。
-Claude Code、Codex 等支持 `SKILL.md` 的 agent 都可以直接使用该目录：
 
-- **Codex / OpenAI 插件**：本仓库带 `.codex-plugin/plugin.json`，可按其插件市场方式引入
-- **手动**：把 `skills/<名字>/` 放到对应 agent 的技能目录
+Claude Code、Codex 这些认 `SKILL.md` 的 agent 都能直接用：
 
-### 验证装好了没
+- **Codex / OpenAI 插件**：仓库带了 `.codex-plugin/plugin.json`，按它的插件方式引入
+- **手动**：把 `skills/<名字>/` 整个目录，拷到那个 agent 的技能目录里
+
+### 怎么确认装好了
+
+直接跟 agent 说一句「我 C 盘满了」或「查一下我电脑」，它应该自己加载 **disk-butler**。
+
+也可以手动跑技能自检：
 
 ```powershell
-# 直接问 agent：「我电脑 C 盘满了」或「查一下我电脑」——它应当自动加载 disk-butler
-# 也可以手动跑技能自检：
 & "$env:USERPROFILE\.dsh\skills\disk-butler\scripts\Test-SkillHealth.ps1" -Deep
 ```
 
-> **关于 npm**：本仓库的 `package.json` 是一个合法的 npm 包（`dsh-aurirlk-skills`），
-> 但**尚未发布到 npm registry**，所以 `pnpm add dsh-aurirlk-skills` 现在会失败。
-> 请用方式一。git 安装和 npm 安装的包内容完全一致。
+---
+
+## 常见问题
+
+**装了没反应？**
+先确认文件夹名字对得上：DSH 只认 `SKILL.md` 里的 `name` 和目录名一致的情况。改完不用重启，但 DSH 确实要能扫到那个目录。
+
+**会不会乱删我的文件？**
+会动手的技能（比如 disk-butler）在自己的 README 里都写了安全模型——**删之前会先给你看清单，按危险程度分级**。用之前读一下那篇，别闭眼跑。
+
+**能只装其中几个吗？**
+能，见上面「只想装其中一个」。挂几个都行，互不影响。
+
+**这和 npm 包有什么区别？**
+`package.json` 是合法的 npm 包，但没发布。走 git 装，内容和 npm 装的一模一样。
 
 ---
 
-## 仓库结构
+## 仓库长什么样
 
 ```
 Aurirlk-DSH-skills/
-├── README.md                  ← 你在这里（仓库介绍 + 技能目录）
+├── README.md                  ← 你在这里
 ├── LICENSE / CONTRIBUTING.md / SECURITY.md / CHANGELOG.md
-├── .gitattributes / .editorconfig / .gitignore / .npmignore
 ├── .github/workflows/verify.yml    ← CI：遍历所有技能做校验
-├── scripts/Fix-Bom.ps1             ← 仓库级开发工具（不随包发布）
-├── index.js / cordis.patch.yml / package.json   ← 合集包（注册所有技能）
-├── .codex-plugin/plugin.json       ← Codex/OpenAI 插件清单
+├── index.js / cordis.patch.yml / package.json   ← 合集包（负责注册全部技能）
+├── .codex-plugin/plugin.json       ← Codex / OpenAI 插件清单
+├── scripts/                        ← 仓库级开发工具（不随包发布）
 └── skills/
-    └── disk-butler/           ← 技能一
-        ├── README.md          ← 该技能的介绍 / 用法 / 安装
+    └── disk-butler/           ← 一个技能
+        ├── README.md          ← 给人看的：介绍 / 用法 / 安装
         ├── SKILL.md           ← 技能本体（agent 读的就是它）
         ├── scripts/           ← 可执行脚本
         └── references/        ← 按需加载的参考文档
 ```
 
-### 为什么技能放在 `skills/<名字>/` 而不是仓库根目录
+---
 
-这不是随意选的，是两条规范交叉的结果：
+## 想自己加一个技能
 
-- **DSH 的文件系统技能发现只扫一层**：`<根>/<名字>/SKILL.md`，不支持嵌套
-- **Codex/OpenAI 插件规范要求** `plugin.json` 的 `skills` 字段指向一个**名为 `skills` 的目录**
+三步：
 
-把技能放在 `skills/` 下，两个要求同时满足，而且一份技能真源可以三种方式分发
-（DSH 插件 / Codex 插件 / 通用 agent skill），不需要维护多份副本。
-
-### 新增一个技能
-
-1. `skills/<名字>/SKILL.md`——正文，frontmatter 必填 `name`（kebab-case，**须与目录名一致**）与 `description`
-2. `skills/<名字>/README.md`——给人看的介绍、用法、安装
-3. 在本文的[技能目录](#技能目录)表格里加一行
-4. 跑一遍校验：
+1. `skills/<名字>/SKILL.md` —— 技能本体。开头必须有一段元信息，至少写 `name`（小写连字符，**必须和目录名一样**）和 `description`
+2. `skills/<名字>/README.md` —— 给人看的介绍、用法、安装
+3. 在上面[技能目录](#技能目录)里加一行，然后跑一遍校验：
 
 ```powershell
-.\scripts\Fix-Bom.ps1                                    # 编码/BOM
-.\skills\<名字>\scripts\Test-SkillHealth.ps1 -Deep        # 该技能自检（若有）
-node scripts\self-test.mjs                               # 合集注册逻辑
+.\scripts\Fix-Bom.ps1                              # 检查编码和 BOM
+.\skills\<名字>\scripts\Test-SkillHealth.ps1 -Deep  # 该技能自检（如果有）
+node scripts\self-test.mjs                          # 合集注册逻辑
 ```
 
-**`index.js` 不需要改**——它会自动遍历 `skills/` 注册所有含 `SKILL.md` 的目录。
+**`index.js` 不用改。** 它会自己遍历 `skills/`，凡是带 `SKILL.md` 的目录都注册。
+
+### 为什么技能必须放在 `skills/<名字>/` 下
+
+不是随便定的，是两条规矩撞在一起的结果：
+
+- DSH 找技能时**只扫一层**：`<根>/<名字>/SKILL.md`，不支持再往下嵌套
+- Codex / OpenAI 的插件规范要求 `plugin.json` 里 `skills` 指向一个**叫 `skills` 的目录**
+
+放成 `skills/<名字>/`，两边的规矩同时满足，而且同一份技能能直接用三种方式发（DSH 插件 / Codex 插件 / 通用 agent skill），不用维护多份副本。
 
 ---
 
 ## 参与贡献
 
-见 [CONTRIBUTING.md](CONTRIBUTING.md)。**最重要的一条是 BOM 约定**——
-本仓库的技能以 Windows PowerShell 为主，而 PS 5.1 对编码极其敏感：
-`.ps1` 必须有 BOM、`SKILL.md` 必须没有 BOM，两个方向相反、极易弄反。
+看 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+**最要紧的一条是 BOM。** 这仓库里的脚本以 Windows PowerShell 为主，而 PS 5.1 对编码特别挑：
+
+- `.ps1` 文件**必须带** BOM
+- `SKILL.md` **必须不带** BOM
+
+两个方向正好相反，非常容易弄反，弄反了不会报错，只会静默出问题。
 
 ## 安全
 
-本仓库的技能可能**修改或删除你机器上的文件**（例如 disk-butler 会清理磁盘）。
-每个技能自己的 README 里有它的安全模型，**使用前请先读**。
-漏洞报告方式见 [SECURITY.md](SECURITY.md)。
+这个仓库里的技能**可能会修改或删除你机器上的文件**（比如 disk-butler 就是干这个的）。
+
+每个技能自己的 README 里都写了它的安全模型，**用之前读一下**。发现漏洞请按 [SECURITY.md](SECURITY.md) 的方式报。
 
 ## 许可
 

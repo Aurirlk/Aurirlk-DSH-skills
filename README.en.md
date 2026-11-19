@@ -1,85 +1,106 @@
 # Aurirlk DSH Skills
 
-> **My DSH skill-sharing repository.** One directory per skill, each with **bilingual READMEs**
-> covering usage and installation.
->
-> Two kinds of content live here:
-> - **Original** — written and used by me (e.g. disk-butler)
-> - **Adapted** — built from someone else's or an official published skill, reworked to the DSH spec
->
-> Every adapted skill records its **source, licence and exactly what we changed** in
-> [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
+**A collection of DSH skills. Install once, and your agent picks up a dozen new trades.**
 
 [![verify](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml/badge.svg)](https://github.com/Aurirlk/Aurirlk-DSH-skills/actions/workflows/verify.yml)
 
-**English** | [中文](README.md)
+[中文](README.md) | **English**
 
 ---
 
-## Skills
+## What this is
+
+DeepSeek Harness (DSH for short) is an agent framework — think of it as an AI assistant that can read files, run commands, and call tools. [Repo](https://github.com/deepseek-ai/deepseek-harness) · [Docs](https://deepseek-harness.github.io/deepseek-harness/)
+
+Out of the box it is a jack of all trades and master of none.
+
+**A skill is how you give it a trade.**
+
+One skill is a written brief: here is the order to do this kind of work in, here is what you must not do, here is when you should stop and ask.
+
+This repository is the collection I have built up. **Install it once and every skill is live**, and a `git pull` keeps you current.
+
+> Skills come in two kinds here: **original** (I wrote them) and **adapted** (built on someone else's work).
+> Every adapted skill has its source, licence, and a description of what changed in [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
+
+---
+
+## You probably need one of these
+
+| What you are dealing with | Reach for |
+|---|---|
+| The C drive is full and you do not know what is safe to delete | **disk-butler** |
+| You need an architecture diagram and refuse to drag boxes by hand | **drawio** |
+| You have to write release notes for non-technical readers | **speak-human** |
+| Production broke and after two hours you realise you started in the wrong place | **systematic-rca** |
+| You want to query the database in plain language without leaking another tenant's rows | **nl2sql-analyst** |
+| One assistant, many capabilities, and nobody knows who should answer what | **agent-orchestration** |
+| Judging a scene from surveillance footage and your eyes keep playing tricks | **visual-scene-judge** |
+| You need to know whether an agent actually followed the instructions | **agent-trace-eval** |
+| You want to rehearse interviews against a real job description | **interview-skills** |
+| The code is full of duplication and you are afraid to touch it | **code-review-refactor** |
+
+---
+
+## Skill catalogue
+
+**15 skills** in total.
 
 ### System tools
 
-| Skill | What it does | Platform | Docs |
+| Skill | When to use it | Platform | Docs |
 |---|---|---|---|
-| **disk-butler** | Windows computer butler: find out where C/D/E space went → clean junk by safety tier → migrate hard-coded caches transparently with NTFS junctions → keep a durable machine archive | Windows | [English](skills/disk-butler/README.en.md) · [中文](skills/disk-butler/README.md) |
+| **disk-butler** | C drive is full: shows where the space went, cleans up by risk level, moves caches that are hard-wired to C: onto another drive, and keeps a local record | Windows | [English](skills/disk-butler/README.en.md) · [中文](skills/disk-butler/README.md) |
 
 ### Documents & diagrams
 
-| Skill | What it does | Origin | Docs |
+| Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **drawio** | Generate / export / lint draw.io diagrams: automatic layered layout from a JSON spec, page-by-page export to PNG/SVG/PDF, and pre-export checks for overlapping boxes and **edges routed through boxes** | original | [English](skills/drawio/README.en.md) · [中文](skills/drawio/README.md) |
-| **speak-human** | Translate engineer-speak into plain business language: three-step denoise-and-rewrite plus dual blocklists for jargon and marketing filler; outputs product intros and release notes | original | [English](skills/speak-human/README.en.md) · [中文](skills/speak-human/README.md) |
+| **drawio** | Drawing an architecture diagram: write a few lines of JSON, get a diagram; batch export to PNG/SVG/PDF; reports overlapping boxes before you export | original | [English](skills/drawio/README.en.md) · [中文](skills/drawio/README.md) |
+| **speak-human** | Explaining a technical change to business readers: three-step rewrite into plain language, with the jargon and marketing filler stripped out | original | [English](skills/speak-human/README.en.md) · [中文](skills/speak-human/README.md) |
 
 ### Front-end (Nuxt 4 / Vue 3 / Vuetify 3)
 
-| Skill | What it does | Origin | Docs |
+| Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **code-review-refactor** | Actionable code review and refactoring: duplicated logic, CSS de-duplication, config-driven pages | adapted | [English](skills/code-review-refactor/README.en.md) · [中文](skills/code-review-refactor/README.md) |
-| **git-commit-message-generator** | Conventional Commits messages with subjects that actually say something | adapted | [English](skills/git-commit-message-generator/README.en.md) · [中文](skills/git-commit-message-generator/README.md) |
-| **ui-tip** | One convention for global toasts: success uses defaults, **errors must set the icon** | adapted (body changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
-| **ui-use-confirm** | One convention for confirmation dialogs, plus which actions must confirm first | adapted (body changed) | [English](skills/ui-use-confirm/README.en.md) · [中文](skills/ui-use-confirm/README.md) |
-| **vuetify0** | Using and authoring with `@vuetify/v0` headless components and composables | official skill | [English](skills/vuetify0/README.en.md) · [中文](skills/vuetify0/README.md) |
+| **code-review-refactor** | Duplication is piling up: find it, collapse it, turn near-identical pages into config-driven ones | adapted | [English](skills/code-review-refactor/README.en.md) · [中文](skills/code-review-refactor/README.md) |
+| **git-commit-message-generator** | Writing a commit: classify as feat/fix/docs, and no "updated" or "changed" in the subject | adapted | [English](skills/git-commit-message-generator/README.en.md) · [中文](skills/git-commit-message-generator/README.md) |
+| **ui-tip** | Toast messages are inconsistent: success uses the default, errors must name their icon | adapted (content changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
+| **ui-use-confirm** | Which actions need a confirmation dialog: settle the rule once instead of deciding each time | adapted (content changed) | [English](skills/ui-use-confirm/README.en.md) · [中文](skills/ui-use-confirm/README.md) |
+| **vuetify0** | Building components with `@vuetify/v0`: how the headless components and composables are meant to be used | official skill | [English](skills/vuetify0/README.en.md) · [中文](skills/vuetify0/README.md) |
 
 ### Job hunting / interviews
 
-| Skill | What it does | Origin | Docs |
+| Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **create-interviewer** | Distils an interviewer into a continuously-evolving AI persona (tech map + behaviour archive + persona) | adapted (MIT) | [English](skills/create-interviewer/README.en.md) · [中文](skills/create-interviewer/README.md) |
-| **interview-skills** | Big-tech AI mock interviewer: questions from company + role + JD + resume, with good-vs-bad answers and multi-round simulation | adapted (MIT) | [English](skills/interview-skills/README.en.md) · [中文](skills/interview-skills/README.md) |
+| **create-interviewer** | Rehearsing against the same interviewer repeatedly: freeze their thinking style, preferences, and question habits into an AI persona | adapted (MIT) | [English](skills/create-interviewer/README.en.md) · [中文](skills/create-interviewer/README.md) |
+| **interview-skills** | Mock interviews at big tech: give it the company, role, JD, and résumé; it asks questions and contrasts good vs bad answers | adapted (MIT) | [English](skills/interview-skills/README.en.md) · [中文](skills/interview-skills/README.md) |
 
 ### AI evaluation
 
-| Skill | What it does | Origin | Docs |
+| Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **agent-trace-eval** | Evaluate whether an agent's tool-call trace follows the instruction, in three modes: error location / tool-call labeling / white-box rubrics + ground truth; uses the standard instruction-following annotation vocabulary | original | [English](skills/agent-trace-eval/README.en.md) · [中文](skills/agent-trace-eval/README.md) |
+| **agent-trace-eval** | Deciding whether an agent did what it was told: walk its call trace step by step, mark what went wrong, how bad, and how to fix it | original | [English](skills/agent-trace-eval/README.en.md) · [中文](skills/agent-trace-eval/README.md) |
 
 ### Reasoning & diagnosis
 
-| Skill | What it does | Origin | Docs |
+| Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **systematic-rca** | Four-stage root-cause diagnosis: facts → hypotheses with low-cost discriminators → root-cause tracing → graded action; covers code, writing, incidents, and bug replies | original | [English](skills/systematic-rca/README.en.md) · [中文](skills/systematic-rca/README.md) |
-| **visual-scene-judge** | Scene judgment from surveillance: boundary claim → invariants → temporal gradient → differential diagnosis; conflicts are reported, not voted on | original (abstracted) | [English](skills/visual-scene-judge/README.en.md) · [中文](skills/visual-scene-judge/README.md) |
+| **systematic-rca** | Something broke and you need the cause: see the facts, list the possibilities, rule them out, then act — it exists to stop you jumping to a conclusion | original | [English](skills/systematic-rca/README.en.md) · [中文](skills/systematic-rca/README.md) |
+| **visual-scene-judge** | Judging state from surveillance footage: state what is visible first, then cross-check four dimensions, and report conflicts honestly | original | [English](skills/visual-scene-judge/README.en.md) · [中文](skills/visual-scene-judge/README.md) |
 
 ### Agent orchestration
 
-| Skill | What it does | Origin | Docs |
+| Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **agent-orchestration** | Multi-skill routing + three-tier memory + dual register: same facts, different words for dashboard vs chat, never different information | original (abstracted) | [English](skills/agent-orchestration/README.en.md) · [中文](skills/agent-orchestration/README.md) |
-| **nl2sql-analyst** | Six-step NL querying: intent → semantic mapping (with a do-not-read-from column) → tenant-isolated read-only SQL → attribution → charts | original (abstracted) | [English](skills/nl2sql-analyst/README.en.md) · [中文](skills/nl2sql-analyst/README.md) |
+| **agent-orchestration** | One assistant, many capabilities: who answers what, how context is remembered, and how a dashboard and a chat box say the same thing differently | original | [English](skills/agent-orchestration/README.en.md) · [中文](skills/agent-orchestration/README.md) |
+| **nl2sql-analyst** | Querying a database in plain language: turns a question into SQL, never crosses tenants, and says "no data" instead of inventing numbers | original | [English](skills/nl2sql-analyst/README.en.md) · [中文](skills/nl2sql-analyst/README.md) |
 
-> Sources and licences are documented in [`ATTRIBUTIONS.md`](ATTRIBUTIONS.md).
-
----
-
-## Related projects
-
-These live **outside this repository** (they have homes of their own — re-uploading would be
-pointless), so they are listed as recommendations only:
+### Someone else's projects (not in this repo)
 
 | Project | Notes |
 |---|---|
-| **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** | A job-hunting skill collection (5.4k ⭐): resume "distillation", interview prediction and follow-up drilling, autumn recruiting tracker, open-source contribution helper. Aurirlk contributed OpenCode plugin support ([PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)) |
+| **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** | A job-hunting skill collection (5.4k ⭐): resume distillation, interview prediction and follow-up drilling, autumn recruiting tracker. Aurirlk contributed OpenCode plugin support ([PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)) |
 | **[@vuetify/v0](https://0.vuetifyjs.com/)** | Where this repository's `vuetify0` skill comes from — the headless logic layer for Vue 3 |
 
 <!-- When adding a skill, add a row above and make sure skills/<name>/README.md exists -->
@@ -88,15 +109,12 @@ pointless), so they are listed as recommendations only:
 
 ## Installation
 
-> **This repository is a public git repository and can be used directly as a package source.**
-> No npm registry and no npm account required.
+Assumes DSH is already installed and you have a profile directory (typically `~/.dsh/profiles/desktop` — use whatever yours is called).
 
-### Option 1 — install the whole collection (recommended)
-
-Add this repository as a dependency of your DSH profile to **register every skill at once**:
+### Install everything (recommended)
 
 ```powershell
-# Windows — your profile directory may not be called `desktop`; use whatever you have
+# Windows
 cd "$env:USERPROFILE\.dsh\profiles\desktop"
 pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
@@ -107,22 +125,22 @@ cd ~/.dsh/profiles/desktop
 pnpm add github:Aurirlk/Aurirlk-DSH-skills
 ```
 
-DSH then reads the package's `dsh.bundle.patch` and registers every skill under `skills/`.
-Measured at roughly **7 seconds**.
+**No restart needed.** DSH picks up everything under `skills/` on its own. Measured at roughly **7 seconds**.
 
-**Updating to the latest version:**
+To update later:
 
 ```powershell
 pnpm update dsh-aurirlk-skills
 ```
 
-### Option 2 — link a single skill
+> ⚠️ **Don't run `pnpm add dsh-aurirlk-skills`** (without the `github:` prefix). The package has not been published to the npm registry, so that command fails. Use the git URL above — the contents are identical.
 
-DSH discovers skills by scanning **one level** under a skill root (`<root>/<name>/SKILL.md`),
-so you can link just one skill instead of the whole repository — no package install needed:
+### Install just one skill
+
+Skills work as directly linked directories, so no package install is needed:
 
 ```powershell
-# Windows — a junction needs no administrator rights (a symlink would)
+# Windows: a junction needs no administrator rights (a symlink would)
 git clone https://github.com/Aurirlk/Aurirlk-DSH-skills.git D:\Dev\Aurirlk-DSH-skills
 New-Item -ItemType Junction `
   -Path   "$env:USERPROFILE\.dsh\skills\disk-butler" `
@@ -130,38 +148,56 @@ New-Item -ItemType Junction `
 ```
 
 ```bash
-# macOS / Linux
+# macOS / Linux: a symlink
 git clone https://github.com/Aurirlk/Aurirlk-DSH-skills.git ~/dev/Aurirlk-DSH-skills
 ln -s ~/dev/Aurirlk-DSH-skills/skills/disk-butler ~/.dsh/skills/disk-butler
 ```
 
-> **Which option to pick:**
-> - Option 1 installs the whole collection; skills you add later show up automatically.
->   Good if you want to follow upstream.
-> - Option 2 links a single skill; the repository's other skills stay out of your environment.
->   Good if you only want one of them.
->
-> Both use a junction/symlink, so after `git pull` the skill is already up to date — no copying.
-> DSH watches skill roots, so added / renamed / removed skills take effect **without a restart**.
+Which to choose:
 
-### Option 3 — other agents
+| | Whole collection | Single skill |
+|---|---|---|
+| Best for | People who want to follow updates | People who use one or two skills |
+| Skills added later | Arrive automatically | Do not appear |
+| Updating | `pnpm update` | `git pull` — it is a link, not a copy |
 
-The skill body is just `skills/<name>/SKILL.md` and **does not depend on DSH**.
-Any agent that understands `SKILL.md` (Claude Code, Codex, …) can use the directory directly.
-The repository also ships `.codex-plugin/plugin.json` for the Codex/OpenAI plugin flow.
+**Both options link, they do not copy.** After a `git pull` the skill is already current, with nothing to move.
+The skills directory is watched, so **adding, renaming, or deleting needs no restart**.
 
-### Verifying the install
+### Using this with other agents
+
+The skill itself is just `skills/<name>/SKILL.md` and **does not depend on DSH**.
+
+Claude Code, Codex, and anything else that understands `SKILL.md` can use it directly:
+
+- **Codex / OpenAI plugins**: the repo ships `.codex-plugin/plugin.json`; install it the way that ecosystem expects
+- **Manually**: copy `skills/<name>/` into that agent's skills directory
+
+### Checking that it worked
+
+Just say "my C drive is full" or "take a look at my machine" — the agent should load **disk-butler** on its own.
+
+You can also run the skill's self-check by hand:
 
 ```powershell
-# Just ask the agent: "my C drive is full" — it should load disk-butler automatically.
-# Or run the skill's self-check by hand:
 & "$env:USERPROFILE\.dsh\skills\disk-butler\scripts\Test-SkillHealth.ps1" -Deep
 ```
 
-> **A note on npm**: this repository's `package.json` is a valid npm package
-> (`dsh-aurirlk-skills`), but it has **not been published to the npm registry**, so
-> `pnpm add dsh-aurirlk-skills` will fail today. Use Option 1 instead.
-> The git install and an npm install would ship identical contents.
+---
+
+## FAQ
+
+**Installed it, nothing happened.**
+Check the directory name matches the `name` in `SKILL.md`. No restart is required, but DSH does have to be able to see the directory.
+
+**Will it delete my files?**
+Skills that touch your machine (disk-butler is one) document their safety model in their own README — **they show you the list first and grade it by risk**. Read that README before you run anything.
+
+**Can I install only some of them?**
+Yes — see "Install just one skill" above. Link as many as you like; they do not interfere.
+
+**How is this different from an npm package?**
+`package.json` is a valid npm package, but it is unpublished. Installing via git gives you exactly the same content.
 
 ---
 
@@ -169,63 +205,65 @@ The repository also ships `.codex-plugin/plugin.json` for the Codex/OpenAI plugi
 
 ```
 Aurirlk-DSH-skills/
-├── README.md / README.en.md   ← you are here (intro + skill index)
+├── README.md                  ← you are here
 ├── LICENSE / CONTRIBUTING.md / SECURITY.md / CHANGELOG.md
-├── .gitattributes / .editorconfig / .gitignore / .npmignore
-├── .github/workflows/verify.yml     ← CI: verifies every skill
-├── scripts/Fix-Bom.ps1              ← repo-level dev tool (not published)
-├── index.js / cordis.patch.yml / package.json   ← collection package (registers all skills)
-├── .codex-plugin/plugin.json        ← Codex/OpenAI plugin manifest
+├── .github/workflows/verify.yml    ← CI: validates every skill
+├── index.js / cordis.patch.yml / package.json   ← the bundle package (registers all skills)
+├── .codex-plugin/plugin.json       ← Codex / OpenAI plugin manifest
+├── scripts/                        ← repository dev tooling (not published)
 └── skills/
     └── disk-butler/           ← one skill
-        ├── README.md / README.en.md   ← intro / usage / installation
-        ├── SKILL.md                   ← the skill body (what the agent reads)
-        ├── scripts/                   ← executable scripts
-        └── references/                ← docs loaded on demand
+        ├── README.md          ← human-facing: intro / usage / install
+        ├── SKILL.md           ← the skill itself (what the agent reads)
+        ├── scripts/           ← executable scripts
+        └── references/        ← reference docs loaded on demand
 ```
 
-### Why skills live under `skills/<name>/` instead of the repository root
+---
 
-This is not arbitrary — it is where two specs intersect:
+## Adding a skill
 
-- **DSH filesystem skill discovery scans exactly one level**: `<root>/<name>/SKILL.md`, no nesting
-- **The Codex/OpenAI plugin spec requires** `plugin.json`'s `skills` field to point at a directory
-  **named `skills`**
+Three steps:
 
-Putting skills under `skills/` satisfies both, so **one source of truth ships as three packages** —
-a DSH plugin, a Codex plugin, and a plain agent skill — with no duplicated copies.
-
-### Adding a skill
-
-1. `skills/<name>/SKILL.md` — the body. Frontmatter requires `name` (kebab-case, **must match the
-   directory name**) and `description`
-2. `skills/<name>/README.md` — the human-facing intro, usage and installation
-3. Add a row to the [Skills](#skills) table above
-4. Run the checks:
+1. `skills/<name>/SKILL.md` — the skill itself. Start with front matter containing at least `name` (kebab-case, **must match the directory name**) and `description`
+2. `skills/<name>/README.md` — human-facing intro, usage, install
+3. Add a row to the [skill catalogue](#skill-catalogue) above, then run the checks:
 
 ```powershell
-.\scripts\Fix-Bom.ps1                                 # encoding / BOM
-.\skills\<name>\scripts\Test-SkillHealth.ps1 -Deep    # per-skill self-check (if present)
-node scripts\self-test.mjs                            # collection registration logic
+.\scripts\Fix-Bom.ps1                              # encoding and BOM
+.\skills\<name>\scripts\Test-SkillHealth.ps1 -Deep  # that skill's self-check, if it has one
+node scripts\self-test.mjs                          # bundle registration logic
 ```
 
-**`index.js` needs no changes** — it iterates `skills/` and registers every directory containing a
-`SKILL.md`.
+**`index.js` needs no change.** It walks `skills/` and registers every directory that has a `SKILL.md`.
+
+### Why skills must live under `skills/<name>/`
+
+Not an arbitrary choice — it is where two rules meet:
+
+- DSH scans **one level** for skills: `<root>/<name>/SKILL.md`, no nesting
+- The Codex / OpenAI plugin spec requires `plugin.json`'s `skills` field to point at a directory **named `skills`**
+
+`skills/<name>/` satisfies both, and one source of truth can be distributed three ways (DSH plugin / Codex plugin / generic agent skill) without maintaining copies.
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). **The single most important rule is the BOM convention** —
-these skills target Windows PowerShell, and PS 5.1 is extremely sensitive to encoding:
-`.ps1` must **have** a BOM while `SKILL.md` must **not**, two opposite requirements that are easy to
-get backwards.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+**The single most important rule is BOM.** This repo's tooling is mostly Windows PowerShell, and PS 5.1 is picky about encoding:
+
+- `.ps1` files **must have** a BOM
+- `SKILL.md` **must not have** a BOM
+
+The two directions are opposite and easy to get backwards — and getting it wrong does not error, it just fails silently.
 
 ## Security
 
-Skills here may **modify or delete files on your machine** (disk-butler cleans up disk space, for
-example). Each skill's own README documents its safety model — **read it before use**.
-See [SECURITY.md](SECURITY.md) for how to report a vulnerability.
+Skills here **may modify or delete files on your machine** (disk-butler exists for exactly that).
+
+Each skill's own README documents its safety model — **read it before use**. To report a vulnerability, follow [SECURITY.md](SECURITY.md).
 
 ## License
 
