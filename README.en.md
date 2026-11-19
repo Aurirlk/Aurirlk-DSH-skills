@@ -58,7 +58,7 @@
 
 | Skill | What it does | Origin | Docs |
 |---|---|---|---|
-| **see-analyze-act** | Three-stage diagnosis: state the boundary → three-layer attribution → two-level action, with four grounding rules against invention | original (abstracted) | [English](skills/see-analyze-act/README.en.md) · [中文](skills/see-analyze-act/README.md) |
+| **systematic-rca** | Four-stage root-cause diagnosis: facts → hypotheses with low-cost discriminators → root-cause tracing → graded action; covers code, writing, incidents, and bug replies | original | [English](skills/systematic-rca/README.en.md) · [中文](skills/systematic-rca/README.md) |
 | **visual-scene-judge** | Scene judgment from surveillance: boundary claim → invariants → temporal gradient → differential diagnosis; conflicts are reported, not voted on | original (abstracted) | [English](skills/visual-scene-judge/README.en.md) · [中文](skills/visual-scene-judge/README.md) |
 
 ### Agent orchestration

@@ -62,7 +62,7 @@
 
 | 技能 | 一句话说明 | 来源 | 文档 |
 |---|---|---|---|
-| **see-analyze-act** | 见·析·行三段式诊断：声明边界 → 三层归因 → 两级行动，配事实溯源四铁律防编造 | 原创（抽自垂类技能） | [中文](skills/see-analyze-act/README.md) · [EN](skills/see-analyze-act/README.en.md) |
+| **systematic-rca** | 系统化根因诊断四阶段：事实提取 → 假设与排他（给低成本鉴别动作）→ 根因溯源 → 分级处置；覆盖代码、文档、事件、Bug 回复四场景 | 原创 | [中文](skills/systematic-rca/README.md) · [EN](skills/systematic-rca/README.en.md) |
 | **visual-scene-judge** | 监控画面判别框架：边界声明 → 多维不变量 → 时间梯度 → 鉴别诊断；四维冲突时报告冲突而非投票 | 原创（抽自垂类技能） | [中文](skills/visual-scene-judge/README.md) · [EN](skills/visual-scene-judge/README.en.md) |
 
 ### AI 应用编排
