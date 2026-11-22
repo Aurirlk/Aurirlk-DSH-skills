@@ -50,12 +50,13 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 新同事拉下仓库，`.env` 缺配置跑不起来 | **env-config** |
 | 后端改了 DTO，前端要跟着动七处 | **vue3-admin-frontend** |
 | 改完代码只想提交，文档一个字没动 | **docs-code-sync** |
+| 页面不对，但不知道是前端、后端还是环境的问题 | **frontend-delivery-method** |
 
 ---
 
 ## 技能目录
 
-共 **26 个**。
+共 **27 个**。
 
 ### 系统工具
 
@@ -75,12 +76,13 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 
 | 技能 | 什么时候用 | 来源 | 文档 |
 |---|---|---|---|
+| **frontend-delivery-method** | 前端从接需求到能用的推进方法：开工三问、环境三级验通、依赖锁死、布局先定谁滚、响应性陷阱、巨型组件拆法，附排障决策树 | 原创 | [中文](skills/frontend-delivery-method/README.md) · [EN](skills/frontend-delivery-method/README.en.md) |
 | **code-review-refactor** | 代码重复太多：找出重复的、合并掉，相似页面改成配置驱动 | 二开 | [中文](skills/code-review-refactor/README.md) · [EN](skills/code-review-refactor/README.en.md) |
 | **git-commit-message-generator** | 写 commit：按 feat/fix/docs 分类，主题不许写「修改了」「更新了」 | 二开 | [中文](skills/git-commit-message-generator/README.md) · [EN](skills/git-commit-message-generator/README.en.md) |
 | **ui-tip** | 全局提示不统一：定死成功走默认样式，报错必须显式指定图标 | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
 | **ui-use-confirm** | 哪些操作该弹二次确认：定好规矩，别每次临时拍脑袋 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
 | **vuetify0** | 用 `@vuetify/v0` 写组件：无样式组件和 composable 怎么用 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
-| **vue3-admin-frontend** | 用 Vue 3 + Naive UI + UnoCSS 写后台页：列表用 `useTable`、表单调抽屉、i18n 要改两处、后端改 DTO 前端动七处 | 原创 | [中文](skills/vue3-admin-frontend/README.md) · [EN](skills/vue3-admin-frontend/README.en.md) |
+| **vue3-admin-frontend** | 用 Vue 3 + Naive UI + UnoCSS 写后台页：列表用 `useTable`、表单调抽屉、i18n 要改全部语言包 + 手写类型表、后端改 DTO 前端动七处 | 原创 | [中文](skills/vue3-admin-frontend/README.md) · [EN](skills/vue3-admin-frontend/README.en.md) |
 
 ### 后端与运维
 

@@ -163,16 +163,25 @@ declare namespace Api {
 
 放 `src/typings/api/`，新增文件记得在 `index.d.ts` 里补 barrel export，否则全局 `Api.Xxx` 找不到。
 
-## i18n：两处都要改，少一处就编译不过
+## i18n：语言包 + 手写类型表，两类地方都要改
 
-所有用户可见文本走 `$t('key')`。新增一个 key 要**同时**改两个地方：
+所有用户可见文本走 `$t('key')`。新增一个 key 要改的是**两类地方**：
 
-1. `src/locales/langs/zh-cn.ts` 和 `en-us.ts`（值）
-2. **`src/typings/app.d.ts` 里的 `I18n.Schema`（类型，手写）**
+1. **全部语言包**（`src/locales/langs/*.ts`）。数量按项目实际——出海项目常见 8 套（中/繁/英/越/泰/印尼/马来/菲律宾），**缺一个就是那个语言下界面显示 key 原文**。
+2. **手写的类型表**：`src/typings/app.d.ts` 里的 `I18n.Schema`；有的项目还有 `src/typings/extra.d.ts`（页面级 key）。
 
-第 2 处是这套骨架最容易漏的地方：locale 文件是对象，类型表是手写的 interface。只加值不加类型，运行时能用，但 **`vue-tsc` 会在所有用到该 key 的地方报"不存在此属性"**。类型表不是自动生成的，别指望它能自己长出来。
+第 2 类是这套骨架最容易漏的地方：locale 文件是对象，类型表是手写的 interface。只加值不加类型，运行时能用，但 **`vue-tsc` 会在所有用到该 key 的地方报"不存在此属性"**。类型表不是自动生成的，别指望它能自己长出来。
 
-> 反过来也成立：删 key 时两处一起删。只删值留下类型，编译器不报，但运行时会显示原始 key 字符串，测试阶段很难注意到。
+> 反过来也成立：删 key 时两边一起删。只删值留下类型，编译器不报，但运行时会显示原始 key 字符串，测试阶段很难注意到。
+
+🔴 **排查时必须按 key 名搜，不能按键值搜**：
+
+```bash
+grep -rn "route.dataAgent" src/locales/langs/   # ✅ 命中所有语言包
+grep -rn "数据智能体" src/locales/langs/          # ❌ 只命中 zh-cn，漏掉另外 7 个
+```
+
+只有 zh-cn 用中文，其余语言里同一 key 是英文/越南语/泰语。所以"我 grep 过了，只有一处"这种判断在改文案时**一定错**。
 
 ## 样式
 
@@ -191,7 +200,7 @@ declare namespace Api {
 2. **API 层** `service/api/<domain>.ts`：新增 `fetch*`、改 URL/方法/参数、删废弃函数。
 3. **类型** `typings/api/`：字段类型跟 DTO 对齐，补 barrel export。
 4. **页面** `views/<domain>/`：新增目录；字段变更改 columns 与表单；状态枚举变更改 render。
-5. **i18n**：langs + `app.d.ts` 两处。
+5. **i18n**：全部语言包 + `app.d.ts`（+ 有的项目 `extra.d.ts`）。
 6. **路由**：新增页面跑 `pnpm gen-route`。
 7. **验证**：
    ```bash
@@ -204,20 +213,20 @@ declare namespace Api {
 
 | 现象 | 真因 | 处理 |
 | --- | --- | --- |
-| `vue-tsc` 报 i18n key 不存在 | 只加了 langs 没加 `I18n.Schema` | 手写类型表，见上 |
+| `vue-tsc` 报 i18n key 不存在 | 只加了语言包没加 `I18n.Schema` | 手写类型表，见上 |
 | 表格列不随状态更新 | `columns` 写成了数组不是函数 | 改成 `() => [...]` |
 | JSX 报命名空间错 | `<script setup lang="ts">` | 改 `lang="tsx"` |
 | `prose` 类没效果 | UnoCSS 无 typography 预设 | 用 `markdown-content.vue` |
 | store 初始化时 `undefined` | 顶层调 `useOtherStore()` | 移到 setup 函数内部调用 |
 | 改了路由刷新就没了 | 手改了 `router/elegant/` | 只能改源配置 + 重新生成 |
 | 页面能跑但 CI 挂 | 只跑了 dev，没跑 `typecheck` | 提交前两条命令都跑 |
-| 中文界面显示 key 原文 | 删了值没删类型（或反之） | 两处同步 |
+| 某个语言下显示 key 原文 | 漏了那个语言包 | 按 key 名搜全部语言包（不是按键值） |
 
 ## 交付自检
 
 - [ ] `pnpm typecheck` 通过（不是"dev 能开就行"）
 - [ ] `pnpm lint` 通过
-- [ ] 新增/改动的可见文本都有 `$t()`，langs 与 `app.d.ts` 都改了
+- [ ] 新增/改动的可见文本都有 `$t()`，**全部**语言包与 `app.d.ts`（+ `extra.d.ts`）都改了
 - [ ] 新增页面跑过 `pnpm gen-route`
 - [ ] 没手改 `router/elegant/`
 - [ ] 列表页 `columns` 是函数、tsx 文件用 `lang="tsx"`

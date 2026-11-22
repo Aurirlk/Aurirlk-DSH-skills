@@ -10,7 +10,7 @@ Build admin pages the way the skeleton already does.
 
 A backend field changes, and the frontend has to follow. Not hard work — but **miss one spot and it either won't compile, or it compiles and the UI shows a raw i18n key**.
 
-The spots people miss: the type definitions, the locale file, the **hand-written `I18n.Schema` interface in `app.d.ts`**, and re-running route generation.
+The spots people miss: the type definitions, **every** locale file, the **hand-written `I18n.Schema` interface in `app.d.ts`**, and re-running route generation.
 
 This skill lays out "the seven places to touch when a DTO changes" in a fixed order, and bakes in the conventions you otherwise have to remember.
 
@@ -22,9 +22,11 @@ You may find `useTable` less flexible than a composable of your own. But if fort
 
 ## Three failures that actually happened
 
-**1. An i18n key lives in two places, not one**
+**1. An i18n key lives in two *kinds* of place — and there's more than one locale file**
 
-`src/locales/langs/zh-cn.ts` holds the *value*; the `I18n.Schema` interface in `src/typings/app.d.ts` holds the *type* — and that interface is **hand-written, never generated**.
+`src/locales/langs/*.ts` holds the *values* — **one file per language**. Overseas products commonly run eight (zh-CN, zh-TW, en, vi, th, id, ms, fil); miss one and that language renders the raw key.
+
+The `I18n.Schema` interface in `src/typings/app.d.ts` holds the *type* — and that interface is **hand-written, never generated** (some projects also have `extra.d.ts`).
 
 Add the value without the type: it works at runtime, but `vue-tsc` reports "property does not exist" everywhere the key is used. Delete the value but keep the type: it compiles fine, and the UI renders the raw key string.
 

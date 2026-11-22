@@ -50,12 +50,13 @@ This repository is the collection I have built up. **Install it once and every s
 | A teammate cloned the repo and `.env` is missing, so nothing runs | **env-config** |
 | The backend changed a DTO and the frontend has seven spots to touch | **vue3-admin-frontend** |
 | You want to commit and the docs haven't moved a line | **docs-code-sync** |
+| The page is wrong and you can't tell which layer is at fault | **frontend-delivery-method** |
 
 ---
 
 ## Skill catalogue
 
-**26 skills** in total.
+**27 skills** in total.
 
 ### System tools
 
@@ -75,6 +76,7 @@ This repository is the collection I have built up. **Install it once and every s
 
 | Skill | When to use it | Origin | Docs |
 |---|---|---|---|
+| **frontend-delivery-method** | Frontend from ticket to usable product: three questions before starting, three levels of "it runs", pinned dependencies, decide who scrolls, reactivity traps, splitting giant components — plus a triage tree | original | [English](skills/frontend-delivery-method/README.en.md) · [中文](skills/frontend-delivery-method/README.md) |
 | **code-review-refactor** | Duplication is piling up: find it, collapse it, turn near-identical pages into config-driven ones | adapted | [English](skills/code-review-refactor/README.en.md) · [中文](skills/code-review-refactor/README.md) |
 | **git-commit-message-generator** | Writing a commit: classify as feat/fix/docs, and no "updated" or "changed" in the subject | adapted | [English](skills/git-commit-message-generator/README.en.md) · [中文](skills/git-commit-message-generator/README.md) |
 | **ui-tip** | Toast messages are inconsistent: success uses the default, errors must name their icon | adapted (content changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
