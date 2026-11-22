@@ -101,8 +101,8 @@ Toolkit tools(arg, boolean writeEnabled) {
 
 运维级总开关 × 产品级开关：
 
-```
-hmsz-ai.sandbox.enabled   AND   xxx.sandbox.enabled
+```yaml
+app.sandbox.enabled      AND   product.sandbox.enabled
 ```
 
 **两个都开才生效。** 关掉时：工具不注册，**提示词里也不拼这段能力说明**。

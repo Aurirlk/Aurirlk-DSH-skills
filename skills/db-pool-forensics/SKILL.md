@@ -134,7 +134,7 @@ leak-detection-threshold: 30000   # 或 0（关闭）
 如果旧 jar 里写的是硬编码：
 
 ```yaml
-maximum-pool-size: 20        # 没有 ${HMSZ_AI_DB_POOL_MAX:20}
+maximum-pool-size: 20        # 没有 ${APP_DB_POOL_MAX:20}
 ```
 
 那么**你设了环境变量也不会生效**。此时"改配置 + 重启"是假动作 —— 必须重新打包换 jar。

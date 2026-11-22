@@ -41,7 +41,7 @@ $line.Line.Substring("java.class.path=".Length) | Set-Content "$tmp\app_cp.txt" 
 **注意两个陷阱：**
 
 - **IDEA 启动的 JVM，`java.class.path` 往往不含第三方 jar**（IDEA 用自定义 classloader 加载）。
-  这时改从 fat jar 里取：解出 `BOOT-INF/lib/*` 的路径列表，或直接用 `hmsz-ai-server-exec.jar` 的 lib 目录拼。
+  这时改从 fat jar 里取：解出 `BOOT-INF/lib/*` 的路径列表，或直接用 `your-app-exec.jar` 的 lib 目录拼。
 - `Set-Content -Encoding UTF8` 在 Windows PowerShell 5.1 会写 BOM，**BOM 会污染第一个 classpath 条目**。用 ASCII，或读回来 `TrimStart([char]0xFEFF)`。
 
 ### 2. 还原转义，写 javac argfile
