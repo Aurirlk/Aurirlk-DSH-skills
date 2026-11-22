@@ -1,7 +1,7 @@
 ---
 name: vue3-admin-frontend
-description: 用 Vue 3 + Naive UI + UnoCSS + Pinia 这套后台骨架写页面、并跟后端接口变更保持同步时使用。含 API 层扁平请求约定、useTable 列表页、抽屉表单、自动路由、i18n 手写类型表、以及「后端改了 DTO 前端要动哪七处」的顺序。
-whenToUse: 后端加了/改了接口要同步前端；新增页面、列表、抽屉表单；TS 报 i18n key 类型错；页面样式用了 prose 类却不生效。
+description: 用 Vue 3 + Naive UI + UnoCSS + Pinia 这套后台骨架写页面、并跟后端接口变更保持同步时使用。含 API 层扁平请求约定、useTable 列表页、抽屉表单、自动路由、i18n 手写类型表、以及「后端改了 DTO 前端要动哪七处」的顺序；自带一个零依赖静态体检脚本（columns 写成数组 / i18n 值与类型不对齐 / 死 prop），不起服务也能跑。
+whenToUse: 后端加了/改了接口要同步前端；新增页面、列表、抽屉表单；TS 报 i18n key 类型错；页面样式用了 prose 类却不生效；提交前想快速体检这次改动有没有漏掉类型表或留下死 prop。
 ---
 
 # Vue 3 后台前端开发
@@ -183,6 +183,8 @@ grep -rn "数据智能体" src/locales/langs/          # ❌ 只命中 zh-cn，�
 
 只有 zh-cn 用中文，其余语言里同一 key 是英文/越南语/泰语。所以"我 grep 过了，只有一处"这种判断在改文案时**一定错**。
 
+这一段的三件事（缺语言包 / 缺类型 / 类型多出来的）现在都能机器查，见下面「可执行体检」。
+
 ## 样式
 
 - **优先 UnoCSS 工具类**：`flex gap-16px text-primary h-full justify-between`
@@ -222,10 +224,77 @@ grep -rn "数据智能体" src/locales/langs/          # ❌ 只命中 zh-cn，�
 | 页面能跑但 CI 挂 | 只跑了 dev，没跑 `typecheck` | 提交前两条命令都跑 |
 | 某个语言下显示 key 原文 | 漏了那个语言包 | 按 key 名搜全部语言包（不是按键值） |
 
+上面「表格列不随状态更新」「某个语言下显示 key 原文」「vue-tsc 报 key 不存在」这三条，
+不用靠眼睛——`scripts/Test-FrontendHealth.mjs` 直接扫。
+
+## 可执行体检：三条能被机器抓住的坑
+
+`scripts/Test-FrontendHealth.mjs` —— 零依赖、单文件、不启动 dev server、不跑 `vue-tsc`、不装任何包。
+
+```bash
+node <技能目录>/scripts/Test-FrontendHealth.mjs <项目根>
+node <技能目录>/scripts/Test-FrontendHealth.mjs <项目根> --strict   # 警告也算不通过（放 CI 里）
+node <技能目录>/scripts/Test-FrontendHealth.mjs <项目根> --only=columns,i18n,props
+```
+
+退出码：`0` 通过 / `1` 有问题 / `2` 跑不起来（路径不对、没扫到源码）。`--json` 给机器读，`--max=N` 控制每类列几条。
+
+**为什么要有这一层**：下面三条的共同点是「看完了表就不看了」——不是不懂，是记不住。
+尤其 i18n，语言包八套、key 上百个，靠眼睛对是自欺欺人；而且漏掉的后果不是报错，
+是界面安静地显示原始 key。
+
+| 检查 | 报什么 | 级别 |
+| --- | --- | --- |
+| `columns` | `useTable({ columns: [...] })` 写了数组字面量；或通过一个数组变量传进去 | error / warn |
+| `i18n` | 语言包有、`I18n.Schema` 没有（用到处 vue-tsc 会炸） | error |
+| | `I18n.Schema` 有、语言包没有（运行时显示原始 key） | warn |
+| | 某几套语言缺某个 key（那个语言下显示原始 key） | warn |
+| `props` | `defineProps` 声明了、全仓没人传值 | warn |
+| | 同上但有 `withDefaults` 默认值（等于恒用默认值，设计味道） | info |
+| | 组件声明了 props 但全仓没人引用（删页面漏删） | warn |
+
+### 它不判什么（先看清边界，再决定信几分）
+
+静态扫描不是类型检查器。以下一律**降级为「无法判定」并打印出来**，不会硬判：
+
+- `v-bind="obj"` / `{...props}` 展开传参 → 该组件的 prop 全部跳过（宁可少报，不可错报）
+- `defineProps<Pick<...>>` / `Omit<...>` / 外部包里的类型 → 该组件部分 prop 跳过
+- 动态拼接的 i18n key（`$t('a.' + x)`）不参与比对
+- `Record<K, V>` / 索引签名 / `A & Record<...>` → 该层算「部分可知」，不往下判
+- 名字级匹配：同名组件靠 `import` 解析归属，`import` 解析不出来的才退回按名字认
+
+**「没报」和「没看」必须能区分**：每次跑完都会打印「降级 / 跳过」清单。
+如果清单里出现了你关心的组件，就别把它的 `✓` 当成结论。
+
+### 误报是会被反噬的，所以它自带测试
+
+```bash
+node <技能目录>/scripts/Test-FrontendHealth.selftest.mjs
+```
+
+两套夹具（`scripts/fixtures/`）：一套是「该报的必须报」（含 key 名、prop 名、行号断言），
+一套是「全是陷阱、一条都不许报」——裸属性 `embedded`、`:active="false"`、`v-bind` 展开、
+`Record<>` 类型、写成函数的 `columns`。仓库根的 `scripts/self-test.mjs` 会跑这个自检。
+
+一个永远输出 ✓ 的检查器比没有检查器更坏：它给的是虚假的安心。
+
+### 逃逸口
+
+判错了就在那一行（或上一行）加注释，它不再报这一条：
+
+```ts
+// frontend-health-ignore  这个组件由外部包在生产时动态注册
+const props = defineProps<Props>()
+```
+
+**但别拿它当消音器**。一个文件里出现三个以上 `frontend-health-ignore`，说明它认错了这个项目的写法，
+该去改检查器或者干脆别跑这一条（`--only=` 去掉它）。
+
 ## 交付自检
 
 - [ ] `pnpm typecheck` 通过（不是"dev 能开就行"）
 - [ ] `pnpm lint` 通过
+- [ ] `node <技能目录>/scripts/Test-FrontendHealth.mjs .` 没有 error（警告逐条看一眼）
 - [ ] 新增/改动的可见文本都有 `$t()`，**全部**语言包与 `app.d.ts`（+ `extra.d.ts`）都改了
 - [ ] 新增页面跑过 `pnpm gen-route`
 - [ ] 没手改 `router/elegant/`

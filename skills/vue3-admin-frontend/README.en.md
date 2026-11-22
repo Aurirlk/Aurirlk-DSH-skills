@@ -38,6 +38,32 @@ UnoCSS ships without the typography preset, so `prose` and `prose-sm` are no-ops
 
 Written as a plain array, the table renders — but columns stop reacting to state. The correct form is `columns: () => [...]`.
 
+## It can also examine itself (no dev server)
+
+The skill ships a **zero-dependency, single-file** checker. It reads source; it does not start a dev server or run `vue-tsc`:
+
+```bash
+node scripts/Test-FrontendHealth.mjs .            # from the project root
+node scripts/Test-FrontendHealth.mjs . --strict   # in CI: warnings also fail
+```
+
+Three checks, all of the "we agreed to check this, and humans will definitely miss it" kind:
+
+| Check | Catches | Consequence if missed |
+| --- | --- | --- |
+| `columns` | `useTable({ columns: [...] })` written as an array | Table renders, but columns stop reacting to state |
+| `i18n` | Key in the locale files but not in `I18n.Schema` (or the reverse), or a key missing from some locales | `vue-tsc` fails at every usage site, or the UI quietly shows the raw key |
+| `props` | A `defineProps` member nobody passes, or a component nobody references | Dead props and orphaned components mislead the next reader |
+
+Findings are graded `error` / `warn` / `info`, each with `file:line`; `--json` for machines.
+**"Clean" and "not looked at" stay distinguishable** — anything it cannot decide (`v-bind` spreads,
+`Pick`/`Omit`, external types, `Record<>`) is listed under "degraded / skipped" instead of being
+counted as a pass.
+
+The checker has its own tests (`scripts/Test-FrontendHealth.selftest.mjs`) with two fixtures:
+one where everything must be reported, one full of traps where nothing may be reported.
+A checker that always prints ✓ is worse than no checker.
+
 ## The seven steps, in order
 
 ```

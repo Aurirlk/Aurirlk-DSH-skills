@@ -49,6 +49,7 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 交付前怀疑有假数据、假实现 | **no-stub-delivery** |
 | 新同事拉下仓库，`.env` 缺配置跑不起来 | **env-config** |
 | 后端改了 DTO，前端要跟着动七处 | **vue3-admin-frontend** |
+| 想确认语言包、类型表、死 prop 有没有问题（不用起服务） | **vue3-admin-frontend** 自带的 `Test-FrontendHealth.mjs` |
 | 改完代码只想提交，文档一个字没动 | **docs-code-sync** |
 | 页面不对，但不知道是前端、后端还是环境的问题 | **frontend-delivery-method** |
 | 接手一个陌生仓库，要给人和 agent 一份能查的地图 | **repo-skill-forge** |
@@ -83,7 +84,7 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | **ui-tip** | 全局提示不统一：定死成功走默认样式，报错必须显式指定图标 | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
 | **ui-use-confirm** | 哪些操作该弹二次确认：定好规矩，别每次临时拍脑袋 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
 | **vuetify0** | 用 `@vuetify/v0` 写组件：无样式组件和 composable 怎么用 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
-| **vue3-admin-frontend** | 用 Vue 3 + Naive UI + UnoCSS 写后台页：列表用 `useTable`、表单调抽屉、i18n 要改全部语言包 + 手写类型表、后端改 DTO 前端动七处 | 原创 | [中文](skills/vue3-admin-frontend/README.md) · [EN](skills/vue3-admin-frontend/README.en.md) |
+| **vue3-admin-frontend** | 用 Vue 3 + Naive UI + UnoCSS 写后台页：列表用 `useTable`、表单调抽屉、i18n 要改全部语言包 + 手写类型表、后端改 DTO 前端动七处。**自带零依赖体检脚本**（columns 写成数组 / i18n 值与类型不对齐 / 死 prop），带夹具自检 | 原创 | [中文](skills/vue3-admin-frontend/README.md) · [EN](skills/vue3-admin-frontend/README.en.md) |
 
 ### 后端与运维
 

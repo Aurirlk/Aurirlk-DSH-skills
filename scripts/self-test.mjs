@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)))
 const mod = await import(pathToFileURL(join(repoRoot, 'index.js')).href)
@@ -90,6 +91,30 @@ if (db) {
   check('disk-butler：resourceBase 下能解析 references/', existsSync(join(base, 'references', '垃圾分类判据.md')))
   check('disk-butler：content 含两条主线的分节',
         String(db.content).includes('查询线') && String(db.content).includes('清理线'))
+}
+
+// vue3-admin-frontend 带可执行体检脚本：结构在不在、能不能真跑起来
+const vue3 = registrations.find((r) => r.name === 'vue3-admin-frontend')
+if (vue3) {
+  const base = vue3.resourceBase.path
+  const checker = join(base, 'scripts', 'Test-FrontendHealth.mjs')
+  check('vue3-admin-frontend：resourceBase 下能解析 scripts/Test-FrontendHealth.mjs', existsSync(checker))
+  check('vue3-admin-frontend：content 指向体检脚本',
+        String(vue3.content).includes('Test-FrontendHealth'))
+
+  // 真跑一遍它的夹具自检（该自检本身断言「该报的报、不该报的不报」）
+  if (existsSync(checker)) {
+    let ok = false
+    let out = ''
+    try {
+      out = execFileSync(process.execPath, [join(base, 'scripts', 'Test-FrontendHealth.selftest.mjs')],
+                         { encoding: 'utf8', stdio: 'pipe' })
+      ok = true
+    } catch (e) {
+      out = String(e.stdout ?? '') + String(e.stderr ?? '')
+    }
+    check('vue3-admin-frontend：体检脚本自检全部通过', ok, out.split('\n').filter((l) => l.includes('❌')).join(' / '))
+  }
 }
 
 // ---------------------------------------------------------------- 解析器单元测试

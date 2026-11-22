@@ -38,6 +38,30 @@ UnoCSS 默认不带 typography 预设，`prose`、`prose-sm` 写了等于没写�
 
 写成 `columns: [...]` 数组，列表能出来，但列不会随状态更新。正确写法是 `columns: () => [...]`。
 
+## 还能自己体检（不用起服务）
+
+技能里带了一个**零依赖单文件**检查器，直接扫源码，不启动 dev server、不跑 `vue-tsc`：
+
+```bash
+node scripts/Test-FrontendHealth.mjs .            # 在项目根跑
+node scripts/Test-FrontendHealth.mjs . --strict   # 放 CI：警告也算不通过
+```
+
+三条检查，都是「说了要检查、人肉一定会漏」的那种：
+
+| 检查 | 抓什么 | 漏了会怎样 |
+| --- | --- | --- |
+| `columns` | `useTable({ columns: [...] })` 写成数组 | 列表照常出来，但列不随状态更新 |
+| `i18n` | 语言包有 key、`I18n.Schema` 没有；或反过来；或某几套语言缺这个 key | 用到处 `vue-tsc` 报错，或界面安静地显示原始 key |
+| `props` | `defineProps` 声明了、全仓没人传值；组件声明了 props 但没人引用 | 死 prop、删页面漏删的组件，下一个读代码的人被误导 |
+
+输出会分成 `error` / `warn` / `info`，每条带 `文件:行`；`--json` 给机器读；
+**「没报」和「没看」分得清**——它算不出来的（`v-bind` 展开、`Pick/Omit`、外部类型、
+`Record<>`）一律打印在「降级 / 跳过」里，不会假装通过。
+
+检查器自己也带测试（`scripts/Test-FrontendHealth.selftest.mjs`），两套夹具：
+一套「该报的必须报」，一套「全是陷阱、一条都不许报」。一个永远输出 ✓ 的检查器比没有更坏。
+
 ## 七步同步顺序（顺序不能倒）
 
 ```

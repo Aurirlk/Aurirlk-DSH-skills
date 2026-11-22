@@ -49,6 +49,7 @@ This repository is the collection I have built up. **Install it once and every s
 | You suspect fake data or a feature that was never wired up | **no-stub-delivery** |
 | A teammate cloned the repo and `.env` is missing, so nothing runs | **env-config** |
 | The backend changed a DTO and the frontend has seven spots to touch | **vue3-admin-frontend** |
+| You want to know the locale files, the type table and dead props are clean, without a dev server | the `Test-FrontendHealth.mjs` shipped with **vue3-admin-frontend** |
 | You want to commit and the docs haven't moved a line | **docs-code-sync** |
 | The page is wrong and you can't tell which layer is at fault | **frontend-delivery-method** |
 | You inherited an unfamiliar repo and need a map both people and agents can query | **repo-skill-forge** |
@@ -83,7 +84,7 @@ This repository is the collection I have built up. **Install it once and every s
 | **ui-tip** | Toast messages are inconsistent: success uses the default, errors must name their icon | adapted (content changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
 | **ui-use-confirm** | Which actions need a confirmation dialog: settle the rule once instead of deciding each time | adapted (content changed) | [English](skills/ui-use-confirm/README.en.md) · [中文](skills/ui-use-confirm/README.md) |
 | **vuetify0** | Building components with `@vuetify/v0`: how the headless components and composables are meant to be used | official skill | [English](skills/vuetify0/README.en.md) · [中文](skills/vuetify0/README.md) |
-| **vue3-admin-frontend** | Admin pages on Vue 3 + Naive UI + UnoCSS: `useTable` for lists, drawer forms, i18n in two places, and seven spots to touch when a DTO changes | original | [English](skills/vue3-admin-frontend/README.en.md) · [中文](skills/vue3-admin-frontend/README.md) |
+| **vue3-admin-frontend** | Admin pages on Vue 3 + Naive UI + UnoCSS: `useTable` for lists, drawer forms, i18n in two places, and seven spots to touch when a DTO changes. **Ships a zero-dependency health checker** (array `columns`, i18n value/type drift, dead props) with fixture-backed self-tests | original | [English](skills/vue3-admin-frontend/README.en.md) · [中文](skills/vue3-admin-frontend/README.md) |
 
 ### Backend & operations
 
