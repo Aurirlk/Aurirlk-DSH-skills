@@ -1,7 +1,7 @@
 {
   "name": "aurirlk-dsh-skills",
-  "version": "0.5.0",
-  "description": "Aurirlk 验证可用的 DSH 技能合集：每个技能一个目录，装上即注册全部技能。当前收录 27 个技能，覆盖 Agent 工程（流式对话端点、写工具安全边界、工具调用评测、编排）、后端运维（不停服编译校验、连接池取证、数据库变更报备、部署链路取证）、前端与环境（前端交付方法论、Vue 3 后台开发、.env 配置引导）以及交付纪律（提交安全、反桩交付、文档同步）。",
+  "version": "0.6.0",
+  "description": "Aurirlk 验证可用的 DSH 技能合集：每个技能一个目录，装上即注册全部技能。当前收录 28 个技能，覆盖仓库理解（repo-skill-forge：扫仓库生成开发手册 + 6 个查询技能）、Agent 工程（流式对话端点、写工具安全边界、工具调用评测、编排）、后端运维（不停服编译校验、连接池取证、数据库变更报备、部署链路取证）、前端与环境（前端交付方法论、Vue 3 后台开发、.env 配置引导）以及交付纪律（提交安全、反桩交付、文档同步）。",
   "author": {
     "name": "Aurirlk",
     "url": "https://github.com/Aurirlk"
@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Aurirlk DSH Skills",
     "shortDescription": "Aurirlk 验证过的 DSH 技能合集",
-    "longDescription": "收录 Aurirlk 实际使用并验证可用的 DSH（DeepSeek Harness）技能，每个技能一个目录、各自带 README 说明用法与安装方式。当前收录 27 个技能，覆盖 Agent 工程、后端运维、前端开发与交付纪律：agent-chat-endpoint（流式对话四件套：增量映射 / 收尾语义 / 历史落库 / 上下文预算）、agent-tool-safety（写工具命名、双层确认、scope 隔离、装配层开关、沙箱边界）、live-jvm-compile-check（借运行中 JVM 的 classpath 离线验证 Java 改动）、db-pool-forensics（连接池耗尽取证与限流位置）、db-change-report（数据库变更五项报备）、deploy-access-chain（覆盖了文件线上不生效的链路取证）、git-submit-safety（提交与推送纪律 + 推完必给的编译/启动前清单）、no-stub-delivery（假数据 / 假实现 / 假完成审查）、docs-code-sync（代码改了文档必须跟着改的映射检查）、frontend-delivery-method（前端从接需求到能用的推进顺序与排障决策树）、vue3-admin-frontend（Vue 3 + Naive UI + UnoCSS 后台开发约定）、env-config（.env 缺失时三层引导），以及 systematic-rca、agent-trace-eval、agent-orchestration、nl2sql-analyst、speak-human、disk-butler、drawio 等。",
+    "longDescription": "收录 Aurirlk 实际使用并验证可用的 DSH（DeepSeek Harness）技能，每个技能一个目录、各自带 README 说明用法与安装方式。当前收录 28 个技能，覆盖仓库理解、Agent 工程、后端运维、前端开发与交付纪律：repo-skill-forge（扫仓库生成 1 本开发手册 + 6 个查询技能：地图 / 符号 / 调用 / 影响面 / 链路 / 施工单，带索引与校验，判断部分留成编号 TODO）、agent-chat-endpoint（流式对话四件套：增量映射 / 收尾语义 / 历史落库 / 上下文预算）、agent-tool-safety（写工具命名、双层确认、scope 隔离、装配层开关、沙箱边界）、live-jvm-compile-check（借运行中 JVM 的 classpath 离线验证 Java 改动）、db-pool-forensics（连接池耗尽取证与限流位置）、db-change-report（数据库变更五项报备）、deploy-access-chain（覆盖了文件线上不生效的链路取证）、git-submit-safety（提交与推送纪律 + 推完必给的编译/启动前清单）、no-stub-delivery（假数据 / 假实现 / 假完成审查）、docs-code-sync（代码改了文档必须跟着改的映射检查）、frontend-delivery-method（前端从接需求到能用的推进顺序与排障决策树）、vue3-admin-frontend（Vue 3 + Naive UI + UnoCSS 后台开发约定）、env-config（.env 缺失时三层引导），以及 systematic-rca、agent-trace-eval、agent-orchestration、nl2sql-analyst、speak-human、disk-butler、drawio 等。",
     "developerName": "Aurirlk",
     "websiteURL": "https://github.com/Aurirlk/Aurirlk-DSH-skills",
     "category": "Productivity",
@@ -33,7 +33,7 @@
     ],
     "brandColor": "#3B82F6",
   "defaultPrompt": [
-    "服务还开着，帮我验证刚改的 Java 能不能编过",
+    "接手这个仓库，帮我扫一份能查的代码地图和开发手册",
     "后端改了 DTO，帮我把前端接口和类型同步了",
     "帮我审一遍这次交付，有没有假数据或者没接线的功能"
   ]

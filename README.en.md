@@ -51,12 +51,13 @@ This repository is the collection I have built up. **Install it once and every s
 | The backend changed a DTO and the frontend has seven spots to touch | **vue3-admin-frontend** |
 | You want to commit and the docs haven't moved a line | **docs-code-sync** |
 | The page is wrong and you can't tell which layer is at fault | **frontend-delivery-method** |
+| You inherited an unfamiliar repo and need a map both people and agents can query | **repo-skill-forge** |
 
 ---
 
 ## Skill catalogue
 
-**27 skills** in total.
+**28 skills** in total.
 
 ### System tools
 
@@ -100,6 +101,7 @@ This repository is the collection I have built up. **Install it once and every s
 |---|---|---|---|
 | **git-submit-safety** | Commit and push discipline: no `add -A`, precise pathspecs, trust `ls-remote` over the local tracking ref, fast-forward only on divergence — and a pre-build checklist handed over after every push | original | [English](skills/git-submit-safety/README.en.md) · [中文](skills/git-submit-safety/README.md) |
 | **no-stub-delivery** | Truthfulness audit before delivery: fake data, fake implementations (written but never wired), fake completion | original | [English](skills/no-stub-delivery/README.en.md) · [中文](skills/no-stub-delivery/README.md) |
+| **repo-skill-forge** | Scans a repo and generates one developer guide plus six query skills (map / symbols / calls / impact / request trace / change playbook), with an index and a verifier; judgement is left as numbered TODOs instead of being invented by a script | original | [English](skills/repo-skill-forge/README.en.md) · [中文](skills/repo-skill-forge/README.md) |
 
 ### Job hunting / interviews
 

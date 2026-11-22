@@ -153,6 +153,19 @@ DSH 的技能发现只扫一层，因此必须拆开）。
 
 ---
 
+## repo-skill-forge
+
+本仓库的原创技能，MIT License，作者 [Aurirlk](https://github.com/Aurirlk)。
+
+思路受两类工具启发，但**没有复用任何代码或文本**：
+
+- 代码知识图谱类工具（如 [GitNexus](https://github.com/abhigyanpatwari/GitNexus)）展示的
+  "把仓库变成可查询结构"的方向。该项目的许可是 PolyForm Noncommercial 1.0.0，
+  与本仓库不兼容，因此只借鉴方向，实现（零依赖 Node + regex 级抽取）完全自写。
+- 项目内长期自用的开发规范手册（dev-guide 形态）。本技能生成的是**空壳 + 编号待补项**，
+  不含任何具体项目的业务事实。
+
+---
 ## 相关项目（非本仓库内容）
 
 - **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** — 求职技能合集（简历「酥化」、面试预测、
