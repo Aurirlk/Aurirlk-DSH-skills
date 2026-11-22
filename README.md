@@ -39,12 +39,20 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 要判断 agent 到底有没有按要求干活 | **agent-trace-eval** |
 | 面试前想按真实 JD 练几轮 | **interview-skills** |
 | 代码重复太多，想清理但不敢动 | **code-review-refactor** |
+| 服务还开着，想确认刚改的 Java 能不能编过 | **live-jvm-compile-check** |
+| 提交完不确定到底推没推上去 | **git-submit-safety** |
+| 改了库，得让运维去执行脚本 | **db-change-report** |
+| 接口随机 500，报连接池耗尽 | **db-pool-forensics** |
+| 覆盖了文件，线上还是旧包 | **deploy-access-chain** |
+| 流式对话：表格不渲染 / 答完还转圈 / 没历史 | **agent-chat-endpoint** |
+| 要给 AI 加一个能改数据的工具，怕它乱来 | **agent-tool-safety** |
+| 交付前怀疑有假数据、假实现 | **no-stub-delivery** |
 
 ---
 
 ## 技能目录
 
-共 **15 个**。
+共 **23 个**。
 
 ### 系统工具
 
@@ -68,6 +76,22 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | **ui-tip** | 全局提示不统一：定死成功走默认样式，报错必须显式指定图标 | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
 | **ui-use-confirm** | 哪些操作该弹二次确认：定好规矩，别每次临时拍脑袋 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
 | **vuetify0** | 用 `@vuetify/v0` 写组件：无样式组件和 composable 怎么用 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
+
+### 后端与运维
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **live-jvm-compile-check** | 服务还开着，想确认刚改的 Java 能不能编过：从运行中的 JVM 借 classpath，只编到临时目录 | 原创 | [中文](skills/live-jvm-compile-check/README.md) · [EN](skills/live-jvm-compile-check/README.en.md) |
+| **db-change-report** | 改了库要交给别人执行：五项必答（脚本 / TEST / PROD 顺序 / 是否重启 / 回滚），附幂等写法与历史表方案 | 原创 | [中文](skills/db-change-report/README.md) · [EN](skills/db-change-report/README.en.md) |
+| **db-pool-forensics** | 连接池耗尽：先分清「借空」还是「DB 拒绝」，再找谁在占连接，最后把限流挂在唯一汇入口 | 原创 | [中文](skills/db-pool-forensics/README.md) · [EN](skills/db-pool-forensics/README.en.md) |
+| **deploy-access-chain** | 覆盖了文件线上还是旧包：用访问日志关联证明请求落在哪台机器哪个目录，再谈发版 | 原创 | [中文](skills/deploy-access-chain/README.md) · [EN](skills/deploy-access-chain/README.en.md) |
+
+### 交付与协作
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **git-submit-safety** | 提交与推送的安全纪律：禁 `add -A`、精确 pathspec、push 结果以 `ls-remote` 为真值 | 原创 | [中文](skills/git-submit-safety/README.md) · [EN](skills/git-submit-safety/README.en.md) |
+| **no-stub-delivery** | 交付前查真假：认得出假数据、假实现（写了没接线）、假完成（文档说做了但代码没有） | 原创 | [中文](skills/no-stub-delivery/README.md) · [EN](skills/no-stub-delivery/README.en.md) |
 
 ### 求职 / 面试
 
@@ -95,6 +119,8 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 |---|---|---|---|
 | **agent-orchestration** | 一个助手管一堆能力：什么话该谁答、上下文怎么记、大屏和对话框怎么说不同的话 | 原创 | [中文](skills/agent-orchestration/README.md) · [EN](skills/agent-orchestration/README.en.md) |
 | **nl2sql-analyst** | 用大白话查数据库：说人话出 SQL，多租户不会串，查不到就直说没数据 | 原创 | [中文](skills/nl2sql-analyst/README.md) · [EN](skills/nl2sql-analyst/README.en.md) |
+| **agent-chat-endpoint** | 流式对话四件套：空白增量别丢、慢动作不挂流尾、登录态在请求线程取、压缩边界用消息 id | 原创 | [中文](skills/agent-chat-endpoint/README.md) · [EN](skills/agent-chat-endpoint/README.en.md) |
+| **agent-tool-safety** | 给 agent 加会改数据的工具：`draft_*` 命名、双层确认、带 scope、开关做在装配层、沙箱只读 | 原创 | [中文](skills/agent-tool-safety/README.md) · [EN](skills/agent-tool-safety/README.en.md) |
 
 ### 别人的项目（不在本仓库）
 

@@ -1,7 +1,7 @@
 {
   "name": "aurirlk-dsh-skills",
-  "version": "0.2.0",
-  "description": "Aurirlk 验证可用的 DSH 技能合集：每个技能一个目录，装上即注册全部技能。当前收录 disk-butler（Windows 电脑管家：查清空间去向、按安全等级清理、Junction 透明迁移缓存、留档成本机档案）。",
+  "version": "0.3.0",
+  "description": "Aurirlk 验证可用的 DSH 技能合集：每个技能一个目录，装上即注册全部技能。当前收录 23 个技能，覆盖 Agent 工程（流式对话端点、写工具安全边界、工具调用评测、编排）、后端运维（不停服编译校验、连接池取证、数据库变更报备、部署链路取证）与交付纪律（提交安全、反桩交付）。",
   "author": {
     "name": "Aurirlk",
     "url": "https://github.com/Aurirlk"
@@ -23,7 +23,7 @@
   "interface": {
     "displayName": "Aurirlk DSH Skills",
     "shortDescription": "Aurirlk 验证过的 DSH 技能合集",
-    "longDescription": "收录 Aurirlk 实际使用并验证可用的 DSH（DeepSeek Harness）技能，每个技能一个目录、各自带 README 说明用法与安装方式。当前收录 disk-butler：查清 C/D/E 盘空间去向，按安全等级识别可清理对象并执行，用 NTFS Junction 把写死在 C 盘的缓存透明迁移到其他盘，并把结论留档成本机档案。",
+    "longDescription": "收录 Aurirlk 实际使用并验证可用的 DSH（DeepSeek Harness）技能，每个技能一个目录、各自带 README 说明用法与安装方式。当前收录 23 个技能，覆盖 Agent 工程、后端运维与交付纪律：agent-chat-endpoint（流式对话四件套：增量映射 / 收尾语义 / 历史落库 / 上下文预算）、agent-tool-safety（写工具命名、双层确认、scope 隔离、装配层开关、沙箱边界）、live-jvm-compile-check（借运行中 JVM 的 classpath 离线验证 Java 改动）、db-pool-forensics（连接池耗尽取证与限流位置）、db-change-report（数据库变更五项报备）、deploy-access-chain（覆盖了文件线上不生效的链路取证）、git-submit-safety（提交与推送纪律）、no-stub-delivery（假数据 / 假实现 / 假完成审查），以及 systematic-rca、agent-trace-eval、agent-orchestration、nl2sql-analyst、speak-human、disk-butler、drawio 等。",
     "developerName": "Aurirlk",
     "websiteURL": "https://github.com/Aurirlk/Aurirlk-DSH-skills",
     "category": "Productivity",
@@ -32,10 +32,10 @@
       "Write"
     ],
     "brandColor": "#3B82F6",
-    "defaultPrompt": [
-      "帮我看看 C 盘空间都被什么占用了",
-      "清理一下磁盘垃圾，先给我看计划",
-      "把 C 盘的浏览器缓存挪到 E 盘"
-    ]
+  "defaultPrompt": [
+    "服务还开着，帮我验证刚改的 Java 能不能编过",
+    "前端覆盖上去了线上还是旧包，帮我定位请求打到哪儿",
+    "帮我审一遍这次交付，有没有假数据或者没接线的功能"
+  ]
   }
 }

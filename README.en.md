@@ -39,12 +39,20 @@ This repository is the collection I have built up. **Install it once and every s
 | You need to know whether an agent actually followed the instructions | **agent-trace-eval** |
 | You want to rehearse interviews against a real job description | **interview-skills** |
 | The code is full of duplication and you are afraid to touch it | **code-review-refactor** |
+| A service is running and you want to know your Java edits compile | **live-jvm-compile-check** |
+| You committed and pushed, but aren't sure it landed | **git-submit-safety** |
+| You changed the schema and someone else has to run the script | **db-change-report** |
+| Random 500s, connection pool exhausted | **db-pool-forensics** |
+| You overwrote the files but production still serves the old build | **deploy-access-chain** |
+| Streaming chat: broken tables, spinner after the answer, no history | **agent-chat-endpoint** |
+| You want to give the agent a tool that mutates data, safely | **agent-tool-safety** |
+| You suspect fake data or a feature that was never wired up | **no-stub-delivery** |
 
 ---
 
 ## Skill catalogue
 
-**15 skills** in total.
+**23 skills** in total.
 
 ### System tools
 
@@ -68,6 +76,22 @@ This repository is the collection I have built up. **Install it once and every s
 | **ui-tip** | Toast messages are inconsistent: success uses the default, errors must name their icon | adapted (content changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
 | **ui-use-confirm** | Which actions need a confirmation dialog: settle the rule once instead of deciding each time | adapted (content changed) | [English](skills/ui-use-confirm/README.en.md) · [中文](skills/ui-use-confirm/README.md) |
 | **vuetify0** | Building components with `@vuetify/v0`: how the headless components and composables are meant to be used | official skill | [English](skills/vuetify0/README.en.md) · [中文](skills/vuetify0/README.md) |
+
+### Backend & operations
+
+| Skill | When to use it | Origin | Docs |
+|---|---|---|---|
+| **live-jvm-compile-check** | The service is running and you want to verify Java edits build: borrow the live JVM's classpath, compile into a temp dir | original | [English](skills/live-jvm-compile-check/README.en.md) · [中文](skills/live-jvm-compile-check/README.md) |
+| **db-change-report** | You changed the database and someone else must execute it: five mandatory disclosures plus idempotent SQL and history-table rollback | original | [English](skills/db-change-report/README.en.md) · [中文](skills/db-change-report/README.md) |
+| **db-pool-forensics** | Connection pool exhausted: separate "borrowed dry" from "DB refusing", find the holders, throttle at the single choke point | original | [English](skills/db-pool-forensics/README.en.md) · [中文](skills/db-pool-forensics/README.md) |
+| **deploy-access-chain** | You overwrote the files and production still serves the old build: prove which host and directory the request hits before shipping again | original | [English](skills/deploy-access-chain/README.en.md) · [中文](skills/deploy-access-chain/README.md) |
+
+### Delivery & collaboration
+
+| Skill | When to use it | Origin | Docs |
+|---|---|---|---|
+| **git-submit-safety** | Commit and push discipline: no `add -A`, precise pathspecs, trust `ls-remote` over the local tracking ref | original | [English](skills/git-submit-safety/README.en.md) · [中文](skills/git-submit-safety/README.md) |
+| **no-stub-delivery** | Truthfulness audit before delivery: fake data, fake implementations (written but never wired), fake completion | original | [English](skills/no-stub-delivery/README.en.md) · [中文](skills/no-stub-delivery/README.md) |
 
 ### Job hunting / interviews
 
@@ -95,6 +119,8 @@ This repository is the collection I have built up. **Install it once and every s
 |---|---|---|---|
 | **agent-orchestration** | One assistant, many capabilities: who answers what, how context is remembered, and how a dashboard and a chat box say the same thing differently | original | [English](skills/agent-orchestration/README.en.md) · [中文](skills/agent-orchestration/README.md) |
 | **nl2sql-analyst** | Querying a database in plain language: turns a question into SQL, never crosses tenants, and says "no data" instead of inventing numbers | original | [English](skills/nl2sql-analyst/README.en.md) · [中文](skills/nl2sql-analyst/README.md) |
+| **agent-chat-endpoint** | The four pieces of a streaming chat endpoint: keep whitespace deltas, never park slow work at the stream tail, read auth on the request thread, bound compression by message id | original | [English](skills/agent-chat-endpoint/README.en.md) · [中文](skills/agent-chat-endpoint/README.md) |
+| **agent-tool-safety** | Giving an agent a mutating tool: `draft_*` naming, two-phase confirmation, scoped changes, assembly-layer switches, read-only sandboxes | original | [English](skills/agent-tool-safety/README.en.md) · [中文](skills/agent-tool-safety/README.md) |
 
 ### Someone else's projects (not in this repo)
 

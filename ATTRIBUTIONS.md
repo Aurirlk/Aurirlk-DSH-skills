@@ -100,6 +100,27 @@ DSH 的技能发现只扫一层，因此必须拆开）。
 
 ---
 
+## 0.7.0 新增的 8 个原创技能
+
+以下技能**无第三方来源**，全部由 Aurirlk 从自己的项目复盘记录中提炼，按本仓库规范撰写，
+采用 MIT License：
+
+| 技能 | 一句话来源 |
+|---|---|
+| `live-jvm-compile-check` | 服务不能停、又想确认改动能编译时的反复实践 |
+| `db-change-report` | 多次「脚本谁执行、先跑还是先部署」的沟通事故 |
+| `db-pool-forensics` | 一次 RAG 解析把连接池借空的生产事故复盘 |
+| `deploy-access-chain` | 一次「覆盖成功但线上没变」的长链排查，含三条被撤回的推断 |
+| `agent-chat-endpoint` | 流式对话的换行丢失 / 转圈不收尾 / 历史不落库三连症 |
+| `agent-tool-safety` | 让 agent 改提示词与配置时的越权、误改、假完成事故 |
+| `git-submit-safety` | 并行 agent 共用一个 worktree 时的串批与假同步 |
+| `no-stub-delivery` | 「为了让演示好看而塞 mock」被当场指出之后立的规矩 |
+
+这些技能里出现的代码片段与命令，均为**脱敏后的通用形态**：不含任何真实主机名、
+凭据、库名或业务标识。
+
+---
+
 ## 相关项目（非本仓库内容）
 
 - **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** — 求职技能合集（简历「酥化」、面试预测、
