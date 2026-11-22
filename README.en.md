@@ -47,12 +47,15 @@ This repository is the collection I have built up. **Install it once and every s
 | Streaming chat: broken tables, spinner after the answer, no history | **agent-chat-endpoint** |
 | You want to give the agent a tool that mutates data, safely | **agent-tool-safety** |
 | You suspect fake data or a feature that was never wired up | **no-stub-delivery** |
+| A teammate cloned the repo and `.env` is missing, so nothing runs | **env-config** |
+| The backend changed a DTO and the frontend has seven spots to touch | **vue3-admin-frontend** |
+| You want to commit and the docs haven't moved a line | **docs-code-sync** |
 
 ---
 
 ## Skill catalogue
 
-**23 skills** in total.
+**26 skills** in total.
 
 ### System tools
 
@@ -66,6 +69,7 @@ This repository is the collection I have built up. **Install it once and every s
 |---|---|---|---|
 | **drawio** | Drawing an architecture diagram: write a few lines of JSON, get a diagram; batch export to PNG/SVG/PDF; reports overlapping boxes before you export | original | [English](skills/drawio/README.en.md) · [中文](skills/drawio/README.md) |
 | **speak-human** | Explaining a technical change to business readers: three-step rewrite into plain language, with the jargon and marketing filler stripped out | original | [English](skills/speak-human/README.en.md) · [中文](skills/speak-human/README.md) |
+| **docs-code-sync** | About to commit after a code change: run the change → doc mapping, reconcile with source-over-docs priority, then scan for stale paths and version numbers | original | [English](skills/docs-code-sync/README.en.md) · [中文](skills/docs-code-sync/README.md) |
 
 ### Front-end (Nuxt 4 / Vue 3 / Vuetify 3)
 
@@ -76,6 +80,7 @@ This repository is the collection I have built up. **Install it once and every s
 | **ui-tip** | Toast messages are inconsistent: success uses the default, errors must name their icon | adapted (content changed) | [English](skills/ui-tip/README.en.md) · [中文](skills/ui-tip/README.md) |
 | **ui-use-confirm** | Which actions need a confirmation dialog: settle the rule once instead of deciding each time | adapted (content changed) | [English](skills/ui-use-confirm/README.en.md) · [中文](skills/ui-use-confirm/README.md) |
 | **vuetify0** | Building components with `@vuetify/v0`: how the headless components and composables are meant to be used | official skill | [English](skills/vuetify0/README.en.md) · [中文](skills/vuetify0/README.md) |
+| **vue3-admin-frontend** | Admin pages on Vue 3 + Naive UI + UnoCSS: `useTable` for lists, drawer forms, i18n in two places, and seven spots to touch when a DTO changes | original | [English](skills/vue3-admin-frontend/README.en.md) · [中文](skills/vue3-admin-frontend/README.md) |
 
 ### Backend & operations
 
@@ -85,12 +90,13 @@ This repository is the collection I have built up. **Install it once and every s
 | **db-change-report** | You changed the database and someone else must execute it: five mandatory disclosures plus idempotent SQL and history-table rollback | original | [English](skills/db-change-report/README.en.md) · [中文](skills/db-change-report/README.md) |
 | **db-pool-forensics** | Connection pool exhausted: separate "borrowed dry" from "DB refusing", find the holders, throttle at the single choke point | original | [English](skills/db-pool-forensics/README.en.md) · [中文](skills/db-pool-forensics/README.md) |
 | **deploy-access-chain** | You overwrote the files and production still serves the old build: prove which host and directory the request hits before shipping again | original | [English](skills/deploy-access-chain/README.en.md) · [中文](skills/deploy-access-chain/README.md) |
+| **env-config** | `.env` is missing config: three layers (file exists → value set → value valid) to get the project running; placeholders and relative paths count as unset | original | [English](skills/env-config/README.en.md) · [中文](skills/env-config/README.md) |
 
 ### Delivery & collaboration
 
 | Skill | When to use it | Origin | Docs |
 |---|---|---|---|
-| **git-submit-safety** | Commit and push discipline: no `add -A`, precise pathspecs, trust `ls-remote` over the local tracking ref | original | [English](skills/git-submit-safety/README.en.md) · [中文](skills/git-submit-safety/README.md) |
+| **git-submit-safety** | Commit and push discipline: no `add -A`, precise pathspecs, trust `ls-remote` over the local tracking ref, fast-forward only on divergence — and a pre-build checklist handed over after every push | original | [English](skills/git-submit-safety/README.en.md) · [中文](skills/git-submit-safety/README.md) |
 | **no-stub-delivery** | Truthfulness audit before delivery: fake data, fake implementations (written but never wired), fake completion | original | [English](skills/no-stub-delivery/README.en.md) · [中文](skills/no-stub-delivery/README.md) |
 
 ### Job hunting / interviews

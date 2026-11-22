@@ -47,12 +47,15 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 流式对话：表格不渲染 / 答完还转圈 / 没历史 | **agent-chat-endpoint** |
 | 要给 AI 加一个能改数据的工具，怕它乱来 | **agent-tool-safety** |
 | 交付前怀疑有假数据、假实现 | **no-stub-delivery** |
+| 新同事拉下仓库，`.env` 缺配置跑不起来 | **env-config** |
+| 后端改了 DTO，前端要跟着动七处 | **vue3-admin-frontend** |
+| 改完代码只想提交，文档一个字没动 | **docs-code-sync** |
 
 ---
 
 ## 技能目录
 
-共 **23 个**。
+共 **26 个**。
 
 ### 系统工具
 
@@ -65,6 +68,7 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 技能 | 什么时候用 | 来源 | 文档 |
 |---|---|---|---|
 | **drawio** | 要画架构图：写几行 JSON 就出图，能批量导 PNG/SVG/PDF，导出前先告诉你哪几个框叠一起了 | 原创 | [中文](skills/drawio/README.md) · [EN](skills/drawio/README.en.md) |
+| **docs-code-sync** | 改完代码要提交：先过「改动 → 文档」映射表，按源码优先于文档对账，再扫旧路径/旧版本号的残留 | 原创 | [中文](skills/docs-code-sync/README.md) · [EN](skills/docs-code-sync/README.en.md) |
 | **speak-human** | 要把技术改动讲给业务方听：三步改写成大白话，顺手清掉「赋能」「打通」这类词 | 原创 | [中文](skills/speak-human/README.md) · [EN](skills/speak-human/README.en.md) |
 
 ### 前端开发（Nuxt 4 / Vue 3 / Vuetify 3）
@@ -76,6 +80,7 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | **ui-tip** | 全局提示不统一：定死成功走默认样式，报错必须显式指定图标 | 二开（正文有改动） | [中文](skills/ui-tip/README.md) · [EN](skills/ui-tip/README.en.md) |
 | **ui-use-confirm** | 哪些操作该弹二次确认：定好规矩，别每次临时拍脑袋 | 二开（正文有改动） | [中文](skills/ui-use-confirm/README.md) · [EN](skills/ui-use-confirm/README.en.md) |
 | **vuetify0** | 用 `@vuetify/v0` 写组件：无样式组件和 composable 怎么用 | 官方 skill | [中文](skills/vuetify0/README.md) · [EN](skills/vuetify0/README.en.md) |
+| **vue3-admin-frontend** | 用 Vue 3 + Naive UI + UnoCSS 写后台页：列表用 `useTable`、表单调抽屉、i18n 要改两处、后端改 DTO 前端动七处 | 原创 | [中文](skills/vue3-admin-frontend/README.md) · [EN](skills/vue3-admin-frontend/README.en.md) |
 
 ### 后端与运维
 
@@ -85,12 +90,13 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | **db-change-report** | 改了库要交给别人执行：五项必答（脚本 / TEST / PROD 顺序 / 是否重启 / 回滚），附幂等写法与历史表方案 | 原创 | [中文](skills/db-change-report/README.md) · [EN](skills/db-change-report/README.en.md) |
 | **db-pool-forensics** | 连接池耗尽：先分清「借空」还是「DB 拒绝」，再找谁在占连接，最后把限流挂在唯一汇入口 | 原创 | [中文](skills/db-pool-forensics/README.md) · [EN](skills/db-pool-forensics/README.en.md) |
 | **deploy-access-chain** | 覆盖了文件线上还是旧包：用访问日志关联证明请求落在哪台机器哪个目录，再谈发版 | 原创 | [中文](skills/deploy-access-chain/README.md) · [EN](skills/deploy-access-chain/README.en.md) |
+| **env-config** | `.env` 缺配置：按「文件在不在 → 有没有值 → 值对不对」三层把人引导到能跑，占位符、相对路径都算没配 | 原创 | [中文](skills/env-config/README.md) · [EN](skills/env-config/README.en.md) |
 
 ### 交付与协作
 
 | 技能 | 什么时候用 | 来源 | 文档 |
 |---|---|---|---|
-| **git-submit-safety** | 提交与推送的安全纪律：禁 `add -A`、精确 pathspec、push 结果以 `ls-remote` 为真值 | 原创 | [中文](skills/git-submit-safety/README.md) · [EN](skills/git-submit-safety/README.en.md) |
+| **git-submit-safety** | 提交与推送的安全纪律：禁 `add -A`、精确 pathspec、push 结果以 `ls-remote` 为真值、分叉只许 ff-only，推完还要给「编译/启动前清单」 | 原创 | [中文](skills/git-submit-safety/README.md) · [EN](skills/git-submit-safety/README.en.md) |
 | **no-stub-delivery** | 交付前查真假：认得出假数据、假实现（写了没接线）、假完成（文档说做了但代码没有） | 原创 | [中文](skills/no-stub-delivery/README.md) · [EN](skills/no-stub-delivery/README.en.md) |
 
 ### 求职 / 面试

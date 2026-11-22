@@ -121,12 +121,33 @@ DSH 的技能发现只扫一层，因此必须拆开）。
 
 ---
 
+## 0.8.0 新增与改写的技能
+
+以下技能**无第三方来源**，全部由 Aurirlk 从自己项目内的 `.agents/skills/` 清洗而来，
+采用 MIT License：
+
+| 技能 | 来源与清洗方式 |
+|---|---|
+| `docs-code-sync` | 由项目内 `docs-maintenance` 提炼。原文围绕某个仓库的具体文档树（`docs/api/**`、`docs/architecture/**`）与品牌名，已改写为通用的「改动 → 文档」映射纪律，剥离全部项目路径 |
+| `vue3-admin-frontend` | 由项目内 `frontend-dev` 改写。保留技术栈与骨架约定（SoybeanAdmin 一系的 `@sa/axios`、`@elegant-router`、`useTable`），移除项目名、项目专属目录树与 `.env` 变量名 |
+| `env-config` | 由项目内同名技能重写。原文已是通用形态，本次补齐判定细节（占位符 / 相对路径 / CI 读序）与验证命令 |
+| `git-submit-safety`（改写） | 并入项目内 `git-submit` 的独有内容（编译前清单、ff-only 分叉、两类钩子、提交信息前缀），移除仓路径、内网远端地址、业务分支口径与具体版本号 |
+
+清洗的硬标准：**不含任何真实主机名、内网地址、凭据、库名、包名或业务标识**。
+不符合这条的技能不收录 —— 例如项目专属的开发规范手册（5400+ 行编码风格与包结构），
+整篇绑定单一仓库，脱敏后即失去价值，因此留在项目仓自己的 `.agents/` 中。
+
+---
+
 ## 相关项目（非本仓库内容）
 
 - **[ASu-skills](https://github.com/Hisn00w/ASu-skills)** — 求职技能合集（简历「酥化」、面试预测、
   秋招进度管理、开源贡献辅助等）。本仓库**不复制其内容**，仅作推荐链接。
   Aurirlk 曾为其贡献 OpenCode 插件支持（[PR #80](https://github.com/Hisn00w/ASu-skills/pull/80)）。
 - **[@vuetify/v0](https://0.vuetifyjs.com/)** — 本仓库 `vuetify0` 技能的原始出处。
+- **[GitNexus](https://github.com/abhigyanpatwari/GitNexus)** — 代码知识图谱工具，自带一套
+  `gitnexus-*` 技能。该项目的许可是 **PolyForm Noncommercial License 1.0.0**，
+  与本仓库的 MIT 许可不兼容，因此**不复制其技能内容**，仅在此留链接，需要的人请从原仓获取。
 
 ---
 
