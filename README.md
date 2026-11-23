@@ -165,6 +165,61 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 
 ---
 
+## 生态入口：值得看的 skills 仓库
+
+下面 **34 个仓库**都是 2026-11-23 用 GitHub API 实测过的：存在、未归档，星数是当时的实测值（**会变，以链接页为准**）。三类入口按用途排：官方/规范先定格式，通用合集拿来挑现成的改，私人/领域看别人怎么把方法论沉淀成技能。
+
+**这些只是入口，不是背书。** 安装第三方技能前自己看许可、依赖和脚本内容；不确定就先跑一遍安全扫描。本合集不复制它们的内容，也不对它们的更新负责。
+
+### 官方 / 规范（先看格式，再谈写法）
+
+| 仓库 | 星 | 它能给你什么 |
+| :--- | ---: | :--- |
+| [anthropics/skills](https://github.com/anthropics/skills) | 199.1k | Anthropic 官方 Agent Skills 范例：文档四件套、frontend-design、skill-creator |
+| [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | 48.0k | 官方插件市场，技能 / 命令 / hook 的组织方式 |
+| [openai/skills](https://github.com/openai/skills) | 28.9k | OpenAI 官方 Codex skills |
+| [google/skills](https://github.com/google/skills) | 24.6k | Google 产品与技术的官方 skills |
+| [github/awesome-copilot](https://github.com/github/awesome-copilot) | 41.5k | GitHub 官方 Copilot 指令、agents、skills 与配置合集 |
+| [agentskills/agentskills](https://github.com/agentskills/agentskills) | 27.5k | Agent Skills 规范与文档：格式、字段、渐进式加载 |
+| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | 34.8k | Vercel 官方前端 / React / Next.js 技能集 |
+| [huggingface/skills](https://github.com/huggingface/skills) | 11.4k | 模型训练、评测、Spaces 与 Jobs 相关技能 |
+| [expo/skills](https://github.com/expo/skills) | 4.2k | Expo 官方 React Native 技能（原生 UI、数据、CI/CD） |
+| [trailofbits/skills](https://github.com/trailofbits/skills) | 8.4k | 安全审计技能库，含智能合约审计与漏洞扫描 |
+| [microsoft/skills](https://github.com/microsoft/skills) | 3.2k | Azure SDK / Foundry 相关技能，企业技术栈参考 |
+
+### 通用合集 / 索引（挑现成的改，别从零写）
+
+| 仓库 | 星 | 它能给你什么 |
+| :--- | ---: | :--- |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | 330.6k | 作者自己的 .agents 目录，工程师视角的实战技能 |
+| [obra/superpowers](https://github.com/obra/superpowers) | 324.2k | 技能框架 + 软件工程方法论，20+ 可组合技能 |
+| [affaan-m/ECC](https://github.com/affaan-m/ECC) | 309.1k | Agent harness 性能优化系统：技能 / 本能 / 记忆 / 安全 |
+| [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 119.8k | 生产级工程技能，按 spec → plan → build → test → review → ship 组织 |
+| [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | 80.1k | 1000+ Claude skills 精选导航，不知道装什么先来这翻 |
+| [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | 50.2k | 3000+ 可复用技能索引 + 多端安装器（Claude / Codex / Cursor / Gemini） |
+| [VoltAgent/awesome-openclaw-skills](https://github.com/VoltAgent/awesome-openclaw-skills) | 53.9k | 5400+ OpenClaw 技能，已过滤垃圾与恶意项 |
+| [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | 37.5k | 1000+ 技能索引，按来源（官方 / 社区）分类 |
+| [wshobson/agents](https://github.com/wshobson/agents) | 42.8k | 插件 / agent / 技能 / 命令合集，跨多 harness |
+| [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | 30.3k | 410+ 技能、120+ agents、自定义命令的多职能合集 |
+| [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | 58.6k | Claude Code 资源与技能精选 |
+| [composio-community/awesome-codex-skills](https://github.com/composio-community/awesome-codex-skills) | 17.4k | Codex 工作流技能精选，偏自动化 |
+| [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates) | 34.1k | Claude Code 组件注册中心与 CLI：agents / 命令 / skills / hooks |
+
+### 私人 / 领域（看别人怎么把方法论沉淀成技能）
+
+| 仓库 | 星 | 它能给你什么 |
+| :--- | ---: | :--- |
+| [KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills) | 22.5k | 中文个人 AI Skills 合集，含目标定义、代码洁癖、分析类技能 |
+| [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 27.8k | 内容生产全流程：写作、配图、排版、发布 |
+| [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | 235.1k | 从 Karpathy 观点提炼的单文件行为准则 |
+| [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | 62.1k | 营销技能集：CRO、文案、SEO、分析 |
+| [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) | 58.1k | 把 agent 变成科研助手的技能库 |
+| [obsidianmd/obsidian-skills](https://github.com/obsidianmd/obsidian-skills) | 53.5k | 教 agent 操作 Obsidian 与 Markdown / Bases / JSON Canvas |
+| [mukul975/Anthropic-Cybersecurity-Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) | 36.6k | 817 条安全技能，映射 MITRE 等 6 套框架 |
+| [tmstack/awesome-persona-skills](https://github.com/tmstack/awesome-persona-skills) | 4.7k | 人设类技能导航（同事 / 老板 / 前任 / 女娲等） |
+| [libukai/awesome-agent-skills](https://github.com/libukai/awesome-agent-skills) | 5.2k | 中文 Agent Skills 指南：快速入门、资源与精选技能 |
+| [NVIDIA/SkillSpector](https://github.com/NVIDIA/SkillSpector) | 27.3k | 技能安全扫描器，检测漏洞与恶意模式——装第三方技能前值得一跑 |
+
 ## 怎么装
 
 前提：你已经装好了 DSH，并且有一个 profile 目录（一般长这样 `~/.dsh/profiles/desktop`，具体名字按你的来）。

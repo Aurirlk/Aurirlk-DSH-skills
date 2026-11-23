@@ -1,7 +1,7 @@
 {
   "name": "dsh-aurirlk-skills",
-  "version": "0.13.0",
-  "description": "Aurirlk 验证可用的 DSH（DeepSeek Harness）技能合集：每个技能一个目录，装上本包即注册全部技能。当前收录 36 个技能，包含 repo-skill-forge（扫仓库生成开发手册 + 6 个查询技能）、systematic-rca（系统化根因诊断四阶段）、agent-chat-endpoint（流式对话端点四件套）、agent-tool-safety（写工具与沙箱的安全边界）、live-jvm-compile-check（不停服验证 Java 改动）、db-pool-forensics（连接池耗尽取证）、db-change-report（数据库变更报备）、deploy-access-chain（线上不生效的链路取证）、git-submit-safety（提交与推送纪律 + 编译前清单）、no-stub-delivery（交付真实性审查）、docs-code-sync（代码文档同步）、frontend-delivery-method（前端交付方法论）、vue3-admin-frontend（Vue 3 后台开发）、env-config（.env 配置引导）、git-repo-divergence-check（换仓分叉判定与零冲突搬迁）、pnpm-cli-repair（pnpm 11 构建脚本审批与 shim 修复），以及 agent-trace-eval、agent-orchestration、nl2sql-analyst、speak-human、disk-butler、drawio 等。新增 6 个人设技能（就业战略顾问 / Q版贴纸 / 提示词架构师 / 提示词咨询大师 / LLM 笔记沉淀 / 中文校对）。其中 vue3-admin-frontend 还附带零依赖静态体检脚本（columns 写法 / i18n 与类型对齐 / 死 prop），带夹具自检。",
+  "version": "0.14.0",
+  "description": "Aurirlk 验证可用的 DSH（DeepSeek Harness）技能合集：每个技能一个目录，装上本包即注册全部技能。当前收录 36 个技能，包含 repo-skill-forge（扫仓库生成开发手册 + 6 个查询技能）、systematic-rca（系统化根因诊断四阶段）、agent-chat-endpoint（流式对话端点四件套）、agent-tool-safety（写工具与沙箱的安全边界）、live-jvm-compile-check（不停服验证 Java 改动）、db-pool-forensics（连接池耗尽取证）、db-change-report（数据库变更报备）、deploy-access-chain（线上不生效的链路取证）、git-submit-safety（提交与推送纪律 + 编译前清单）、no-stub-delivery（交付真实性审查）、docs-code-sync（代码文档同步）、frontend-delivery-method（前端交付方法论）、vue3-admin-frontend（Vue 3 后台开发）、env-config（.env 配置引导）、git-repo-divergence-check（换仓分叉判定与零冲突搬迁）、pnpm-cli-repair（pnpm 11 构建脚本审批与 shim 修复），以及 agent-trace-eval、agent-orchestration、nl2sql-analyst、speak-human、disk-butler、drawio 等。新增 6 个人设技能（就业战略顾问 / Q版贴纸 / 提示词架构师 / 提示词咨询大师 / LLM 笔记沉淀 / 中文校对）。其中 vue3-admin-frontend 还附带零依赖静态体检脚本（columns 写法 / i18n 与类型对齐 / 死 prop），带夹具自检。README 另收录 34 个经 GitHub API 实测的高星 skills 生态入口（官方规范 / 通用合集 / 私人领域）。",
   "type": "module",
   "main": "index.js",
   "exports": {

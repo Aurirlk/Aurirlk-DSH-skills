@@ -165,6 +165,61 @@ This repository is the collection I have built up. **Install it once and every s
 
 ---
 
+## Ecosystem index: skill repositories worth knowing
+
+All **34 repositories** below were checked against the GitHub API on 2026-11-23: they exist, are not archived, and the star counts are the values measured that day (**they change — trust the linked page**). Three groups: official/standards for the format, general collections to adapt, personal/domain packs to study how others distill a method into a skill.
+
+**These are entry points, not endorsements.** Check the licence, dependencies and scripts before installing anything third-party; when in doubt, run a security scanner first. This collection copies none of their content and does not track their updates.
+
+### Official & standards (learn the format first)
+
+| Repository | Stars | What it gives you |
+| :--- | ---: | :--- |
+| [anthropics/skills](https://github.com/anthropics/skills) | 199.1k | Anthropic reference skills: document suites, frontend-design, skill-creator |
+| [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | 48.0k | Official plugin marketplace: how skills, commands and hooks are packaged |
+| [openai/skills](https://github.com/openai/skills) | 28.9k | Official Codex skills from OpenAI |
+| [google/skills](https://github.com/google/skills) | 24.6k | Official skills for Google products and technologies |
+| [github/awesome-copilot](https://github.com/github/awesome-copilot) | 41.5k | Official Copilot instructions, agents, skills and configurations |
+| [agentskills/agentskills](https://github.com/agentskills/agentskills) | 27.5k | The Agent Skills specification: format, fields, progressive loading |
+| [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | 34.8k | Vercel official frontend / React / Next.js skills |
+| [huggingface/skills](https://github.com/huggingface/skills) | 11.4k | Skills for model training, evaluation, Spaces and Jobs |
+| [expo/skills](https://github.com/expo/skills) | 4.2k | Official React Native skills: native UI, data, CI/CD |
+| [trailofbits/skills](https://github.com/trailofbits/skills) | 8.4k | Security-audit skills, including contract audits and vulnerability scanning |
+| [microsoft/skills](https://github.com/microsoft/skills) | 3.2k | Azure SDK / Foundry skills for enterprise stacks |
+
+### General collections & indexes (adapt, do not start from zero)
+
+| Repository | Stars | What it gives you |
+| :--- | ---: | :--- |
+| [mattpocock/skills](https://github.com/mattpocock/skills) | 330.6k | The author’s own .agents directory — practical engineer-to-engineer skills |
+| [obra/superpowers](https://github.com/obra/superpowers) | 324.2k | A skills framework plus engineering methodology, 20+ composable skills |
+| [affaan-m/ECC](https://github.com/affaan-m/ECC) | 309.1k | Harness performance system: skills, instincts, memory and security |
+| [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 119.8k | Production-grade engineering skills organised as a delivery pipeline |
+| [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | 80.1k | A curated index of 1000+ Claude skills and tools |
+| [sickn33/agentic-awesome-skills](https://github.com/sickn33/agentic-awesome-skills) | 50.2k | 3000+ reusable skills with a multi-harness installer |
+| [VoltAgent/awesome-openclaw-skills](https://github.com/VoltAgent/awesome-openclaw-skills) | 53.9k | 5400+ OpenClaw skills, filtered for spam and malware |
+| [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | 37.5k | 1000+ skills indexed by source (official / community) |
+| [wshobson/agents](https://github.com/wshobson/agents) | 42.8k | Plugins, agents, skills and commands across several harnesses |
+| [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) | 30.3k | 410+ skills, 120+ agents and custom commands for many roles |
+| [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | 58.6k | Hand-picked Claude Code resources and skills |
+| [composio-community/awesome-codex-skills](https://github.com/composio-community/awesome-codex-skills) | 17.4k | A curated list of practical Codex workflow skills |
+| [davila7/claude-code-templates](https://github.com/davila7/claude-code-templates) | 34.1k | A registry and CLI for Claude Code components |
+
+### Personal & domain-specific (see how others distill method into skills)
+
+| Repository | Stars | What it gives you |
+| :--- | ---: | :--- |
+| [KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills) | 22.5k | A Chinese personal skills collection: goal setting, code hygiene, analysis |
+| [JimLiu/baoyu-skills](https://github.com/JimLiu/baoyu-skills) | 27.8k | Content production from writing and art to layout and publishing |
+| [multica-ai/andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills) | 235.1k | A single-file behavior guide distilled from Karpathy’s ideas |
+| [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) | 62.1k | Marketing skills: CRO, copywriting, SEO and analytics |
+| [K-Dense-AI/scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) | 58.1k | A skill library that turns an agent into a research assistant |
+| [obsidianmd/obsidian-skills](https://github.com/obsidianmd/obsidian-skills) | 53.5k | Teach an agent to work with Obsidian, Markdown, Bases and JSON Canvas |
+| [mukul975/Anthropic-Cybersecurity-Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) | 36.6k | 817 cybersecurity skills mapped to six frameworks including MITRE |
+| [tmstack/awesome-persona-skills](https://github.com/tmstack/awesome-persona-skills) | 4.7k | An index of persona skills — colleagues, boss, mentor and more |
+| [libukai/awesome-agent-skills](https://github.com/libukai/awesome-agent-skills) | 5.2k | A Chinese guide to Agent Skills: quickstart, resources and picks |
+| [NVIDIA/SkillSpector](https://github.com/NVIDIA/SkillSpector) | 27.3k | A security scanner for skills; worth running before installing third-party packs |
+
 ## Installation
 
 Assumes DSH is already installed and you have a profile directory (typically `~/.dsh/profiles/desktop` — use whatever yours is called).

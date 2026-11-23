@@ -7,6 +7,29 @@
 > 每个技能一个顶层目录（`skills/<名字>/`），共用仓库级校验与一套 npm 打包。
 > 下面的版本号针对**整个合集包**。
 
+## [0.14.0] - 2026-11-23
+
+### README 新增 34 个高星 skills 仓库入口
+
+中英双语 README 在「技能目录」之后新增「生态入口 / Ecosystem index」，分三类：
+
+- **官方 / 规范（11 个）**：`anthropics/skills`（199.1k）、`openai/skills`、`google/skills`、
+  `github/awesome-copilot`、`agentskills/agentskills`（规范本身）、`vercel-labs/agent-skills`、
+  `trailofbits/skills` 等——先看官方怎么定格式，再谈怎么写。
+- **通用合集 / 索引（13 个）**：`mattpocock/skills`（330.6k）、`obra/superpowers`（324.2k）、
+  `affaan-m/ECC`（309.1k）、`addyosmani/agent-skills`、`ComposioHQ/awesome-claude-skills`、
+  `sickn33/agentic-awesome-skills`（3000+）、`VoltAgent/awesome-openclaw-skills`（5400+）等。
+- **私人 / 领域（10 个）**：`KKKKhazix/khazix-skills`、`JimLiu/baoyu-skills`、
+  `coreyhaines31/marketingskills`、`mukul975/Anthropic-Cybersecurity-Skills`（817 条）、
+  `tmstack/awesome-persona-skills`、`NVIDIA/SkillSpector`（装第三方技能前的安全扫描器）等。
+
+**采集口径**：2026-11-23 用 GitHub REST API 逐个查过存在性、归档状态与星数，
+并和 `search/repositories` 的三组结果交叉验证；星数会变，README 已注明以链接页为准。
+二手文章里的星数（含 404 的仓库）一律不采信。明确写成「入口不是背书」：
+安装第三方技能前自查许可、依赖与脚本内容。本合集不复制这些仓库的内容。
+
+技能数仍 36；package.json 0.14.0 / plugin.json 0.6.4。
+
 ## [0.13.0] - 2026-11-23
 
 技能数 30 → **36**：新增 6 个**人设负载型**技能。`SKILL.md` 正文直接承载人设（Role / Profile / Goals / Constraints / Workflow），agent 加载即入戏，不是"介绍某个人设"的说明书。每个都带双语 README，写清何时用、与相邻人设的区别、边界。
