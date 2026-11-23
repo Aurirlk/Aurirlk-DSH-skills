@@ -53,18 +53,21 @@ This repository is the collection I have built up. **Install it once and every s
 | You want to commit and the docs haven't moved a line | **docs-code-sync** |
 | The page is wrong and you can't tell which layer is at fault | **frontend-delivery-method** |
 | You inherited an unfamiliar repo and need a map both people and agents can query | **repo-skill-forge** |
+| You moved to a new repo and need to know whether old patches still apply | **git-repo-divergence-check** |
+| `pnpm install` reports `ERR_PNPM_IGNORED_BUILDS` and `node_modules` never appears | **pnpm-cli-repair** |
 
 ---
 
 ## Skill catalogue
 
-**28 skills** in total.
+**30 skills** in total.
 
 ### System tools
 
 | Skill | When to use it | Platform | Docs |
 |---|---|---|---|
 | **disk-butler** | C drive is full: shows where the space went, cleans up by risk level, moves caches that are hard-wired to C: onto another drive, and keeps a local record | Windows | [English](skills/disk-butler/README.en.md) · [中文](skills/disk-butler/README.md) |
+| **pnpm-cli-repair** | Two frequent pnpm failures: `pnpm -v` dies with MODULE_NOT_FOUND (shim points at a stale misspelled path), or pnpm 11's `ERR_PNPM_IGNORED_BUILDS` (build scripts not approved) — triage by keyword, don't mix them up | original | [English](skills/pnpm-cli-repair/README.en.md) · [中文](skills/pnpm-cli-repair/README.md) |
 
 ### Documents & diagrams
 
@@ -103,6 +106,7 @@ This repository is the collection I have built up. **Install it once and every s
 | **git-submit-safety** | Commit and push discipline: no `add -A`, precise pathspecs, trust `ls-remote` over the local tracking ref, fast-forward only on divergence — and a pre-build checklist handed over after every push | original | [English](skills/git-submit-safety/README.en.md) · [中文](skills/git-submit-safety/README.md) |
 | **no-stub-delivery** | Truthfulness audit before delivery: fake data, fake implementations (written but never wired), fake completion | original | [English](skills/no-stub-delivery/README.en.md) · [中文](skills/no-stub-delivery/README.md) |
 | **repo-skill-forge** | Scans a repo and generates one developer guide plus six query skills (map / symbols / calls / impact / request trace / change playbook), with an index and a verifier; judgement is left as numbered TODOs instead of being invented by a script | original | [English](skills/repo-skill-forge/README.en.md) · [中文](skills/repo-skill-forge/README.md) |
+| **git-repo-divergence-check** | Before migrating repos or branches: blobless clone + blob SHA comparison tells you whether merge is even possible and which paths are pure additions that can move with zero conflicts | original | [English](skills/git-repo-divergence-check/README.en.md) · [中文](skills/git-repo-divergence-check/README.md) |
 
 ### Job hunting / interviews
 

@@ -7,6 +7,27 @@
 > 每个技能一个顶层目录（`skills/<名字>/`），共用仓库级校验与一套 npm 打包。
 > 下面的版本号针对**整个合集包**。
 
+## [0.12.0] - 2026-11-23
+
+技能数 28 → **30**。这一轮做的是「清点还有哪些技能该收」，外加把工作副本迁到稳定目录。
+
+### 新增
+
+- **git-repo-divergence-check**：换仓库/迁分支前先判分叉。无 blob 克隆（`--filter=blob:none`）+ cat-file 判同源 + blob SHA 量化漂移；同源才 merge/rebase，不同源只能按路径重放。对目标仓不存在的路径，用 git 空树 `4b825dc...` 做基线生成零冲突补丁。
+- **pnpm-cli-repair**：把两类症状相似、根因不同的失败分开——`pnpm -v` 就崩是 shim 硬编码了拼错的历史路径（三件套直连 `pnpm.mjs`，别只改拼写）；`pnpm -v` 正常但 install 报 `ERR_PNPM_IGNORED_BUILDS` 是 pnpm 11 的 `strictDepBuilds` 默认开启，要用 `pnpm-workspace.yaml` 的 `allowBuilds`，且 **git 依赖不能用纯包名审批**。
+
+### 明确不收的（清点结论）
+
+- `java-compile-check-live-jvm`：与现有 `live-jvm-compile-check` 重复，且后者更全（`-proc:full`、IDEA 自定义 classloader、MSYS 路径陷阱、判读与交付话术）。
+- 8 个 `apifox-*`：第三方产品 CLI 手册，来源/许可不明，且强依赖 `apifox` 二进制；本合集定位是方法论与踩坑，不是产品操作手册。
+- `drawio`：已收录，且第三方版权明确。
+- `frontend-dev` / `dev-guide` / `docs-maintenance` / `git-submit` / gitnexus：前一版已判定过——强绑单一项目、许可不兼容（PolyForm NC）或已被 `vue3-admin-frontend` / `git-submit-safety` 覆盖。
+- 某个「直接改业务库提示词」的技能：强绑具体库，正文含明文连接信息，绝不进公开仓。
+
+### 工作副本迁移
+
+从临时目录迁到稳定目录；同名的旧分叉（9 技能、历史 HEAD 不同）**改名为 `.legacy-9skills` 备份，未覆盖**。迁移后 self-test 252/0、体检自检 27/0 均通过。
+
 ## [0.11.0] - 2026-11-22
 
 给 **vue3-admin-frontend** 配了一个**可执行体检**：`Test-FrontendHealth.mjs`，

@@ -53,18 +53,21 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 改完代码只想提交，文档一个字没动 | **docs-code-sync** |
 | 页面不对，但不知道是前端、后端还是环境的问题 | **frontend-delivery-method** |
 | 接手一个陌生仓库，要给人和 agent 一份能查的地图 | **repo-skill-forge** |
+| 换了新仓库，想知道老补丁能不能直接搬过去 | **git-repo-divergence-check** |
+| `pnpm install` 报 `ERR_PNPM_IGNORED_BUILDS`，node_modules 都没生成 | **pnpm-cli-repair** |
 
 ---
 
 ## 技能目录
 
-共 **28 个**。
+共 **30 个**。
 
 ### 系统工具
 
 | 技能 | 什么时候用 | 平台 | 文档 |
 |---|---|---|---|
 | **disk-butler** | C 盘满了：先告诉你空间去哪了，再按危险程度清理，最后把写死在 C 盘的缓存搬到别的盘，并留一份本机档案 | Windows | [中文](skills/disk-butler/README.md) · [EN](skills/disk-butler/README.en.md) |
+| **pnpm-cli-repair** | pnpm 两类高频失败：`pnpm -v` 就报 MODULE_NOT_FOUND（shim 指错路径），或 pnpm 11 的 `ERR_PNPM_IGNORED_BUILDS`（构建脚本没审批）——看关键字分诊，别混着查 | 原创 | [中文](skills/pnpm-cli-repair/README.md) · [EN](skills/pnpm-cli-repair/README.en.md) |
 
 ### 文档与图表
 
@@ -103,6 +106,7 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | **git-submit-safety** | 提交与推送的安全纪律：禁 `add -A`、精确 pathspec、push 结果以 `ls-remote` 为真值、分叉只许 ff-only，推完还要给「编译/启动前清单」 | 原创 | [中文](skills/git-submit-safety/README.md) · [EN](skills/git-submit-safety/README.en.md) |
 | **no-stub-delivery** | 交付前查真假：认得出假数据、假实现（写了没接线）、假完成（文档说做了但代码没有） | 原创 | [中文](skills/no-stub-delivery/README.md) · [EN](skills/no-stub-delivery/README.en.md) |
 | **repo-skill-forge** | 扫一个仓库生成 1 本开发手册 + 6 个查询技能（地图/符号/调用/影响面/链路/施工单），带索引与校验；判断部分留成编号 TODO，不许脚本编 | 原创 | [中文](skills/repo-skill-forge/README.md) · [EN](skills/repo-skill-forge/README.en.md) |
+| **git-repo-divergence-check** | 换仓库/迁分支前先判分叉：无 blob 克隆 + blob SHA 比对，不下载文件内容就知道能不能 merge、哪些路径是纯新增可以零冲突搬 | 原创 | [中文](skills/git-repo-divergence-check/README.md) · [EN](skills/git-repo-divergence-check/README.en.md) |
 
 ### 求职 / 面试
 
