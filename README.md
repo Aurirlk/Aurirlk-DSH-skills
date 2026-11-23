@@ -55,12 +55,18 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 | 接手一个陌生仓库，要给人和 agent 一份能查的地图 | **repo-skill-forge** |
 | 换了新仓库，想知道老补丁能不能直接搬过去 | **git-repo-divergence-check** |
 | `pnpm install` 报 `ERR_PNPM_IGNORED_BUILDS`，node_modules 都没生成 | **pnpm-cli-repair** |
+| 想知道某个专业在 AI 时代是推荐还是劝退 | **career-ai-strategist** |
+| 拿人物照片做 12 宫格 Q 版表情包 | **chibi-sticker-pro** |
+| 优化一段 prompt，或按模板写一份 | **prompt-architect** |
+| 只有模糊想法，想被追问清楚再拿到 prompt | **prompt-consultant-master** |
+| 把零散的 LLM 开发笔记整理成技术文档 | **llm-notes-architect** |
+| 校对中文文章，要对照表和可直接用的终稿 | **chinese-text-proofreader** |
 
 ---
 
 ## 技能目录
 
-共 **30 个**。
+共 **36 个**。
 
 ### 系统工具
 
@@ -114,6 +120,17 @@ DeepSeek Harness（简称 DSH）是个 agent 框架——你可以理解成一�
 |---|---|---|---|
 | **create-interviewer** | 想反复练同一位面试官：把ta的思路、偏好、提问习惯固化成 AI 角色 | 二开（MIT） | [中文](skills/create-interviewer/README.md) · [EN](skills/create-interviewer/README.en.md) |
 | **interview-skills** | 模拟大厂面试：给公司、岗位、JD 和简历，它出题并对比「好答案 / 差答案」 | 二开（MIT） | [中文](skills/interview-skills/README.md) · [EN](skills/interview-skills/README.en.md) |
+| **career-ai-strategist** | 某个专业的就业前景调研：供需红海/蓝海、课程与企业需求的剪刀差、一线/新一线起薪、被 AI 替代风险，拒绝「前景广阔」这类空话 | 原创人设 | [中文](skills/career-ai-strategist/README.md) · [EN](skills/career-ai-strategist/README.en.md) |
+
+### 人设与内容生产
+
+| 技能 | 什么时候用 | 来源 | 文档 |
+|---|---|---|---|
+| **chibi-sticker-pro** | 人物照片 → 盲盒风 12 宫格 Q 版贴纸：先做骨相级特征映射，再排 12 种情绪，白底粗白描边 | 原创人设 | [中文](skills/chibi-sticker-pro/README.md) · [EN](skills/chibi-sticker-pro/README.en.md) |
+| **prompt-architect** | 优化或新写结构化 Prompt：RTF/CRISPE/ReAct、Few-Shot/CoT、反向约束，附技巧教学与模型推荐 | 原创人设 | [中文](skills/prompt-architect/README.md) · [EN](skills/prompt-architect/README.en.md) |
+| **prompt-consultant-master** | 只有模糊想法时：每轮最多 2 问的自适应问诊，对齐画像后才交付工业级、去 AI 味的 System Prompt | 原创人设 | [中文](skills/prompt-consultant-master/README.md) · [EN](skills/prompt-consultant-master/README.en.md) |
+| **llm-notes-architect** | 零散 LLM 开发笔记 → 技术文档：痛点/方案/代码/坑四段式，自动提 Tech Stack 标签，代码逻辑不许改 | 原创人设 | [中文](skills/llm-notes-architect/README.md) · [EN](skills/llm-notes-architect/README.en.md) |
+| **chinese-text-proofreader** | 中文校对润色：错别字标红、病句标绿，给出「原文/修改后/类型/原因」对照表和可直接用的终稿 | 原创人设 | [中文](skills/chinese-text-proofreader/README.md) · [EN](skills/chinese-text-proofreader/README.en.md) |
 
 ### AI 评测
 

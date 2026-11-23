@@ -55,12 +55,18 @@ This repository is the collection I have built up. **Install it once and every s
 | You inherited an unfamiliar repo and need a map both people and agents can query | **repo-skill-forge** |
 | You moved to a new repo and need to know whether old patches still apply | **git-repo-divergence-check** |
 | `pnpm install` reports `ERR_PNPM_IGNORED_BUILDS` and `node_modules` never appears | **pnpm-cli-repair** |
+| You want to know whether a major is recommended or a dead end in the AI era | **career-ai-strategist** |
+| Turning a portrait into a 12-cell chibi sticker sheet | **chibi-sticker-pro** |
+| Optimising a prompt or writing one from a template | **prompt-architect** |
+| You only have a vague idea and want to be interviewed before getting a prompt | **prompt-consultant-master** |
+| Organising scattered LLM dev notes into a technical document | **llm-notes-architect** |
+| Proofreading Chinese copy, with a change table and a clean final draft | **chinese-text-proofreader** |
 
 ---
 
 ## Skill catalogue
 
-**30 skills** in total.
+**36 skills** in total.
 
 ### System tools
 
@@ -114,6 +120,17 @@ This repository is the collection I have built up. **Install it once and every s
 |---|---|---|---|
 | **create-interviewer** | Rehearsing against the same interviewer repeatedly: freeze their thinking style, preferences, and question habits into an AI persona | adapted (MIT) | [English](skills/create-interviewer/README.en.md) · [中文](skills/create-interviewer/README.md) |
 | **interview-skills** | Mock interviews at big tech: give it the company, role, JD, and résumé; it asks questions and contrasts good vs bad answers | adapted (MIT) | [English](skills/interview-skills/README.en.md) · [中文](skills/interview-skills/README.md) |
+| **career-ai-strategist** | Career outlook for a major: red-ocean vs blue-ocean demand, the gap between coursework and real jobs, tier-1 salaries, and AI-displacement risk — no "bright prospects" filler | original persona | [English](skills/career-ai-strategist/README.en.md) · [中文](skills/career-ai-strategist/README.md) |
+
+### Personas & content production
+
+| Skill | When to use it | Origin | Docs |
+|---|---|---|---|
+| **chibi-sticker-pro** | Portrait → 12-cell blind-box chibi sticker sheet: facial-geometry mapping first, then 12 distinct emotions, white background and thick white borders | original persona | [English](skills/chibi-sticker-pro/README.en.md) · [中文](skills/chibi-sticker-pro/README.md) |
+| **prompt-architect** | Optimise or write a structured prompt: RTF/CRISPE/ReAct, few-shot/CoT, negative constraints, plus technique notes and model picks | original persona | [English](skills/prompt-architect/README.en.md) · [中文](skills/prompt-architect/README.md) |
+| **prompt-consultant-master** | When you only have a vague idea: adaptive interview, max 2 questions per turn, delivers a production-grade de-AI-voiced system prompt only after the profile is confirmed | original persona | [English](skills/prompt-consultant-master/README.en.md) · [中文](skills/prompt-consultant-master/README.md) |
+| **llm-notes-architect** | Scattered LLM dev notes → technical doc: pain point / solution / code / pitfall structure, auto Tech Stack tags, code logic never altered | original persona | [English](skills/llm-notes-architect/README.en.md) · [中文](skills/llm-notes-architect/README.md) |
+| **chinese-text-proofreader** | Chinese proofreading and polishing: typos in red, faulty sentences in green, a before/after table and a ready-to-use final draft | original persona | [English](skills/chinese-text-proofreader/README.en.md) · [中文](skills/chinese-text-proofreader/README.md) |
 
 ### AI evaluation
 
